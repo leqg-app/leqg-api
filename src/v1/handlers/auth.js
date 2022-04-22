@@ -25,20 +25,22 @@ const login = {
     const user = await repo.findOneBy({ username: identifier });
 
     if (!user) {
-      return formatError("Auth.form.error.invalid");
+      return reply.status(400).send(formatError("Auth.form.error.invalid"));
     }
 
     if (user.blocked) {
-      return formatError("Auth.form.error.blocked");
+      return reply.status(400).send(formatError("Auth.form.error.blocked"));
     }
 
     if (user.provider !== "local") {
-      return formatError("Auth.form.error.password.local");
+      return reply
+        .status(400)
+        .send(formatError("Auth.form.error.password.local"));
     }
 
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
-      return formatError("Auth.form.error.invalid");
+      return reply.status(400).send(formatError("Auth.form.error.invalid"));
     }
 
     return user;
@@ -111,7 +113,7 @@ const forgotPassword = {
       S.string().format(S.FORMATS.EMAIL).required()
     ),
     response: {
-      200: S.object(),
+      200: S.object().prop("statusCode", S.integer()),
       400: errorSchema(),
     },
   },
@@ -127,7 +129,7 @@ const forgotPassword = {
 
     reply.status(400).send(formatError(message));
   },
-  handler: async (req, rep) => {
+  handler: async (req, reply) => {
     const { email } = req.body;
     const repo = req.server.db.getRepository(User);
 
@@ -139,11 +141,13 @@ const forgotPassword = {
     }
 
     if (user.blocked) {
-      return formatError("Auth.form.error.blocked");
+      return reply.status(400).send(formatError("Auth.form.error.blocked"));
     }
 
     if (user.provider !== "local") {
-      return formatError("Auth.form.error.password.local");
+      return reply
+        .status(400)
+        .send(formatError("Auth.form.error.password.local"));
     }
 
     const resetPasswordToken = crypto.randomBytes(64).toString("hex");
@@ -151,27 +155,75 @@ const forgotPassword = {
     user.resetPasswordToken = resetPasswordToken;
     await repo.update(user.id, user);
 
+    const html = `
+<p>${user.username},</p>
+
+<p>Il paraît que vous avez oublié votre mot de passe, mais heureusement nous avons tout prévu.</p>
+
+<p>Procédure habituelle, vous connaissez bien, il faut cliquer sur le lien:</p>
+<p>https://leqg.app/reset-password?code=${resetPasswordToken}</p>
+
+<p>A bientôt !</p>
+<p>Le QG</p>
+`;
+
+    const text = `
+${user.username},
+
+Il paraît que vous avez oublié votre mot de passe, mais heureusement nous avons tout prévu.
+
+Procédure habituelle, vous connaissez bien, il faut cliquer sur le lien:
+https://leqg.app/reset-password?code=${resetPasswordToken}
+
+A bientôt !
+Le QG
+`;
+
     await req.server.email.send({
       to: user.email,
-      subject: "Réinitialisez votre mot de passe",
-      html: `${user.username},\n\nCliquez sur ce lien pour réinitialiser votre mot de passe: https://leqg.app/reset-password/?token=${resetPasswordToken}`,
-      text: `${user.username},\n\nCliquez sur ce lien pour réinitialiser votre mot de passe: https://leqg.app/reset-password/?token=${resetPasswordToken}`,
+      subject: "Mot de passe oublié",
+      html,
+      text,
     });
 
-    return {};
+    return { statusCode: 200 };
   },
 };
 
 const resetPassword = {
   schema: {
     summary: "Reset user password",
+    body: S.object()
+      .prop("code", S.string().required())
+      .prop("password", S.string().required())
+      .prop("passwordConfirmation", S.string().required()),
     response: {
-      200: S.object(), // TODO
+      200: S.object().prop("statusCode", S.integer()),
     },
   },
-  handler: async (req, rep) => {
-    // TODO
-    return {};
+  handler: async (req, reply) => {
+    const { code, password, passwordConfirmation } = req.body;
+
+    if (password !== passwordConfirmation) {
+      return reply
+        .status(400)
+        .send(formatError("Auth.form.error.password.matching"));
+    }
+
+    const repo = req.server.db.getRepository(User);
+
+    const user = await repo.findOneBy({ resetPasswordToken: code });
+    if (!user) {
+      return reply
+        .status(400)
+        .send(formatError("Auth.form.error.code.provide"));
+    }
+
+    user.password = await hashPassword(password);
+    user.resetPasswordToken = null;
+    await repo.update(user.id, user);
+
+    return { statusCode: 200 };
   },
 };
 
