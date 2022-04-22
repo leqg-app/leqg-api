@@ -2,8 +2,8 @@ import S from "fluent-json-schema";
 import crypto from "crypto";
 
 import { User } from "../../entity/index.js";
-import { errorSchema, formatError } from "../responses/error.js";
-import { hashPassword } from "../utils/password.js";
+import { formatError } from "../schemas/error.js";
+import { hashPassword, comparePassword } from "../utils/password.js";
 
 const login = {
   schema: {
@@ -12,14 +12,14 @@ const login = {
       .prop("identifier", S.string().required())
       .prop("password", S.string().required()),
     response: {
-      200: S.object()
-        .prop("username", S.string())
-        .prop("email", S.string())
-        .prop("contributions", S.integer()),
-      400: errorSchema(),
+      200: S.ref("userSchema"),
+      400: S.ref("errorSchema"),
     },
   },
-  handler: async (req, rep) => {
+  errorHandler: (error, req, reply) => {
+    return reply.status(400).send(formatError(error.message));
+  },
+  handler: async (req, reply) => {
     const { identifier, password } = req.body;
     const repo = req.server.db.getRepository(User);
     const user = await repo.findOneBy({ username: identifier });
@@ -38,10 +38,14 @@ const login = {
         .send(formatError("Auth.form.error.password.local"));
     }
 
-    const isValid = await bcrypt.compare(password, user.password);
+    const isValid = await comparePassword(password, user.password);
     if (!isValid) {
       return reply.status(400).send(formatError("Auth.form.error.invalid"));
     }
+
+    user.jwt = await reply.jwtSign({
+      id: user.id,
+    });
 
     return user;
   },
@@ -55,11 +59,8 @@ const register = {
       .prop("password", S.string().required())
       .prop("email", S.string().format(S.FORMATS.EMAIL).required()),
     response: {
-      200: S.object()
-        .prop("username", S.string())
-        .prop("email", S.string())
-        .prop("contributions", S.integer()),
-      400: errorSchema(),
+      200: S.ref("userSchema"),
+      400: S.ref("errorSchema"),
     },
   },
   errorHandler: (error, req, reply) => {
@@ -114,7 +115,7 @@ const forgotPassword = {
     ),
     response: {
       200: S.object().prop("statusCode", S.integer()),
-      400: errorSchema(),
+      400: S.ref("errorSchema"),
     },
   },
   errorHandler: (error, req, reply) => {
@@ -199,6 +200,7 @@ const resetPassword = {
       .prop("passwordConfirmation", S.string().required()),
     response: {
       200: S.object().prop("statusCode", S.integer()),
+      400: S.ref("errorSchema"),
     },
   },
   handler: async (req, reply) => {

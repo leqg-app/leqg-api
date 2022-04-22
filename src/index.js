@@ -4,7 +4,7 @@ import S from "fluent-json-schema";
 
 import database from "./plugins/database.js";
 import email from "./plugins/email.js";
-import authentication from "./v1/authentication.js";
+import authentication from "./plugins/authentication.js";
 import v1 from "./v1/routes.js";
 
 const fastify = Fastify({
@@ -26,7 +26,12 @@ fastify.register(fastifyEnv, options);
 fastify.register(database);
 fastify.register(email);
 fastify.register(authentication);
-fastify.register(v1, { prefix: "/v1" });
+fastify.register(v1);
+
+fastify.get("/", async () => ({
+  statusCode: 200,
+  source: "https://github.com/leqg-app/leqg-api-v2",
+}));
 
 fastify.listen(3000, function (err, address) {
   if (err) {

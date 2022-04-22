@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 
-export function hashPassword(password) {
-  return new Promise((resolve, reject) => {
+export const hashPassword = (password) =>
+  new Promise((resolve, reject) => {
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
         return reject(err);
@@ -9,4 +9,5 @@ export function hashPassword(password) {
       resolve(hash);
     });
   });
-}
+
+export const comparePassword = (clear, hashed) => bcrypt.compare(clear, hashed);
