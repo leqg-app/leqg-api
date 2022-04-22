@@ -6,6 +6,9 @@ import { User } from "../entity/User.js";
 async function authentication(fastify) {
   fastify.register(fastifyJwt, {
     secret: fastify.config.JWT_SECRET,
+    sign: {
+      expiresIn: "365d",
+    },
   });
 
   fastify.decorate("authenticate", async function (request, reply) {
@@ -14,13 +17,13 @@ async function authentication(fastify) {
       const repo = request.server.db.getRepository(User);
       const user = await repo.findOneBy({ id });
 
-      if (user.blocked) {
-        throw new Error("User is disabled");
+      if (!user || user.blocked) {
+        reply.status(401).send({ message: "Invalid user" });
       }
 
-      request.user = user;
+      return user;
     } catch (err) {
-      reply.send(err);
+      reply.status(401).send({ message: err.message });
     }
   });
 }

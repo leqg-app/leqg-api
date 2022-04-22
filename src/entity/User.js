@@ -52,6 +52,7 @@ export const User = new EntitySchema({
       type: "many-to-many",
       target: "Store",
       joinTable: true,
+      eager: true,
     },
     revisions: {
       type: "one-to-many",
