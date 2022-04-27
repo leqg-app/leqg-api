@@ -43,11 +43,14 @@ const login = {
       return reply.status(400).send(formatError("Auth.form.error.invalid"));
     }
 
-    user.jwt = await reply.jwtSign({
+    const jwt = await reply.jwtSign({
       id: user.id,
     });
 
-    return user;
+    return {
+      jwt,
+      user,
+    };
   },
 };
 
@@ -64,9 +67,6 @@ const register = {
     },
   },
   errorHandler: (error, req, reply) => {
-    if (!error.validation) {
-      return reply.status(400).send(formatError(error.message));
-    }
     const [{ params }] = error.validation;
 
     const message = {
@@ -119,9 +119,6 @@ const forgotPassword = {
     },
   },
   errorHandler: (error, req, reply) => {
-    if (!error.validation) {
-      return reply.status(400).send(formatError(error.message));
-    }
     const [{ params }] = error.validation;
 
     const message = {

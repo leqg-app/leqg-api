@@ -60,8 +60,8 @@ export const Store = new EntitySchema({
     features: {
       type: "many-to-many",
       target: "Feature",
-      eager: true,
       joinTable: true,
+      eager: true,
     },
     revisions: {
       type: "one-to-many",

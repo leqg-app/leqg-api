@@ -13,9 +13,9 @@ export const Product = new EntitySchema({
       unique: true,
     },
     type: {
-      type: "enum",
-      enum: ["beer", "cider"],
-      default: "beer",
+      type: "varchar",
+      // enum: ["beer", "cider"],
+      // default: "beer",
     },
     custom: {
       type: "simple-json",

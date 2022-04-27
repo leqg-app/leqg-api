@@ -12,7 +12,11 @@ export const StoreRevision = new EntitySchema({
       type: "int",
     },
     changes: {
-      type: "longtext",
+      type: "text",
+      transformer: {
+        from: (string) => JSON.parse(string || null),
+        to: (string) => JSON.stringify(string || ""),
+      },
     },
   },
   relations: {

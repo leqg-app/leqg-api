@@ -1,6 +1,7 @@
 import S from "fluent-json-schema";
 
 import { User } from "../../entity/User.js";
+import { isRole, ROLES } from "../../plugins/authentication.js";
 
 const getProfile = {
   schema: {
@@ -9,16 +10,17 @@ const getProfile = {
       200: S.ref("userSchema"),
     },
   },
-  onRequest: async (req, reply) => {
-    req.user = await req.server.authenticate(req, reply);
-  },
+  onRequest: [isRole(ROLES.USER)],
   handler: async (req, reply) => {
     // Sign new jwt to expand expiration
-    req.user.jwt = await reply.jwtSign({
+    const jwt = await reply.jwtSign({
       id: req.user.id,
     });
 
-    return req.user;
+    return {
+      jwt,
+      user: req.user,
+    };
   },
 };
 
@@ -30,9 +32,7 @@ const updateProfile = {
       200: S.object().prop("statusCode", S.integer()),
     },
   },
-  onRequest: async (req, reply) => {
-    req.user = await req.server.authenticate(req, reply);
-  },
+  onRequest: [isRole(ROLES.USER)],
   handler: async (req, reply) => {
     const { favorites } = req.body;
 

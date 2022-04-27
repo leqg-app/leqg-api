@@ -6,16 +6,7 @@ const getAllProducts = {
   schema: {
     summary: "Get all products",
     response: {
-      200: S.array().items(
-        S.object()
-          .prop("id", S.integer())
-          .prop("name", S.string())
-          .prop("type", S.string())
-          .prop(
-            "custom",
-            S.anyOf([S.null(), S.object().prop("color", S.string())])
-          )
-      ),
+      200: S.array().items(S.ref("productSchema")),
     },
   },
   handler: async (req, rep) => {
@@ -24,4 +15,21 @@ const getAllProducts = {
   },
 };
 
-export { getAllProducts };
+const createProduct = {
+  schema: {
+    summary: "Create a product",
+    body: S.ref("productBaseSchema"),
+    response: {
+      200: S.ref("productSchema"),
+    },
+  },
+  preHandler: async (req, reply) => {
+    // TODO
+    // Only admin at the moment
+  },
+  handler: async (req, rep) => {
+    // TODO
+  },
+};
+
+export { getAllProducts, createProduct };

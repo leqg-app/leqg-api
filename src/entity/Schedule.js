@@ -28,7 +28,7 @@ export const Schedule = new EntitySchema({
       nullable: true,
     },
     closed: {
-      type: "bool",
+      type: "boolean",
     },
   },
   relations: {

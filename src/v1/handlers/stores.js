@@ -1,7 +1,11 @@
 import S from "fluent-json-schema";
 
 import { Store } from "../../entity/Store.js";
+import { StoreRevision } from "../../entity/StoreRevision.js";
+import { Version } from "../../entity/Version.js";
+import { isRole, ROLES } from "../../plugins/authentication.js";
 import { formatStore } from "../utils/format.js";
+import diffMapper from "../utils/diffMapper.js";
 
 const getAllStores = {
   schema: {
@@ -32,11 +36,118 @@ const getAllStores = {
       ),
     },
   },
-  handler: async (req, rep) => {
-    const storeRepo = rep.server.db.getRepository(Store);
+  handler: async (req) => {
+    const storeRepo = req.server.db.getRepository(Store);
     const stores = await storeRepo.find();
     return stores.map(formatStore);
   },
 };
 
-export { getAllStores };
+const getStore = {
+  schema: {
+    summary: "Get a store",
+    params: S.object().prop("id", S.integer().required()),
+    response: {
+      200: S.ref("storeSchema"),
+    },
+  },
+  handler: async (req) => {
+    const { id } = req.params;
+    const storeRepo = req.server.db.getRepository(Store);
+    const store = await storeRepo.findOneBy({ id });
+    store.features = store.features.map(({ id }) => id);
+    store.products.map((p) => (p.product = p.productId));
+    return store;
+  },
+};
+
+const createStore = {
+  schema: {
+    summary: "Create a store",
+    body: S.ref("storeBaseSchema"),
+    response: {
+      200: S.ref("storeSchema"),
+    },
+  },
+  onRequest: [isRole(ROLES.USER)],
+  handler: async (req, rep) => {
+    const repoStore = req.server.db.getRepository(Store);
+    const store = await repoStore.save(req.body);
+
+    const repoVersion = req.server.db.getRepository(Version);
+    const { version } = await repoVersion.findOneBy({ name: "stores" });
+
+    // Create revision
+    const revision = await req.server.db.manager.save(StoreRevision, {
+      store,
+      version: version + 1,
+      author: req.user.id,
+      changes: [{ type: "initial" }],
+    });
+
+    // Set revision into store response
+    delete revision.store;
+    revision.user = { username: "nicolas" };
+
+    store.revisions = [revision];
+
+    // Upgrade version
+    await repoVersion.update({ name: "stores" }, { version: version + 1 });
+
+    return store;
+  },
+};
+
+const updateStore = {
+  schema: {
+    summary: "Update store",
+    params: S.object().prop("id", S.integer().required()),
+    body: S.ref("storeSchema"),
+    response: {
+      200: S.object()
+        .prop("store", S.ref("storeSchema"))
+        .prop("contributed", S.boolean()),
+    },
+  },
+  onRequest: [isRole(ROLES.USER)],
+  handler: async (req, reply) => {
+    const { id } = req.params;
+    const repoStore = req.server.db.getRepository(Store);
+    const store = await repoStore.findOneBy({ id });
+
+    if (!store) {
+      return reply.status(404).send({});
+    }
+
+    const updated = await repoStore.save(req.body);
+
+    const changes = diffMapper(store, updated);
+
+    if (!changes.length) {
+      return {
+        store: updated,
+        contributed: false,
+      };
+    }
+
+    const repoVersion = req.server.db.getRepository(Version);
+    const { version } = await repoVersion.findOneBy({ name: "stores" });
+
+    // Create revision
+    const revision = await req.server.db.manager.save(StoreRevision, {
+      store,
+      version: version + 1,
+      author: req.user.id,
+      changes,
+    });
+
+    // Upgrade version
+    await repoVersion.update({ name: "stores" }, { version: version + 1 });
+
+    updated.revisions.push(revision);
+
+    return { store: updated, contributed: true };
+  },
+};
+
+export { getAllStores, getStore, createStore, updateStore };

@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "Le QG API",
   "license": "GNU GPLv3",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "start": "pm2 start src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "pm2 start src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "NODE_ENV=test tap",
+    "test-watch": "NODE_ENV=test tap --watch"
   },
   "engines": {
     "node": ">=12"
@@ -21,10 +22,21 @@
     "fastify-plugin": "^3.0.1",
     "fluent-json-schema": "^3.1.0",
     "mysql": "^2.18.1",
+    "pino-pretty": "^7.6.1",
     "sib-api-v3-sdk": "^8.3.0",
+    "sqlite3": "^5.0.5",
     "typeorm": "^0.3.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "@istanbuljs/esm-loader-hook": "^0.1.2",
+    "nodemon": "^2.0.15",
+    "tap": "^16.0.1"
+  },
+  "tap": {
+    "node-arg": [
+      "--no-warnings",
+      "--experimental-loader",
+      "@istanbuljs/esm-loader-hook"
+    ]
   }
 }

@@ -25,8 +25,8 @@ export const StoreProduct = new EntitySchema({
       nullable: true, // TO REMOVE
     },
     type: {
-      type: "enum",
-      enum: ["draft", "bottle", "can", "other"],
+      type: "varchar",
+      // enum: ["draft", "bottle", "can", "other"],
       nullable: true, // TO REMOVE
     },
     currencyCode: {

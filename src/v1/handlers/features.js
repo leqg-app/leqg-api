@@ -4,7 +4,7 @@ import { FeatureCategory } from "../../entity/FeatureCategory.js";
 
 const getAllFeatures = {
   schema: {
-    summary: "Get all products",
+    summary: "Get all features",
     response: {
       200: S.array().items(
         S.object()
