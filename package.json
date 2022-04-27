@@ -5,7 +5,7 @@
   "license": "GNU GPLv3",
   "main": "src/server.js",
   "scripts": {
-    "start": "pm2 start src/server.js",
+    "start": "pm2-runtime start src/server.js",
     "dev": "nodemon src/server.js",
     "test": "tap --coverage-report=lcov",
     "test-watch": "tap --watch"
@@ -14,6 +14,7 @@
     "node": ">=12"
   },
   "dependencies": {
+    "@fastify/swagger": "^6.0.0",
     "bcryptjs": "^2.4.3",
     "fastify": "^3.28.0",
     "fastify-env": "^2.1.1",
@@ -22,6 +23,7 @@
     "fluent-json-schema": "^3.1.0",
     "mysql": "^2.18.1",
     "pino-pretty": "^7.6.1",
+    "pm2": "^5.2.0",
     "sib-api-v3-sdk": "^8.3.0",
     "sqlite3": "^5.0.5",
     "typeorm": "^0.3.6"
