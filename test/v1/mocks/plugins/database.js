@@ -1,22 +1,25 @@
 const fastifyPlugin = require("fastify-plugin");
 const { DataSource } = require("typeorm");
 
-const entities = require("../entity/index.js");
+const entities = require("../../../../src/entity/index.js");
+const fixtures = require("../fixtures/index.js");
 
 async function db(fastify) {
-  const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST } = fastify.config;
   const AppDataSource = new DataSource({
-    type: "mysql",
-    host: DB_HOST,
-    port: 3306,
-    username: DB_USER,
-    password: DB_PASSWORD,
-    database: DB_NAME,
+    type: "sqlite",
+    database: ":memory:",
     synchronize: true,
     entities,
   });
 
-  await AppDataSource.initialize();
+  const connection = await AppDataSource.initialize();
+
+  for (const fixture of fixtures) {
+    const repo = connection.getRepository(fixture.repository);
+    for (const data of fixture.data) {
+      await repo.save(data);
+    }
+  }
 
   fastify.decorate("db", AppDataSource);
   fastify.addHook("onClose", (fastifyInstance, done) => {

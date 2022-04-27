@@ -1,9 +1,9 @@
-import fastifyPlugin from "fastify-plugin";
-import fastifyJwt from "fastify-jwt";
+const fastifyPlugin = require("fastify-plugin");
+const fastifyJwt = require("fastify-jwt");
 
-import { User } from "../entity/User.js";
+const { User } = require("../entity/User.js");
 
-export const ROLES = {
+const ROLES = {
   USER: 1,
   ADMIN: 3,
 };
@@ -27,7 +27,7 @@ async function authentication(fastify) {
   });
 }
 
-export function isRole(role) {
+function isRole(role) {
   return async function (req, reply) {
     const user = await req.server.authenticate(req, reply);
     if (!user || user.blocked || user.role < role) {
@@ -37,4 +37,8 @@ export function isRole(role) {
   };
 }
 
-export default fastifyPlugin(authentication);
+module.exports = {
+  authentication: fastifyPlugin(authentication),
+  ROLES,
+  isRole,
+};

@@ -1,11 +1,11 @@
-import S from "fluent-json-schema";
+const S = require("fluent-json-schema");
 
-import { Store } from "../../entity/Store.js";
-import { StoreRevision } from "../../entity/StoreRevision.js";
-import { Version } from "../../entity/Version.js";
-import { isRole, ROLES } from "../../plugins/authentication.js";
-import { formatStore } from "../utils/format.js";
-import diffMapper from "../utils/diffMapper.js";
+const { Store } = require("../../entity/Store.js");
+const { StoreRevision } = require("../../entity/StoreRevision.js");
+const { Version } = require("../../entity/Version.js");
+const { isRole, ROLES } = require("../../plugins/authentication.js");
+const formatStore = require("../utils/format.js");
+const diffMapper = require("../utils/diffMapper.js");
 
 const getAllStores = {
   schema: {
@@ -150,4 +150,4 @@ const updateStore = {
   },
 };
 
-export { getAllStores, getStore, createStore, updateStore };
+module.exports = { getAllStores, getStore, createStore, updateStore };

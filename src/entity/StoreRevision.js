@@ -1,6 +1,6 @@
-import { EntitySchema } from "typeorm";
+const { EntitySchema } = require("typeorm");
 
-export const StoreRevision = new EntitySchema({
+const StoreRevision = new EntitySchema({
   name: "StoreRevision",
   columns: {
     id: {
@@ -32,3 +32,7 @@ export const StoreRevision = new EntitySchema({
     },
   },
 });
+
+module.exports = {
+  StoreRevision,
+};

@@ -1,6 +1,6 @@
-import S from "fluent-json-schema";
+const S = require("fluent-json-schema");
 
-import { Product } from "../../entity/Product.js";
+const { Product } = require("../../entity/Product.js");
 
 const getAllProducts = {
   schema: {
@@ -32,4 +32,4 @@ const createProduct = {
   },
 };
 
-export { getAllProducts, createProduct };
+module.exports = { getAllProducts, createProduct };

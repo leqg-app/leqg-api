@@ -1,6 +1,6 @@
-import tap from "tap";
+const tap = require("tap");
 
-import build from "../../src/app.js";
+const build = require("./mocks/build.js");
 
 const fastify = build();
 tap.teardown(() => fastify.close());

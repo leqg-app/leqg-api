@@ -1,6 +1,6 @@
-import S from "fluent-json-schema";
+const S = require("fluent-json-schema");
 
-import { CurrencyRate } from "../../entity/CurrencyRate.js";
+const { CurrencyRate } = require("../../entity/CurrencyRate.js");
 
 const getAllCurrencies = {
   schema: {
@@ -15,4 +15,4 @@ const getAllCurrencies = {
   },
 };
 
-export { getAllCurrencies };
+module.exports = { getAllCurrencies };

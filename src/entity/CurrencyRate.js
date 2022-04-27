@@ -1,6 +1,6 @@
-import { EntitySchema } from "typeorm";
+const { EntitySchema } = require("typeorm");
 
-export const CurrencyRate = new EntitySchema({
+const CurrencyRate = new EntitySchema({
   name: "CurrencyRate",
   columns: {
     id: {
@@ -17,3 +17,7 @@ export const CurrencyRate = new EntitySchema({
     },
   },
 });
+
+module.exports = {
+  CurrencyRate,
+};

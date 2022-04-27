@@ -1,11 +1,11 @@
-import Fastify from "fastify";
-import fastifyEnv from "fastify-env";
-import S from "fluent-json-schema";
+const Fastify = require("fastify");
+const fastifyEnv = require("fastify-env");
+const S = require("fluent-json-schema");
 
-import database from "./plugins/database.js";
-import email from "./plugins/email.js";
-import authentication from "./plugins/authentication.js";
-import v1 from "./v1/routes.js";
+const database = require("./plugins/database.js");
+const email = require("./plugins/email.js");
+const { authentication } = require("./plugins/authentication.js");
+const v1 = require("./v1/routes.js");
 
 function app(opts = {}) {
   const fastify = Fastify(opts);
@@ -34,4 +34,4 @@ function app(opts = {}) {
   return fastify;
 }
 
-export default app;
+module.exports = app;

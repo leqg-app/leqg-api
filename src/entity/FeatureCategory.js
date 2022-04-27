@@ -1,6 +1,6 @@
-import { EntitySchema } from "typeorm";
+const { EntitySchema } = require("typeorm");
 
-export const FeatureCategory = new EntitySchema({
+const FeatureCategory = new EntitySchema({
   name: "FeatureCategory",
   columns: {
     id: {
@@ -22,3 +22,7 @@ export const FeatureCategory = new EntitySchema({
     },
   },
 });
+
+module.exports = {
+  FeatureCategory,
+};

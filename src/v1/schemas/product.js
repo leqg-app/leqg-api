@@ -1,5 +1,5 @@
-import fastifyPlugin from "fastify-plugin";
-import S from "fluent-json-schema";
+const fastifyPlugin = require("fastify-plugin");
+const S = require("fluent-json-schema");
 
 const productSchema = fastifyPlugin(async function (fastify) {
   const productBaseSchema = S.object()
@@ -19,4 +19,4 @@ const productSchema = fastifyPlugin(async function (fastify) {
   fastify.addSchema(productSchema);
 });
 
-export { productSchema };
+module.exports = { productSchema };

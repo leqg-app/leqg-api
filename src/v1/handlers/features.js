@@ -1,6 +1,6 @@
-import S from "fluent-json-schema";
+const S = require("fluent-json-schema");
 
-import { FeatureCategory } from "../../entity/FeatureCategory.js";
+const { FeatureCategory } = require("../../entity/FeatureCategory.js");
 
 const getAllFeatures = {
   schema: {
@@ -24,4 +24,4 @@ const getAllFeatures = {
   },
 };
 
-export { getAllFeatures };
+module.exports = { getAllFeatures };

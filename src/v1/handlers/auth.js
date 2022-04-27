@@ -1,9 +1,9 @@
-import S from "fluent-json-schema";
-import crypto from "crypto";
+const S = require("fluent-json-schema");
+const crypto = require("crypto");
 
-import { User } from "../../entity/index.js";
-import { formatError } from "../schemas/error.js";
-import { hashPassword, comparePassword } from "../utils/password.js";
+const { User } = require("../../entity/index.js");
+const { formatError } = require("../schemas/error.js");
+const { hashPassword, comparePassword } = require("../utils/password.js");
 
 const login = {
   schema: {
@@ -66,17 +66,18 @@ const register = {
       400: S.ref("errorSchema"),
     },
   },
-  errorHandler: (error, req, reply) => {
-    const [{ params }] = error.validation;
-
-    const message = {
-      email: "Auth.form.error.email.provide",
-      password: "Auth.form.error.password.provide",
-    }[params.missingProperty || params.format];
-
-    reply.status(400).send(formatError(message));
-  },
+  attachValidation: true,
   handler: async (req, reply) => {
+    if (req.validationError) {
+      const [{ params }] = req.validationError.validation;
+
+      const message = {
+        email: "Auth.form.error.email.provide",
+        password: "Auth.form.error.password.provide",
+      }[params.missingProperty || params.format];
+
+      reply.status(400).send(formatError(message));
+    }
     const { username, password, email } = req.body;
     const repo = req.server.db.getRepository(User);
 
@@ -118,16 +119,18 @@ const forgotPassword = {
       400: S.ref("errorSchema"),
     },
   },
-  errorHandler: (error, req, reply) => {
-    const [{ params }] = error.validation;
-
-    const message = {
-      email: "Auth.form.error.email.format",
-    }[params.missingProperty || params.format];
-
-    reply.status(400).send(formatError(message));
-  },
+  attachValidation: true,
   handler: async (req, reply) => {
+    if (req.validationError) {
+      const [{ params }] = req.validationError.validation;
+
+      const message = {
+        email: "Auth.form.error.email.format",
+      }[params.missingProperty || params.format];
+
+      reply.status(400).send(formatError(message));
+    }
+
     const { email } = req.body;
     const repo = req.server.db.getRepository(User);
 
@@ -151,7 +154,7 @@ const forgotPassword = {
     const resetPasswordToken = crypto.randomBytes(64).toString("hex");
 
     user.resetPasswordToken = resetPasswordToken;
-    await repo.update(user.id, user);
+    await repo.save(user);
 
     const html = `
 <p>${user.username},</p>
@@ -220,10 +223,10 @@ const resetPassword = {
 
     user.password = await hashPassword(password);
     user.resetPasswordToken = null;
-    await repo.update(user.id, user);
+    await repo.save(user);
 
     return { statusCode: 200 };
   },
 };
 
-export { login, register, forgotPassword, resetPassword };
+module.exports = { login, register, forgotPassword, resetPassword };

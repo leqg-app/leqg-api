@@ -98,4 +98,4 @@ function diffMapper(left, right) {
   return returns;
 }
 
-export default diffMapper;
+module.exports = diffMapper;

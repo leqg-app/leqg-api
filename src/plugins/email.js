@@ -1,5 +1,5 @@
-import fastifyPlugin from "fastify-plugin";
-import SibApiV3Sdk from "sib-api-v3-sdk";
+const fastifyPlugin = require("fastify-plugin");
+const SibApiV3Sdk = require("sib-api-v3-sdk");
 
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
 
@@ -19,17 +19,10 @@ async function email(fastify) {
         sendSmtpEmail.htmlContent = options.html;
         sendSmtpEmail.textContent = options.text || "";
 
-        apiInstance.sendTransacEmail(sendSmtpEmail).then(
-          (data) => {
-            resolve(data);
-          },
-          (error) => {
-            reject(error);
-          }
-        );
+        apiInstance.sendTransacEmail(sendSmtpEmail).then(resolve).catch(reject);
       });
     },
   });
 }
 
-export default fastifyPlugin(email);
+module.exports = fastifyPlugin(email);

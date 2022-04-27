@@ -1,6 +1,6 @@
-import * as entities from "../../../src/entity/index.js";
+const entities = require("../../../../src/entity/index.js");
 
-export const Version = {
+module.exports.Version = {
   repository: entities.Version,
   data: [
     {

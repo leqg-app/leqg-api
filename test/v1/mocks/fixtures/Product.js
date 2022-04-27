@@ -1,6 +1,6 @@
-import * as entities from "../../../src/entity/index.js";
+const entities = require("../../../../src/entity/index.js");
 
-export const Product = {
+module.exports.Product = {
   repository: entities.Product,
   data: [
     {

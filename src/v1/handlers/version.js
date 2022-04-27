@@ -1,6 +1,6 @@
-import S from "fluent-json-schema";
+const S = require("fluent-json-schema");
 
-import { Version } from "../../entity/Version.js";
+const { Version } = require("../../entity/Version.js");
 
 const getAllVersions = {
   schema: {
@@ -23,4 +23,4 @@ const getAllVersions = {
   },
 };
 
-export { getAllVersions };
+module.exports = { getAllVersions };

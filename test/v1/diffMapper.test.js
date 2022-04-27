@@ -1,6 +1,6 @@
-import tap from "tap";
+const tap = require("tap");
 
-import diffMapper from "../../src/v1/utils/diffMapper.js";
+const diffMapper = require("../../src/v1/utils/diffMapper.js");
 
 const tests = [
   {

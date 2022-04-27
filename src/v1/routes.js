@@ -1,18 +1,18 @@
-import * as version from "./handlers/version.js";
-import * as stores from "./handlers/stores.js";
-import * as products from "./handlers/products.js";
-import * as features from "./handlers/features.js";
-import * as auth from "./handlers/auth.js";
-import * as user from "./handlers/user.js";
-import * as currencies from "./handlers/currencies.js";
+const version = require("./handlers/version.js");
+const stores = require("./handlers/stores.js");
+const products = require("./handlers/products.js");
+const features = require("./handlers/features.js");
+const auth = require("./handlers/auth.js");
+const user = require("./handlers/user.js");
+const currencies = require("./handlers/currencies.js");
 
-import { userSchema } from "./schemas/user.js";
-import { errorSchema } from "./schemas/error.js";
-import { productSchema } from "./schemas/product.js";
-import { storeSchema } from "./schemas/store.js";
-import { currencyRateSchema } from "./schemas/currencyRate.js";
+const { userSchema } = require("./schemas/user.js");
+const { errorSchema } = require("./schemas/error.js");
+const { productSchema } = require("./schemas/product.js");
+const { storeSchema } = require("./schemas/store.js");
+const { currencyRateSchema } = require("./schemas/currencyRate.js");
 
-export default async function routes(fastify) {
+module.exports = async function routes(fastify) {
   fastify.register(userSchema);
   fastify.register(errorSchema);
   fastify.register(productSchema);
@@ -21,7 +21,7 @@ export default async function routes(fastify) {
 
   fastify.register(v1, { prefix: "v1" });
   fastify.register(authRoutes);
-}
+};
 
 async function v1(fastify) {
   fastify.get("/version", version.getAllVersions);

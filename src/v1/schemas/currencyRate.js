@@ -1,5 +1,5 @@
-import fastifyPlugin from "fastify-plugin";
-import S from "fluent-json-schema";
+const fastifyPlugin = require("fastify-plugin");
+const S = require("fluent-json-schema");
 
 const currencyRateSchema = fastifyPlugin(async function (fastify) {
   const currencyRate = S.object()
@@ -9,4 +9,4 @@ const currencyRateSchema = fastifyPlugin(async function (fastify) {
   fastify.addSchema(currencyRate);
 });
 
-export { currencyRateSchema };
+module.exports = { currencyRateSchema };

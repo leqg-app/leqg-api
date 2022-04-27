@@ -1,5 +1,5 @@
-import fastifyPlugin from "fastify-plugin";
-import S from "fluent-json-schema";
+const fastifyPlugin = require("fastify-plugin");
+const S = require("fluent-json-schema");
 
 const errorSchema = fastifyPlugin(async function (fastify) {
   fastify.addSchema(
@@ -16,4 +16,4 @@ const errorSchema = fastifyPlugin(async function (fastify) {
 
 const formatError = (message) => [{ messages: [{ id: message }] }];
 
-export { errorSchema, formatError };
+module.exports = { errorSchema, formatError };

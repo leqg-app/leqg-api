@@ -1,7 +1,7 @@
-import S from "fluent-json-schema";
+const S = require("fluent-json-schema");
 
-import { User } from "../../entity/User.js";
-import { isRole, ROLES } from "../../plugins/authentication.js";
+const { User } = require("../../entity/User.js");
+const { isRole, ROLES } = require("../../plugins/authentication.js");
 
 const getProfile = {
   schema: {
@@ -44,4 +44,4 @@ const updateProfile = {
   },
 };
 
-export { getProfile, updateProfile };
+module.exports = { getProfile, updateProfile };

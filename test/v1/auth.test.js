@@ -1,36 +1,6 @@
-import tap from "tap";
-import sinon from "sinon";
-import { DataSource } from "typeorm";
+const tap = require("tap");
 
-import build from "../../src/app.js";
-import * as entities from "../../src/entity/index.js";
-import fixtures from "./fixtures/index.js";
-import database from "../../src/plugins/database.js";
-
-// const source = new DataSource({
-//   type: "sqlite",
-//   database: ":memory:",
-//   synchronize: true,
-//   entities,
-// });
-
-sinon.stub(database, "default").callsFake(function () {
-  console.log("here");
-});
-
-// sinon.createStubInstance(DataSource, {
-//   constructor: sinon.stub().returns(source),
-//   initialize: sinon.stub().callsFake(async function () {
-//     await source.initialize();
-//     console.log(fixtures);
-//     // for (const fixture of fixtures) {
-//     //   const repo = connection.getRepository(fixture.repository);
-//     //   for (const data of fixture.data) {
-//     //     await repo.save(data);
-//     //   }
-//     // }
-//   }),
-// });
+const build = require("./mocks/build.js");
 
 const fastify = build();
 tap.teardown(() => fastify.close());
@@ -155,15 +125,15 @@ tap.test("Register", async (t) => {
 });
 
 tap.test("Forgot password", async (t) => {
-  // t.test("Success", async (t) => {
-  //   const response = await fastify.inject({
-  //     method: "POST",
-  //     url: "/auth/forgot-password",
-  //     payload: { email: "user@leqg.app" },
-  //   });
+  t.test("Success", async (t) => {
+    const response = await fastify.inject({
+      method: "POST",
+      url: "/auth/forgot-password",
+      payload: { email: "user@leqg.app" },
+    });
 
-  //   t.equal(response.statusCode, 200);
-  // });
+    t.equal(response.statusCode, 200);
+  });
 
   t.test("Miss field", async (t) => {
     const response = await fastify.inject({
@@ -242,27 +212,27 @@ tap.test("Reset password", async (t) => {
     t.equal(response.statusCode, 400);
   });
 
-  // t.test("Success", async (t) => {
-  //   const response = await fastify.inject({
-  //     method: "POST",
-  //     url: "/auth/reset-password",
-  //     payload: {
-  //       code: "valid-reset-code",
-  //       password: "password",
-  //       passwordConfirmation: "password",
-  //     },
-  //   });
+  t.test("Success", async (t) => {
+    const response = await fastify.inject({
+      method: "POST",
+      url: "/auth/reset-password",
+      payload: {
+        code: "reset-code",
+        password: "password",
+        passwordConfirmation: "password",
+      },
+    });
 
-  //   t.equal(response.statusCode, 200);
-  // });
+    t.equal(response.statusCode, 200);
+  });
 
-  // t.test("Could login with new password", async (t) => {
-  //   const response = await fastify.inject({
-  //     method: "POST",
-  //     url: "/auth/local",
-  //     payload: { identifier: "admin", password: "password" },
-  //   });
+  t.test("Could login with new password", async (t) => {
+    const response = await fastify.inject({
+      method: "POST",
+      url: "/auth/local",
+      payload: { identifier: "admin", password: "password" },
+    });
 
-  //   t.equal(response.statusCode, 200);
-  // });
+    t.equal(response.statusCode, 200);
+  });
 });

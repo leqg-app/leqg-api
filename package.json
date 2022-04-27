@@ -4,12 +4,11 @@
   "description": "Le QG API",
   "license": "GNU GPLv3",
   "main": "src/server.js",
-  "type": "module",
   "scripts": {
     "start": "pm2 start src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "NODE_ENV=test tap",
-    "test-watch": "NODE_ENV=test tap --watch"
+    "test": "tap",
+    "test-watch": "tap --watch"
   },
   "engines": {
     "node": ">=12"
@@ -28,15 +27,10 @@
     "typeorm": "^0.3.6"
   },
   "devDependencies": {
-    "@istanbuljs/esm-loader-hook": "^0.1.2",
     "nodemon": "^2.0.15",
     "tap": "^16.0.1"
   },
   "tap": {
-    "node-arg": [
-      "--no-warnings",
-      "--experimental-loader",
-      "@istanbuljs/esm-loader-hook"
-    ]
+    "files": "test/**/*.test.js"
   }
 }

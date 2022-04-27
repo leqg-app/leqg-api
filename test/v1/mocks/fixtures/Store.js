@@ -1,6 +1,6 @@
-import * as entities from "../../../src/entity/index.js";
+const entities = require("../../../../src/entity/index.js");
 
-export const Store = {
+module.exports.Store = {
   repository: entities.Store,
   data: [
     {
@@ -35,6 +35,7 @@ export const Store = {
           dayOfWeek: i + 1,
           closed: false,
         })),
+      features: [1],
     },
     {
       name: "Store 2",

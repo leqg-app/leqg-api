@@ -1,10 +1,23 @@
-export { Store } from "./Store.js";
-export { Product } from "./Product.js";
-export { StoreProduct } from "./StoreProduct.js";
-export { Schedule } from "./Schedule.js";
-export { StoreRevision } from "./StoreRevision.js";
-export { User } from "./User.js";
-export { CurrencyRate } from "./CurrencyRate.js";
-export { FeatureCategory } from "./FeatureCategory.js";
-export { Feature } from "./Feature.js";
-export { Version } from "./Version.js";
+const { Store } = require("./Store.js");
+const { Product } = require("./Product.js");
+const { StoreProduct } = require("./StoreProduct.js");
+const { Schedule } = require("./Schedule.js");
+const { StoreRevision } = require("./StoreRevision.js");
+const { User } = require("./User.js");
+const { CurrencyRate } = require("./CurrencyRate.js");
+const { FeatureCategory } = require("./FeatureCategory.js");
+const { Feature } = require("./Feature.js");
+const { Version } = require("./Version.js");
+
+module.exports = {
+  Store,
+  Product,
+  StoreProduct,
+  Schedule,
+  StoreRevision,
+  User,
+  CurrencyRate,
+  FeatureCategory,
+  Feature,
+  Version,
+};

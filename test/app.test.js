@@ -1,8 +1,8 @@
-import tap from "tap";
+const tap = require("tap");
 
-import build from "../src/app.js";
+const build = require("./v1/mocks/build.js");
 
-tap.test("GET `/` route", async (t) => {
+tap.test("Health", async (t) => {
   const fastify = build();
 
   t.teardown(() => fastify.close());
