@@ -121,7 +121,17 @@ const updateStore = {
 
     const updated = await repoStore.save(req.body);
 
-    const changes = diffMapper(store, updated);
+    const changes = diffMapper(store, updated, [
+      "name",
+      "address",
+      "longitude",
+      "latitude",
+      "website",
+      "phone",
+      "schedules",
+      "products",
+      "features",
+    ]);
 
     if (!changes.length) {
       return {

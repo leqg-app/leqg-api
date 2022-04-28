@@ -520,7 +520,10 @@ const tests = [
 tap.test("", async function (t) {
   for (const test of tests) {
     t.test(test.name, async function (t) {
-      t.same(diffMapper(test.before, test.after), test.output);
+      t.same(
+        diffMapper(test.before, test.after, ["name", "products"]),
+        test.output
+      );
     });
   }
 });

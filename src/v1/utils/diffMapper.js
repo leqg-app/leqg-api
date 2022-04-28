@@ -1,6 +1,10 @@
-function diffMapper(left, right) {
+function diffMapper(left, right, toMap = []) {
   const returns = [];
   for (const field in left) {
+    if (toMap.length && !toMap.includes(field)) {
+      continue;
+    }
+
     const before = left[field];
     const after = right[field];
 
@@ -83,6 +87,10 @@ function diffMapper(left, right) {
   }
 
   for (const field in right) {
+    if (toMap.length && !toMap.includes(field)) {
+      continue;
+    }
+
     const before = left[field];
     const after = right[field];
 
