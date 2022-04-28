@@ -5,6 +5,7 @@ const { Product } = require("../../entity/Product.js");
 const getAllProducts = {
   schema: {
     summary: "Get all products",
+    tags: ["product"],
     response: {
       200: S.array().items(S.ref("productSchema")),
     },
@@ -18,6 +19,7 @@ const getAllProducts = {
 const createProduct = {
   schema: {
     summary: "Create a product",
+    tags: ["product"],
     body: S.ref("productBaseSchema"),
     response: {
       200: S.ref("productSchema"),

@@ -8,6 +8,7 @@ const { hashPassword, comparePassword } = require("../utils/password.js");
 const login = {
   schema: {
     summary: "Authenticate user",
+    tags: ["user"],
     body: S.object()
       .prop("identifier", S.string().required())
       .prop("password", S.string().required()),
@@ -57,6 +58,7 @@ const login = {
 const register = {
   schema: {
     summary: "Register user",
+    tags: ["user"],
     body: S.object()
       .prop("username", S.string().required())
       .prop("password", S.string().required())
@@ -110,6 +112,7 @@ const register = {
 const forgotPassword = {
   schema: {
     summary: "Send mail to reset password",
+    tags: ["user"],
     body: S.object().prop(
       "email",
       S.string().format(S.FORMATS.EMAIL).required()
@@ -194,6 +197,7 @@ Le QG
 const resetPassword = {
   schema: {
     summary: "Reset user password",
+    tags: ["user"],
     body: S.object()
       .prop("code", S.string().required())
       .prop("password", S.string().required())

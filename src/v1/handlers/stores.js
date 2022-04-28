@@ -10,6 +10,7 @@ const diffMapper = require("../utils/diffMapper.js");
 const getAllStores = {
   schema: {
     summary: "Get all stores",
+    tags: ["store"],
     response: {
       200: S.array().items(
         S.object()
@@ -46,6 +47,7 @@ const getAllStores = {
 const getStore = {
   schema: {
     summary: "Get a store",
+    tags: ["store"],
     params: S.object().prop("id", S.integer().required()),
     response: {
       200: S.ref("storeSchema"),
@@ -64,6 +66,7 @@ const getStore = {
 const createStore = {
   schema: {
     summary: "Create a store",
+    tags: ["store"],
     body: S.ref("storeBaseSchema"),
     response: {
       200: S.ref("storeSchema"),
@@ -101,6 +104,7 @@ const createStore = {
 const updateStore = {
   schema: {
     summary: "Update store",
+    tags: ["store"],
     params: S.object().prop("id", S.integer().required()),
     body: S.ref("storeSchema"),
     response: {

@@ -5,6 +5,7 @@ const { CurrencyRate } = require("../../entity/CurrencyRate.js");
 const getAllCurrencies = {
   schema: {
     summary: "Get all currencies rates",
+    tags: ["currency"],
     response: {
       200: S.array().items(S.ref("currencyRateSchema")),
     },

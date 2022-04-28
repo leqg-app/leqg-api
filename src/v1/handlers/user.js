@@ -6,6 +6,7 @@ const { isRole, ROLES } = require("../../plugins/authentication.js");
 const getProfile = {
   schema: {
     summary: "Get user profile",
+    tags: ["user"],
     response: {
       200: S.ref("userSchema"),
     },
@@ -27,6 +28,7 @@ const getProfile = {
 const updateProfile = {
   schema: {
     summary: "Update user profile",
+    tags: ["user"],
     body: S.object().prop("favorites", S.array().items(S.integer())),
     response: {
       200: S.object().prop("statusCode", S.integer()),

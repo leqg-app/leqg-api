@@ -5,6 +5,7 @@ const { FeatureCategory } = require("../../entity/FeatureCategory.js");
 const getAllFeatures = {
   schema: {
     summary: "Get all features",
+    tags: ["feature"],
     response: {
       200: S.array().items(
         S.object()

@@ -5,6 +5,7 @@ const { Version } = require("../../entity/Version.js");
 const getAllVersions = {
   schema: {
     summary: "Get all versions",
+    tags: ["version"],
     response: {
       200: S.object()
         .prop("stores", S.integer())
