@@ -21,6 +21,12 @@ const Product = new EntitySchema({
       type: "simple-json",
       nullable: true,
     },
+    createdAt: {
+      createDate: true,
+    },
+    updatedAt: {
+      updateDate: true,
+    },
   },
   relations: {
     store: {

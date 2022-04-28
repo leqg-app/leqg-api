@@ -41,6 +41,12 @@ const Store = new EntitySchema({
       nullable: true,
       default: "FR",
     },
+    createdAt: {
+      createDate: true,
+    },
+    updatedAt: {
+      updateDate: true,
+    },
   },
   relations: {
     schedules: {

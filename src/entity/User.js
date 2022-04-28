@@ -46,6 +46,9 @@ const User = new EntitySchema({
       nullable: true,
       default: 0,
     },
+    createdAt: {
+      createDate: true,
+    },
   },
   relations: {
     favorites: {
