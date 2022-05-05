@@ -18,6 +18,9 @@ const StoreRevision = new EntitySchema({
         to: (string) => JSON.stringify(string || ""),
       },
     },
+    createdAt: {
+      createDate: true,
+    },
   },
   relations: {
     user: {
