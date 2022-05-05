@@ -7,9 +7,6 @@ const getProfile = {
   schema: {
     summary: "Get user profile",
     tags: ["user"],
-    response: {
-      200: S.ref("userSchema"),
-    },
   },
   onRequest: [isRole(ROLES.USER)],
   handler: async (req, reply) => {
@@ -20,7 +17,7 @@ const getProfile = {
 
     return {
       jwt,
-      user: req.user,
+      ...req.user,
     };
   },
 };

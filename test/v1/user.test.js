@@ -30,7 +30,7 @@ tap.test("Profile", async ({ context }) => {
     });
 
     t.equal(profile.statusCode, 200);
-    t.equal(profile.json().user.username, "admin");
+    t.equal(profile.json().username, "admin");
   });
 
   tap.test("Invalid jwt", async (t) => {
@@ -65,6 +65,6 @@ tap.test("Profile", async ({ context }) => {
     });
 
     t.equal(profile.statusCode, 200);
-    t.equal(profile.json().user.favorites.length, 1);
+    t.equal(profile.json().favorites.length, 1);
   });
 });
