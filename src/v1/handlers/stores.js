@@ -6,6 +6,7 @@ const { Version } = require("../../entity/Version.js");
 const { isRole, ROLES } = require("../../plugins/authentication.js");
 const formatStore = require("../utils/format.js");
 const diffMapper = require("../utils/diffMapper.js");
+const { User } = require("../../entity/User.js");
 
 const getAllStores = {
   schema: {
@@ -97,6 +98,9 @@ const createStore = {
     // Upgrade version
     await repoVersion.update({ name: "stores" }, { version: version + 1 });
 
+    req.user.contributions++;
+    await req.server.db.manager.save(User, req.user);
+
     return repoStore.findOneBy({ id: store.id });
   },
 };
@@ -159,6 +163,9 @@ const updateStore = {
     await repoVersion.update({ name: "stores" }, { version: version + 1 });
 
     updated.revisions.push(revision);
+
+    req.user.contributions++;
+    await req.server.db.manager.save(User, req.user);
 
     return { store: updated, contributed: true };
   },

@@ -56,6 +56,20 @@ tap.test("Create store", async ({ context }) => {
     t.equal(response.statusCode, 200);
     t.equal(response.json().stores, 2);
   });
+
+  tap.test("Check incremented user contribution", async (t) => {
+    const { jwt } = context;
+
+    const profile = await fastify.inject({
+      url: "/users/me",
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    });
+
+    t.equal(profile.statusCode, 200);
+    t.equal(profile.json().contributions, 1);
+  });
 });
 
 tap.test("Update store", async ({ context }) => {
@@ -148,5 +162,19 @@ tap.test("Update store", async ({ context }) => {
     const response = await fastify.inject("/v1/version");
     t.equal(response.statusCode, 200);
     t.equal(response.json().stores, 3);
+  });
+
+  tap.test("Check incremented user contribution", async (t) => {
+    const { jwt } = context;
+
+    const profile = await fastify.inject({
+      url: "/users/me",
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    });
+
+    t.equal(profile.statusCode, 200);
+    t.equal(profile.json().contributions, 2);
   });
 });
