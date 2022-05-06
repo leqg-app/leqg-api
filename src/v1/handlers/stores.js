@@ -19,9 +19,9 @@ const getAllStores = {
           .prop("name", S.string())
           .prop("lng", S.number())
           .prop("lat", S.number())
-          .prop("price", S.number())
+          .prop("price", S.anyOf([S.null(), S.number()]))
           .prop("currency", S.string())
-          .prop("specialPrice", S.number())
+          .prop("specialPrice", S.anyOf([S.null(), S.number()]))
           .prop("products", S.array().items(S.integer()))
           .prop(
             "s",
