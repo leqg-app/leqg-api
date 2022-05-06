@@ -4,6 +4,9 @@ on: [push, pull_request]
 
 concurrency: test
 
+env:
+  JWT_SECRET: azerty
+
 jobs:
   test:
     name: Tests
