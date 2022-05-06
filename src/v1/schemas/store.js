@@ -8,8 +8,8 @@ const storeSchema = fastifyPlugin(async function (fastify) {
     .prop("latitude", S.number().required())
     .prop("longitude", S.number().required())
     .prop("address", S.string().required())
-    .prop("phone", S.string())
-    .prop("website", S.string())
+    .prop("phone", S.anyOf([S.null(), S.string()]))
+    .prop("website", S.anyOf([S.null(), S.string()]))
     .prop("countryCode", S.string())
     .prop(
       "schedules",

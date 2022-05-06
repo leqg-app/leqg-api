@@ -59,8 +59,6 @@ const getStore = {
     const store = await storeRepo.findOneBy({ id });
     store.features = store.features.map(({ id }) => id);
     store.products.map((p) => (p.product = p.productId));
-    store.website = store.website || undefined;
-    store.phone = store.phone || undefined;
     return store;
   },
 };
@@ -99,7 +97,7 @@ const createStore = {
     // Upgrade version
     await repoVersion.update({ name: "stores" }, { version: version + 1 });
 
-    return store;
+    return repoStore.findOneBy({ id: store.id });
   },
 };
 
