@@ -3,17 +3,24 @@ const S = require("fluent-json-schema");
 
 const errorSchema = fastifyPlugin(async function (fastify) {
   fastify.addSchema(
-    S.array()
+    S.object()
       .id("errorSchema")
-      .items(
-        S.object().prop(
-          "messages",
-          S.array().items(S.object().prop("id", S.string()))
+      .prop("error", S.string())
+      .prop(
+        "data",
+        S.array().items(
+          S.object().prop(
+            "messages",
+            S.array().items(S.object().prop("id", S.string()))
+          )
         )
       )
   );
 });
 
-const formatError = (message) => [{ messages: [{ id: message }] }];
+const formatError = (message) => ({
+  error: message,
+  data: [{ messages: [{ id: message }] }],
+});
 
 module.exports = { errorSchema, formatError };
