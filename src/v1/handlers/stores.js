@@ -59,6 +59,8 @@ const getStore = {
     const store = await storeRepo.findOneBy({ id });
     store.features = store.features.map(({ id }) => id);
     store.products.map((p) => (p.product = p.productId));
+    store.website = store.website || undefined;
+    store.phone = store.phone || undefined;
     return store;
   },
 };
