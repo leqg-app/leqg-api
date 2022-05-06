@@ -1,3 +1,3 @@
 # Le QG - API
 
-[![Coverage Status](https://coveralls.io/repos/github/leqg-app/leqg-api-v2/badge.svg)](https://coveralls.io/github/leqg-app/leqg-api-v2)
+[![Tests](https://github.com/leqg-app/leqg-api/actions/workflows/test.yml/badge.svg)](https://github.com/leqg-app/leqg-api/actions/workflows/test.yml) [![Coverage Status](https://coveralls.io/repos/github/leqg-app/leqg-api/badge.svg?branch=master)](https://coveralls.io/github/leqg-app/leqg-api?branch=master)
