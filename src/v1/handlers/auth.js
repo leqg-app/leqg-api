@@ -78,19 +78,19 @@ const register = {
         password: "Auth.form.error.password.provide",
       }[params.missingProperty || params.format];
 
-      reply.status(400).send(formatError(message));
+      return reply.status(400).send(formatError(message));
     }
     const { username, password, email } = req.body;
     const repo = req.server.db.getRepository(User);
 
-    const user = await repo.findOne({ where: [{ username }, { email }] });
-    if (user) {
-      if (user.username === username) {
+    const userExist = await repo.findOne({ where: [{ username }, { email }] });
+    if (userExist) {
+      if (userExist.username === username) {
         return reply
           .status(400)
           .send(formatError("Auth.form.error.username.taken"));
       }
-      if (user.email === email) {
+      if (userExist.email === email) {
         return reply
           .status(400)
           .send(formatError("Auth.form.error.email.taken"));
@@ -98,7 +98,7 @@ const register = {
     }
 
     const hashedPassword = await hashPassword(password);
-    return repo.save({
+    const { id } = await repo.save({
       username,
       email,
       password: hashedPassword,
@@ -106,6 +106,19 @@ const register = {
       role: 1,
       confirmed: 1,
     });
+
+    // Refetch user to get relations, maybe better way
+    const user = await repo.findOneBy({ id });
+
+    // User is already signed in
+    const jwt = await reply.jwtSign({
+      id: id,
+    });
+
+    return {
+      jwt,
+      user,
+    };
   },
 };
 

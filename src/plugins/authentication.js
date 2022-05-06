@@ -22,7 +22,7 @@ async function authentication(fastify) {
       const repo = request.server.db.getRepository(User);
       return repo.findOneBy({ id });
     } catch (err) {
-      reply.status(401).send({ error: err.message });
+      return reply.status(401).send({ error: err.message });
     }
   });
 }
@@ -31,7 +31,7 @@ function isRole(role) {
   return async function (req, reply) {
     const user = await req.server.authenticate(req, reply);
     if (!user || user.blocked || user.role < role) {
-      reply.status(401).send({ error: "Invalid user" });
+      return reply.status(401).send({ error: "Invalid user" });
     }
     req.user = user;
   };
