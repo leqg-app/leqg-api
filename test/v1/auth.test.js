@@ -129,7 +129,7 @@ tap.test("Forgot password", async (t) => {
     const response = await fastify.inject({
       method: "POST",
       url: "/auth/forgot-password",
-      payload: { email: "user@leqg.app" },
+      payload: { email: "admin@leqg.app" },
     });
 
     t.equal(response.statusCode, 200);

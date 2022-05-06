@@ -131,7 +131,7 @@ const forgotPassword = {
         email: "Auth.form.error.email.format",
       }[params.missingProperty || params.format];
 
-      reply.status(400).send(formatError(message));
+      return reply.status(400).send(formatError(message));
     }
 
     const { email } = req.body;
