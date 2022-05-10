@@ -91,7 +91,7 @@ const createStore = {
 
     // Set revision into store response
     delete revision.store;
-    revision.user = { username: "nicolas" };
+    revision.user = { username: req.user.username };
 
     store.revisions = [revision];
 
