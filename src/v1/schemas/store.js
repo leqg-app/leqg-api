@@ -35,7 +35,7 @@ const storeSchema = fastifyPlugin(async function (fastify) {
           .prop("volume", S.integer())
           .prop("type", S.enum(["draft", "bottle", "can", "other"]))
           .prop("currencyCode", S.string())
-          .prop("productId", S.anyOf([S.null(), S.integer()]))
+          .prop("product", S.anyOf([S.null(), S.integer()]))
       )
     )
     .prop("features", S.array().items(S.integer()))

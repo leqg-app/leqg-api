@@ -8,6 +8,16 @@ const formatStore = require("../utils/format.js");
 const diffMapper = require("../utils/diffMapper.js");
 const { User } = require("../../entity/User.js");
 
+function formatStoreV1(store) {
+  if (store.features) {
+    store.features = store.features.map(({ id }) => id);
+  }
+  if (store.products) {
+    store.products.map((p) => (p.product = p.productId));
+  }
+  return store;
+}
+
 const getAllStores = {
   schema: {
     summary: "Get all stores",
@@ -63,9 +73,7 @@ const getStore = {
       return reply.status(404).send({});
     }
 
-    store.features = store.features.map(({ id }) => id);
-    store.products.map((p) => (p.product = p.productId));
-    return store;
+    return formatStoreV1(store);
   },
 };
 
@@ -81,6 +89,11 @@ const createStore = {
   onRequest: [isRole(ROLES.USER)],
   handler: async (req, rep) => {
     const repoStore = req.server.db.getRepository(Store);
+
+    if (req.body.products) {
+      req.body.products.map((p) => (p.productId = p.product));
+    }
+
     const store = await repoStore.save(req.body);
 
     const repoVersion = req.server.db.getRepository(Version);
@@ -106,7 +119,7 @@ const createStore = {
     req.user.contributions++;
     await req.server.db.manager.save(User, req.user);
 
-    return repoStore.findOneBy({ id: store.id });
+    return formatStoreV1(await repoStore.findOneBy({ id: store.id }));
   },
 };
 
@@ -132,9 +145,13 @@ const updateStore = {
       return reply.status(404).send({});
     }
 
+    if (req.body.products) {
+      req.body.products.map((p) => (p.productId = p.product));
+    }
+
     const updated = await repoStore.save(req.body);
 
-    const changes = diffMapper(store, updated, [
+    const changes = diffMapper(formatStoreV1(store), updated, [
       "name",
       "address",
       "longitude",
@@ -148,7 +165,7 @@ const updateStore = {
 
     if (!changes.length) {
       return {
-        store: updated,
+        store: formatStoreV1(updated),
         contributed: false,
       };
     }
@@ -172,7 +189,7 @@ const updateStore = {
     req.user.contributions++;
     await req.server.db.manager.save(User, req.user);
 
-    return { store: updated, contributed: true };
+    return { store: formatStoreV1(updated), contributed: true };
   },
 };
 

@@ -35,7 +35,7 @@ tap.test("Create store", async ({ context }) => {
 
   tap.test("Create store", async (t) => {
     const { jwt } = context;
-    const login = await fastify.inject({
+    const create = await fastify.inject({
       method: "POST",
       url: "/v1/stores",
       headers: {
@@ -48,7 +48,7 @@ tap.test("Create store", async ({ context }) => {
         latitude: 1,
       },
     });
-    t.equal(login.statusCode, 200);
+    t.equal(create.statusCode, 200);
   });
 
   tap.test("Check versions", async (t) => {
@@ -132,7 +132,6 @@ tap.test("Update store", async ({ context }) => {
       payload: store,
     });
     t.equal(response.statusCode, 200);
-    t.same(response.json().store, store);
     t.equal(response.json().contributed, false);
   });
 
