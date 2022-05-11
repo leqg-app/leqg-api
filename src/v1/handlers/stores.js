@@ -58,6 +58,11 @@ const getStore = {
     const { id } = req.params;
     const storeRepo = req.server.db.getRepository(Store);
     const store = await storeRepo.findOneBy({ id });
+
+    if (!store) {
+      return reply.status(404).send({});
+    }
+
     store.features = store.features.map(({ id }) => id);
     store.products.map((p) => (p.product = p.productId));
     return store;
