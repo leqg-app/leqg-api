@@ -8,12 +8,16 @@ const formatStore = require("../utils/format.js");
 const diffMapper = require("../utils/diffMapper.js");
 const { User } = require("../../entity/User.js");
 
+// TOFIX: v2
 function formatStoreV1(store) {
   if (store.features) {
     store.features = store.features.map(({ id }) => id);
   }
   if (store.products) {
-    store.products.map((p) => (p.product = p.productId));
+    store.products.map((p) => {
+      p.product = p.productId;
+      delete p.productId;
+    });
   }
   return store;
 }
@@ -91,7 +95,10 @@ const createStore = {
     const repoStore = req.server.db.getRepository(Store);
 
     if (req.body.products) {
-      req.body.products.map((p) => (p.productId = p.product));
+      req.body.products.map((p) => {
+        p.productId = p.product;
+        delete p.product;
+      });
     }
 
     const store = await repoStore.save(req.body);
@@ -103,7 +110,7 @@ const createStore = {
     const revision = await req.server.db.manager.save(StoreRevision, {
       store,
       version: version + 1,
-      author: req.user.id,
+      user: req.user.id,
       changes: [{ type: "initial" }],
     });
 
@@ -145,13 +152,17 @@ const updateStore = {
       return reply.status(404).send({});
     }
 
+    // TOFIX: v2
     if (req.body.products) {
-      req.body.products.map((p) => (p.productId = p.product));
+      req.body.products.map((p) => {
+        p.productId = p.product;
+        delete p.product;
+      });
     }
 
     const updated = await repoStore.save(req.body);
 
-    const changes = diffMapper(formatStoreV1(store), updated, [
+    const changes = diffMapper(formatStoreV1(store), formatStoreV1(updated), [
       "name",
       "address",
       "longitude",
@@ -177,7 +188,7 @@ const updateStore = {
     const revision = await req.server.db.manager.save(StoreRevision, {
       store,
       version: version + 1,
-      author: req.user.id,
+      user: req.user.id,
       changes,
     });
 
