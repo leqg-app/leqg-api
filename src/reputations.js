@@ -1,7 +1,6 @@
 const STORE = {
   PREDICATES: {
-    schedules: ({ open, close, closed }) =>
-      (open !== undefined && close !== undefined) || closed,
+    schedules: ({ open, close, closed }) => (open && close) || closed,
   },
   CREATION: {
     name: 5,
