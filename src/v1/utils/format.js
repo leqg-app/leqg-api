@@ -47,7 +47,7 @@ function formatStores(store) {
       };
       return schedules;
     }, new Array(7).fill({ cd: false })),
-    ...(features.length && { f: features.map(({ id }) => id) }),
+    f: features.map(({ id }) => id),
   };
 }
 
