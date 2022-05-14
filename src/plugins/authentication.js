@@ -15,25 +15,21 @@ async function authentication(fastify) {
       expiresIn: "365d",
     },
   });
-
-  fastify.decorate("authenticate", async function (request, reply) {
-    try {
-      const { id } = await request.jwtVerify();
-      const repo = request.server.db.getRepository(User);
-      return repo.findOneBy({ id });
-    } catch (err) {
-      return reply.status(401).send({ error: err.message });
-    }
-  });
 }
 
 function isRole(role) {
-  return async function (req, reply) {
-    const user = await req.server.authenticate(req, reply);
-    if (!user || user.blocked || user.role < role) {
-      return reply.status(401).send({ error: "Invalid user" });
+  return async function (request, reply) {
+    try {
+      const { id } = await request.jwtVerify();
+      const repo = request.server.db.getRepository(User);
+      const user = await repo.findOneBy({ id });
+      if (!user || user.blocked || user.role < role) {
+        return reply.status(401).send({ error: "Invalid user" });
+      }
+      request.user = user;
+    } catch (err) {
+      return reply.status(401).send({ error: err.message });
     }
-    req.user = user;
   };
 }
 
