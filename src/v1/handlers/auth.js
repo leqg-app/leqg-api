@@ -121,11 +121,8 @@ const register = {
       id: id,
     });
 
-    user.reputation = user.contributions.reduce(
-      (count, { reputation }) => count + reputation,
-      0
-    );
-    user.contributions = user.contributions?.length;
+    user.reputation = 0;
+    user.contributions = 0;
 
     return {
       jwt,

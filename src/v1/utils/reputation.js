@@ -17,7 +17,6 @@ function isAlreadyEdited(field, delta, revisions, userId) {
       }
     }
   }
-  return false;
 }
 
 function addReputation({ total, fields }, field, reputation) {

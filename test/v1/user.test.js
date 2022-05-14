@@ -1,4 +1,6 @@
 const tap = require("tap");
+const { createSigner } = require("fast-jwt");
+const signSync = createSigner({ key: process.env.JWT_SECRET });
 
 const build = require("./mocks/build.js");
 
@@ -38,6 +40,18 @@ tap.test("Profile", async ({ context }) => {
       url: "/users/me",
       headers: {
         authorization: `Bearer invalidJwt`,
+      },
+    });
+
+    t.equal(profile.statusCode, 401);
+  });
+
+  tap.test("Blocked jwt", async (t) => {
+    const profile = await fastify.inject({
+      url: "/users/me",
+      headers: {
+        // valid jwt with blocked user
+        authorization: `Bearer ${signSync({ id: 3 })}`,
       },
     });
 
