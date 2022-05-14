@@ -1,5 +1,5 @@
 const Fastify = require("fastify");
-const fastifyEnv = require("fastify-env");
+const fastifyEnv = require("@fastify/env");
 const S = require("fluent-json-schema");
 
 const database = require("./plugins/database.js");

@@ -1,5 +1,5 @@
 const fastifyPlugin = require("fastify-plugin");
-const fastifyJwt = require("fastify-jwt");
+const fastifyJwt = require("@fastify/jwt");
 
 const { User } = require("../entity/User.js");
 
