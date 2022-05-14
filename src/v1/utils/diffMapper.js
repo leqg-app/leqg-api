@@ -94,12 +94,24 @@ function diffMapper(left, right, toMap = []) {
     const before = left[field];
     const after = right[field];
 
-    if (before === undefined) {
-      // Created field
+    if (before !== undefined || after === null) {
+      continue;
+    }
+
+    if (!Array.isArray(after)) {
       returns.push({
         field,
         type: "created",
         delta: after,
+      });
+      continue;
+    }
+
+    for (const delta of after) {
+      returns.push({
+        field,
+        type: "created",
+        delta,
       });
     }
   }

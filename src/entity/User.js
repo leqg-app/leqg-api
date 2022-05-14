@@ -41,11 +41,6 @@ const User = new EntitySchema({
     role: {
       type: "int",
     },
-    contributions: {
-      type: "int",
-      nullable: true,
-      default: 0,
-    },
     createdAt: {
       createDate: true,
     },
@@ -61,6 +56,12 @@ const User = new EntitySchema({
       type: "one-to-many",
       target: "StoreRevision",
       inverseSide: "user",
+    },
+    contributions: {
+      type: "one-to-many",
+      target: "Contribution",
+      inverseSide: "user",
+      eager: true,
     },
   },
 });

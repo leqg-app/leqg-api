@@ -30,6 +30,7 @@ async function v1(fastify) {
   fastify.get("/stores/:id", stores.getStore);
   fastify.post("/stores", stores.createStore);
   fastify.put("/stores/:id", stores.updateStore);
+  fastify.post("/stores/:id/validate", stores.validateStore);
 
   fastify.get("/products", products.getAllProducts);
   fastify.post("/products", products.createProduct);

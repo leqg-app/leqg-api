@@ -10,7 +10,7 @@ function getLowest(numbers) {
   );
 }
 
-function formatStore(store) {
+function formatStores(store) {
   const { id, name, longitude, latitude, products, schedules, features } =
     store;
   const productsIds = products.reduce((products, { productId }) => {
@@ -51,4 +51,17 @@ function formatStore(store) {
   };
 }
 
-module.exports = formatStore;
+function formatStore(store) {
+  if (store.features) {
+    store.features = store.features.map(({ id }) => id);
+  }
+  if (store.products) {
+    store.products.map((p) => {
+      p.product = p.productId;
+      delete p.productId;
+    });
+  }
+  return store;
+}
+
+module.exports = { formatStores, formatStore };

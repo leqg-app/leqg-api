@@ -7,8 +7,6 @@ tap.teardown(() => fastify.close());
 
 tap.test("Login", async (t) => {
   t.test("Success", async (t) => {
-    t.plan(3);
-
     const response = await fastify.inject({
       method: "POST",
       url: "/auth/local",
@@ -17,12 +15,11 @@ tap.test("Login", async (t) => {
 
     t.equal(response.statusCode, 200);
     t.type(response.json().jwt, "string");
-    t.same(response.json().user, {
-      username: "admin",
-      email: "admin@leqg.app",
-      favorites: [],
-      contributions: 0,
-    });
+    t.type(response.json().user.username, "string");
+    t.type(response.json().user.email, "string");
+    t.type(response.json().user.favorites, "object");
+    t.type(response.json().user.reputation, "number");
+    t.type(response.json().user.contributions, "number");
   });
 
   t.test("Miss field", async (t) => {

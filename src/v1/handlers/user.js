@@ -15,6 +15,12 @@ const getProfile = {
       id: req.user.id,
     });
 
+    req.user.reputation = req.user.contributions.reduce(
+      (count, { reputation }) => count + reputation,
+      0
+    );
+    req.user.contributions = req.user.contributions?.length;
+
     return {
       jwt,
       ...req.user,

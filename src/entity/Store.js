@@ -75,6 +75,12 @@ const Store = new EntitySchema({
       inverseSide: "store",
       eager: true,
     },
+    validations: {
+      type: "one-to-many",
+      target: "StoreValidation",
+      inverseSide: "store",
+      eager: true,
+    },
   },
 });
 

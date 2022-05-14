@@ -48,6 +48,12 @@ const login = {
       id: user.id,
     });
 
+    user.reputation = user.contributions.reduce(
+      (count, { reputation }) => count + reputation,
+      0
+    );
+    user.contributions = user.contributions?.length;
+
     return {
       jwt,
       user,
@@ -114,6 +120,12 @@ const register = {
     const jwt = await reply.jwtSign({
       id: id,
     });
+
+    user.reputation = user.contributions.reduce(
+      (count, { reputation }) => count + reputation,
+      0
+    );
+    user.contributions = user.contributions?.length;
 
     return {
       jwt,

@@ -507,11 +507,9 @@ const tests = [
       {
         field: "products",
         type: "created",
-        delta: [
-          {
-            name: "Leffe",
-          },
-        ],
+        delta: {
+          name: "Leffe",
+        },
       },
     ],
   },

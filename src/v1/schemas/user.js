@@ -12,6 +12,7 @@ const userSchema = fastifyPlugin(async function (fastify) {
           .prop("username", S.string())
           .prop("email", S.string())
           .prop("contributions", S.integer())
+          .prop("reputation", S.integer())
           .prop(
             "favorites",
             S.array().items(

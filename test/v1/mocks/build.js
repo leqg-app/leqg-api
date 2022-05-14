@@ -11,4 +11,10 @@ const build = tap.mock("../../../src/app.js", {
   },
 });
 
-module.exports = build;
+module.exports = () =>
+  build({
+    logger: {
+      level: "warn",
+      prettyPrint: true,
+    },
+  });

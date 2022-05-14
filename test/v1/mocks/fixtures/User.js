@@ -13,6 +13,15 @@ module.exports.User = {
       provider: "local",
     },
     {
+      username: "auth",
+      email: "auth@leqg.app",
+      password: "$2a$10$jEhmv8RS5kIN9LOX9Pl01u.jDiZJwWLDztNJ5nWz/Avyhk7DVIVEa",
+      blocked: false,
+      confirmed: true,
+      role: 1,
+      provider: "local",
+    },
+    {
       username: "blocked",
       email: "blocked@leqg.app",
       password: "$2a$10$jEhmv8RS5kIN9LOX9Pl01u.jDiZJwWLDztNJ5nWz/Avyhk7DVIVEa",
