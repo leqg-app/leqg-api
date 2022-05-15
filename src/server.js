@@ -8,7 +8,7 @@ const fastify = app({
 });
 
 const port = process.env.PORT || 3000;
-fastify.listen(port, "0.0.0.0", function (err, address) {
+fastify.listen(port, function (err, address) {
   console.log(`Listening on ${port}`);
   if (err) {
     fastify.log.error(err);

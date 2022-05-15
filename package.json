@@ -5,7 +5,7 @@
   "license": "GNU GPLv3",
   "main": "src/server.js",
   "scripts": {
-    "start": "pm2-runtime start src/server.js",
+    "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "JWT_SECRET=azerty tap --coverage-report=lcov --no-browser",
     "test-watch": "JWT_SECRET=azerty tap --watch"
