@@ -24,7 +24,7 @@ function isRole(role) {
       const repo = request.server.db.getRepository(User);
       const user = await repo.findOneBy({ id });
       if (!user || user.blocked || user.role < role) {
-        return reply.status(401).send({ error: "Invalid user" });
+        return reply.status(403).send({ error: "Invalid user" });
       }
       request.user = user;
     } catch (err) {

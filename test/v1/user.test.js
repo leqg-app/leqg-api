@@ -55,7 +55,7 @@ tap.test("Profile", async ({ context }) => {
       },
     });
 
-    t.equal(profile.statusCode, 401);
+    t.equal(profile.statusCode, 403);
   });
 
   tap.test("Add favorite store to user", async (t) => {

@@ -1,8 +1,8 @@
 const tap = require("tap");
 
-const build = require("../mocks/build.js");
+const build = require("./mocks/build.js");
 
-const fastify = build("reputation.sqlite");
+const fastify = build();
 tap.teardown(() => fastify.close());
 
 tap.test("Login user 1", async (t) => {
