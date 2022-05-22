@@ -83,6 +83,8 @@ const createStore = {
       });
     }
 
+    req.body.features = req.body.features.map((id) => ({ id }));
+
     const repoStore = req.server.db.getRepository(Store);
     const store = await repoStore.save(req.body);
 
@@ -166,6 +168,7 @@ const updateStore = {
     }
 
     req.body.id = id;
+    req.body.features = req.body.features.map((id) => ({ id }));
 
     await repoStore.save(req.body);
     const updated = await repoStore.findOne({
