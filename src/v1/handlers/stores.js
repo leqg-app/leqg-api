@@ -176,6 +176,13 @@ const updateStore = {
       relations: ["revisions.user"],
     });
 
+    if (req.query.contribution === "false") {
+      return {
+        store: formatStore(store),
+        contributed: false,
+      };
+    }
+
     const changes = diffMapper(store, updated, STORE_REVISION_FIELDS);
 
     if (!changes.length) {
