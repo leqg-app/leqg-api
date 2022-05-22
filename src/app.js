@@ -1,5 +1,6 @@
 const Fastify = require("fastify");
 const fastifyEnv = require("@fastify/env");
+const fastifyCors = require("@fastify/cors");
 const S = require("fluent-json-schema");
 
 const database = require("./plugins/database.js");
@@ -21,6 +22,9 @@ function app(opts = {}) {
     dotenv: true,
   };
 
+  fastify.register(fastifyCors, {
+    origin: "https://leqg.app",
+  });
   fastify.register(fastifyEnv, options);
   fastify.register(database);
   fastify.register(email);
