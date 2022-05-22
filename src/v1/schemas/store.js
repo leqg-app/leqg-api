@@ -59,8 +59,8 @@ const storeSchema = fastifyPlugin(async function (fastify) {
           .prop("closed", S.boolean())
       )
     )
-    .prop("products", S.array().items(S.ref("productStoreSchema")))
-    .prop("features", S.array().items(S.integer()));
+    .prop("products", S.array().items(S.ref("productStoreSchema")).default([]))
+    .prop("features", S.array().items(S.integer()).default([]));
 
   const storeSchema = S.object()
     .additionalProperties(false)

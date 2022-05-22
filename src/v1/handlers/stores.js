@@ -76,12 +76,10 @@ const createStore = {
   onRequest: [isRole(ROLES.USER)],
   handler: async (req, rep) => {
     // TOFIX: v2
-    if (req.body.products) {
-      req.body.products.map((p) => {
-        p.productId = p.product;
-        delete p.product;
-      });
-    }
+    req.body.products.map((p) => {
+      p.productId = p.product;
+      delete p.product;
+    });
 
     req.body.features = req.body.features.map((id) => ({ id }));
 
@@ -160,12 +158,10 @@ const updateStore = {
     }
 
     // TOFIX: v2
-    if (req.body.products) {
-      req.body.products.map((p) => {
-        p.productId = p.product;
-        delete p.product;
-      });
-    }
+    req.body.products.map((p) => {
+      p.productId = p.product;
+      delete p.product;
+    });
 
     req.body.id = id;
     req.body.features = req.body.features.map((id) => ({ id }));
