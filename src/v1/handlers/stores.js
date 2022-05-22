@@ -29,29 +29,7 @@ const getAllStores = {
     summary: "Get all stores",
     tags: ["store"],
     response: {
-      200: S.array().items(
-        S.object()
-          .prop("id", S.integer())
-          .prop("name", S.string())
-          .prop("lng", S.number())
-          .prop("lat", S.number())
-          .prop("price", S.anyOf([S.null(), S.number()]))
-          .prop("currency", S.string())
-          .prop("specialPrice", S.anyOf([S.null(), S.number()]))
-          .prop("products", S.array().items(S.integer()))
-          .prop(
-            "s",
-            S.array().items(
-              S.object()
-                .prop("cd", S.boolean())
-                .prop("o", S.integer())
-                .prop("c", S.integer())
-                .prop("os", S.integer())
-                .prop("cs", S.integer())
-            )
-          )
-          .prop("f", S.array().items(S.integer()))
-      ),
+      200: S.array().items(S.ref("storeMinified")),
     },
   },
   handler: async (req) => {
