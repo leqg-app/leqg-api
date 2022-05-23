@@ -63,6 +63,7 @@ function formatStore(store) {
   }
   if (store.revisions) {
     store.revisions.map((revision) => {
+      revision.author = { username: revision.user.username };
       revision.created_at = revision.createdAt.getTime();
     });
   }
