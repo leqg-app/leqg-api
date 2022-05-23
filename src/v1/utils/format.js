@@ -61,6 +61,11 @@ function formatStore(store) {
       delete p.productId;
     });
   }
+  if (store.revisions) {
+    store.revisions.map((revision) => {
+      revision.created_at = revision.createdAt.getTime();
+    });
+  }
   return store;
 }
 
