@@ -52,6 +52,11 @@ function formatStores(store) {
 }
 
 function formatStore(store) {
+  if (store.schedules.length < 7) {
+    store.schedules = new Array(7)
+      .fill()
+      .map((_, i) => ({ dayOfWeek: i + 1, closed: false }));
+  }
   if (store.features) {
     store.features = store.features.map(({ id }) => id);
   }
