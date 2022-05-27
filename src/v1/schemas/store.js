@@ -71,7 +71,7 @@ const storeSchema = fastifyPlugin(async function (fastify) {
       S.array().items(
         S.object()
           .prop("created_at", S.number())
-          .prop("user", S.object().prop("username", S.string()))
+          .prop("author", S.object().prop("username", S.string()))
           .prop(
             "changes",
             S.array().items(
