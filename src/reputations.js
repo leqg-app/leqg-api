@@ -9,16 +9,20 @@ const STORE = {
     phone: 3,
     products: 5,
     schedules: 2,
-    feature: 2,
+    features: 2,
   },
   EDITION: {
     name: 2,
     address: 2,
     products: 5,
     schedules: 2,
-    feature: 2,
+    features: 2,
   },
   VALIDATION: 2,
+  RATE: 10,
+  COMMENT: 10,
+  LONG_COMMENT: 10,
+  RECOMMENDED_PRODUCT: 5,
 };
 
 module.exports = {

@@ -14,7 +14,7 @@ function addSchedule(acc, key, value) {
   if (acc[key]) {
     acc[key].push(value);
   } else {
-    acc[key] = value;
+    acc[key] = [value];
   }
 }
 
@@ -63,7 +63,11 @@ function formatStores(store) {
     }
 
     if (openingSpecial !== null && closingSpecial !== null) {
-      addSchedule(schedules, `${openingSpecial}-${closingSpecial}`, dayOfWeek);
+      addSchedule(
+        specialSchedules,
+        `${openingSpecial}-${closingSpecial}`,
+        dayOfWeek
+      );
     }
   }
 

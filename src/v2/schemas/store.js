@@ -8,9 +8,9 @@ const storeSchema = fastifyPlugin(async function (fastify) {
       S.integer(), // 0 id
       S.string(), // 1 name
       S.string(), // 2 address
-      S.number(), // latitude
-      S.number(), // longitude
-      S.number(), // 6 cheapest price TODO: NOT NULL
+      S.number(), // 3 latitude
+      S.number(), // 4 longitude
+      S.number(), // 5 cheapest price TODO: NOT NULL
       S.number(), // 6 cheapest specialPrice
       S.string(), // 7 currencyCode
       S.array().items(
@@ -40,12 +40,12 @@ const storeSchema = fastifyPlugin(async function (fastify) {
     .id("productStoreSchema")
     .prop("id", S.integer())
     .prop("productName", S.anyOf([S.null(), S.string()]))
-    .prop("price")
+    .prop("price", S.anyOf([S.null(), S.number()]))
     .prop("specialPrice", S.anyOf([S.null(), S.number()]))
     .prop("volume", S.integer())
     .prop("type", S.string())
     .prop("currencyCode", S.string())
-    .prop("product", S.anyOf([S.null(), S.integer()]));
+    .prop("productId", S.anyOf([S.null(), S.integer()]));
 
   const storeBaseSchema = S.object()
     .additionalProperties(false)
