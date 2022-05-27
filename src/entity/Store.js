@@ -41,6 +41,14 @@ const Store = new EntitySchema({
       nullable: true,
       default: "FR",
     },
+    rate: {
+      type: "double",
+      default: null,
+    },
+    rateCount: {
+      type: "integer",
+      default: 0,
+    },
     createdAt: {
       createDate: true,
     },
@@ -67,6 +75,12 @@ const Store = new EntitySchema({
       type: "many-to-many",
       target: "Feature",
       joinTable: true,
+      eager: true,
+    },
+    rates: {
+      type: "one-to-many",
+      target: "Rate",
+      inverseSide: "store",
       eager: true,
     },
     revisions: {

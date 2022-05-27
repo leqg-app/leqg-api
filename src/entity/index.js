@@ -8,6 +8,7 @@ const { Contribution } = require("./Contribution.js");
 const { CurrencyRate } = require("./CurrencyRate.js");
 const { FeatureCategory } = require("./FeatureCategory.js");
 const { Feature } = require("./Feature.js");
+const { Rate } = require("./Rate.js");
 const { StoreValidation } = require("./StoreValidation.js");
 const { Version } = require("./Version.js");
 
@@ -22,6 +23,7 @@ module.exports = {
   CurrencyRate,
   FeatureCategory,
   Feature,
+  Rate,
   StoreValidation,
   Version,
 };

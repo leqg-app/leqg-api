@@ -26,6 +26,11 @@ const Contribution = new EntitySchema({
       target: "User",
       inverseSide: "contributions",
     },
+    rate: {
+      type: "one-to-one",
+      target: "Rate",
+      inverseSide: "contribution",
+    },
     revision: {
       type: "one-to-one",
       target: "StoreRevision",
