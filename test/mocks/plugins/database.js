@@ -1,7 +1,7 @@
 const fastifyPlugin = require("fastify-plugin");
 const { DataSource } = require("typeorm");
 
-const entities = require("../../../../src/entity/index.js");
+const entities = require("../../../src/entity/index.js");
 const fixtures = require("../fixtures/index.js");
 
 async function db(fastify) {

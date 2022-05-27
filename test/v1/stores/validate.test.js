@@ -1,6 +1,6 @@
 const tap = require("tap");
 
-const build = require("../mocks/build.js");
+const build = require("../../mocks/build.js");
 
 const fastify = build();
 tap.teardown(() => fastify.close());

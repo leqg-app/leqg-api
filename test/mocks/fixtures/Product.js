@@ -1,4 +1,4 @@
-const entities = require("../../../../src/entity/index.js");
+const entities = require("../../../src/entity/index.js");
 
 module.exports.Product = {
   repository: entities.Product,

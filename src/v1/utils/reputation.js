@@ -20,7 +20,7 @@ function isAlreadyEdited(field, delta, revisions, userId) {
 }
 
 function addReputation({ total, fields }, field, reputation) {
-  if (reputation === undefined) {
+  if (!reputation) {
     return { total, fields };
   }
   return {

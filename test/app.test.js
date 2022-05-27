@@ -1,6 +1,6 @@
 const tap = require("tap");
 
-const build = require("./v1/mocks/build.js");
+const build = require("./mocks/build.js");
 
 tap.test("Health", async (t) => {
   const fastify = build();

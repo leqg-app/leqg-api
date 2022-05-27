@@ -2,7 +2,7 @@ const tap = require("tap");
 const { createSigner } = require("fast-jwt");
 const signSync = createSigner({ key: process.env.JWT_SECRET });
 
-const build = require("./mocks/build.js");
+const build = require("../mocks/build.js");
 
 const fastify = build();
 tap.teardown(() => fastify.close());
