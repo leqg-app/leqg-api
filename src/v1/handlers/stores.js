@@ -114,7 +114,12 @@ const createStore = {
     // Upgrade version
     await repoVersion.update({ name: "stores" }, { version });
 
-    return repoStore.findOneBy({ id: store.id }).then(formatStore);
+    return repoStore
+      .findOne({
+        where: { id: store.id },
+        relations: ["revisions.user"],
+      })
+      .then(formatStore);
   },
 };
 
