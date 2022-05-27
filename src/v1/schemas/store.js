@@ -45,7 +45,6 @@ const storeSchema = fastifyPlugin(async function (fastify) {
     .prop("address", S.string().required())
     .prop("phone", S.anyOf([S.null(), S.string()]))
     .prop("website", S.anyOf([S.null(), S.string()]))
-    .prop("countryCode", S.string())
     .prop(
       "schedules",
       S.array().items(
@@ -66,6 +65,7 @@ const storeSchema = fastifyPlugin(async function (fastify) {
     .additionalProperties(false)
     .id("storeSchema")
     .prop("id", S.integer())
+    .prop("countryCode", S.string())
     .prop(
       "revisions",
       S.array().items(
