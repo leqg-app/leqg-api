@@ -7,6 +7,7 @@ const database = require("./plugins/database.js");
 const email = require("./plugins/email.js");
 const { authentication } = require("./plugins/authentication.js");
 const v1 = require("./v1/routes.js");
+const v2 = require("./v2/routes.js");
 
 function app(opts = {}) {
   const fastify = Fastify(opts);
@@ -30,6 +31,7 @@ function app(opts = {}) {
   fastify.register(email);
   fastify.register(authentication);
   fastify.register(v1);
+  fastify.register(v2);
 
   fastify.get("/", async () => ({
     statusCode: 200,
