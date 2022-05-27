@@ -22,7 +22,6 @@ const StoreProduct = new EntitySchema({
     },
     volume: {
       type: "int",
-      nullable: true, // TO REMOVE
     },
     type: {
       type: "varchar",
