@@ -255,7 +255,10 @@ const validateStore = {
       .prop("longitude", S.number().required())
       .prop("latitude", S.number().required()),
     response: {
-      200: S.object().prop("statusCode", S.integer()),
+      200: S.object().prop("reputation", S.integer()),
+      404: S.object().prop("error", S.string()),
+      422: S.object().prop("error", S.string()),
+      429: S.object().prop("error", S.string()),
     },
   },
   onRequest: [isRole(ROLES.USER)],
