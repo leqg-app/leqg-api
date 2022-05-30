@@ -10,21 +10,6 @@ function getLowest(numbers) {
   );
 }
 
-function addSchedule(acc, key, value) {
-  if (acc[key]) {
-    acc[key].push(value);
-  } else {
-    acc[key] = [value];
-  }
-}
-
-function getSchedules(schedules) {
-  return Object.keys(schedules).map((key) => [
-    schedules[key],
-    key !== "0" ? key.split("-").map((i) => +i) : 0,
-  ]);
-}
-
 function formatStores(store) {
   const { id, name, address, longitude, latitude, features } = store;
   const products = store.products.reduce(
@@ -40,9 +25,7 @@ function formatStores(store) {
     []
   );
 
-  const schedules = {};
-  const specialSchedules = {};
-
+  const schedules = new Array(7).fill([]);
   for (const schedule of store.schedules) {
     const {
       dayOfWeek,
@@ -54,20 +37,23 @@ function formatStores(store) {
     } = schedule;
 
     if (closed) {
-      addSchedule(schedules, "0", dayOfWeek);
+      schedules[dayOfWeek - 1] = 0;
+      continue;
+    }
+
+    if (opening === null && openingSpecial === null) {
       continue;
     }
 
     if (opening !== null && closing !== null) {
-      addSchedule(schedules, `${opening}-${closing}`, dayOfWeek);
+      schedules[dayOfWeek - 1][0] = [opening, closing];
     }
 
     if (openingSpecial !== null && closingSpecial !== null) {
-      addSchedule(
-        specialSchedules,
-        `${openingSpecial}-${closingSpecial}`,
-        dayOfWeek
-      );
+      if (!schedules[dayOfWeek - 1][0]) {
+        schedules[dayOfWeek - 1][0] = [];
+      }
+      schedules[dayOfWeek - 1][1] = [openingSpecial, closingSpecial];
     }
   }
 
@@ -81,8 +67,7 @@ function formatStores(store) {
     getLowest(store.products.map((p) => p.specialPrice).filter(Boolean)),
     store.products?.[0]?.currencyCode || "EUR",
     products,
-    getSchedules(schedules),
-    getSchedules(specialSchedules),
+    schedules,
     features.map(({ id }) => id),
   ];
 }

@@ -1,7 +1,6 @@
-const fastifyPlugin = require("fastify-plugin");
 const S = require("fluent-json-schema");
 
-const storeSchema = fastifyPlugin(async function (fastify) {
+const storeSchema = function (fastify) {
   const storeMinified = S.array()
     .id("storeMinified")
     .items([
@@ -24,14 +23,13 @@ const storeSchema = fastifyPlugin(async function (fastify) {
       ),
       S.array().items(
         // 9 schedules
-        S.array().items(S.anyOf([S.array().items(S.integer()), S.integer()]))
+        S.anyOf([
+          S.array().items(S.array().items([S.integer(), S.integer()])),
+          S.integer(),
+        ])
       ),
       S.array().items(
-        // 10 special schedules
-        S.array().items(S.anyOf([S.array().items(S.integer()), S.integer()]))
-      ),
-      S.array().items(
-        // 11 features
+        // 10 features
         S.integer() // id
       ),
     ]);
@@ -70,7 +68,10 @@ const storeSchema = fastifyPlugin(async function (fastify) {
       )
     )
     .prop("products", S.array().items(S.ref("productStoreSchema")).default([]))
-    .prop("features", S.array().items(S.integer()).default([]));
+    .prop(
+      "features",
+      S.array().items(S.object().prop("id", S.integer())).default([])
+    );
 
   const storeSchema = S.object()
     .additionalProperties(false)
@@ -83,7 +84,8 @@ const storeSchema = fastifyPlugin(async function (fastify) {
       "revisions",
       S.array().items(
         S.object()
-          .prop("created_at", S.number())
+          .prop("id", S.integer())
+          .prop("createdAt", S.number())
           .prop("user", S.object().prop("username", S.string()))
           .prop(
             "changes",
@@ -106,6 +108,6 @@ const storeSchema = fastifyPlugin(async function (fastify) {
   fastify.addSchema(productStoreSchema);
   fastify.addSchema(storeBaseSchema);
   fastify.addSchema(storeSchema);
-});
+};
 
 module.exports = { storeSchema };
