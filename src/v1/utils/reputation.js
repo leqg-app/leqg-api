@@ -19,7 +19,7 @@ function isAlreadyEdited(field, delta, revisions, userId) {
   }
 }
 
-function addReputation({ total, fields }, field, reputation) {
+function addReputation({ total, fields }, fieldName, reputation) {
   if (!reputation) {
     return { total, fields };
   }
@@ -27,7 +27,7 @@ function addReputation({ total, fields }, field, reputation) {
     total: total + reputation,
     fields: fields.concat({
       reputation,
-      field,
+      fieldName,
     }),
   };
 }

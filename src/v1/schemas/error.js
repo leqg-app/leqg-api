@@ -1,7 +1,6 @@
-const fastifyPlugin = require("fastify-plugin");
 const S = require("fluent-json-schema");
 
-const errorSchema = fastifyPlugin(async function (fastify) {
+const errorSchema = function (fastify) {
   fastify.addSchema(
     S.object()
       .id("errorSchema")
@@ -16,7 +15,7 @@ const errorSchema = fastifyPlugin(async function (fastify) {
         )
       )
   );
-});
+};
 
 const formatError = (message) => ({
   error: message,

@@ -1,7 +1,6 @@
-const fastifyPlugin = require("fastify-plugin");
 const S = require("fluent-json-schema");
 
-const userSchema = fastifyPlugin(async function (fastify) {
+const userSchema = function (fastify) {
   fastify.addSchema(
     S.object()
       .id("userSchema")
@@ -9,6 +8,7 @@ const userSchema = fastifyPlugin(async function (fastify) {
       .prop(
         "user",
         S.object()
+          .additionalProperties(false)
           .prop("username", S.string())
           .prop("email", S.string())
           .prop("contributions", S.integer())
@@ -17,6 +17,7 @@ const userSchema = fastifyPlugin(async function (fastify) {
             "favorites",
             S.array().items(
               S.object()
+                .additionalProperties(false)
                 .prop("id", S.integer())
                 .prop("name", S.string())
                 .prop("address", S.string())
@@ -26,6 +27,6 @@ const userSchema = fastifyPlugin(async function (fastify) {
           )
       )
   );
-});
+};
 
 module.exports = { userSchema };

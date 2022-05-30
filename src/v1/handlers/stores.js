@@ -68,7 +68,7 @@ const createStore = {
   schema: {
     summary: "Create a store",
     tags: ["store"],
-    body: S.ref("storeBaseSchema"),
+    body: S.ref("storeBaseSchemav1"),
     response: {
       200: S.ref("storeSchema"),
     },
@@ -128,7 +128,7 @@ const updateStore = {
     summary: "Update store",
     tags: ["store"],
     params: S.object().prop("id", S.integer().required()),
-    body: S.ref("storeBaseSchema"),
+    body: S.ref("storeBaseSchemav1"),
     response: {
       200: S.object()
         .prop("store", S.ref("storeSchema"))

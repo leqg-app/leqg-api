@@ -1,7 +1,6 @@
-const fastifyPlugin = require("fastify-plugin");
 const S = require("fluent-json-schema");
 
-const reputationSchema = fastifyPlugin(async function (fastify) {
+const reputationSchema = function (fastify) {
   fastify.addSchema(
     S.object()
       .id("reputationSchema")
@@ -9,10 +8,12 @@ const reputationSchema = fastifyPlugin(async function (fastify) {
       .prop(
         "fields",
         S.array().items(
-          S.object().prop("field", S.string()).prop("reputation", S.integer())
+          S.object()
+            .prop("fieldName", S.string())
+            .prop("reputation", S.integer())
         )
       )
   );
-});
+};
 
 module.exports = { reputationSchema };

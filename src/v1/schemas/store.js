@@ -1,7 +1,6 @@
-const fastifyPlugin = require("fastify-plugin");
 const S = require("fluent-json-schema");
 
-const storeSchema = fastifyPlugin(async function (fastify) {
+const storeSchema = function (fastify) {
   const storeMinified = S.object()
     .id("storeMinified")
     .prop("id", S.integer())
@@ -38,7 +37,7 @@ const storeSchema = fastifyPlugin(async function (fastify) {
 
   const storeBaseSchema = S.object()
     .additionalProperties(false)
-    .id("storeBaseSchema")
+    .id("storeBaseSchemav1")
     .prop("name", S.string().required())
     .prop("latitude", S.number().required())
     .prop("longitude", S.number().required())
@@ -93,6 +92,6 @@ const storeSchema = fastifyPlugin(async function (fastify) {
   fastify.addSchema(productStoreSchema);
   fastify.addSchema(storeBaseSchema);
   fastify.addSchema(storeSchema);
-});
+};
 
 module.exports = { storeSchema };

@@ -5,9 +5,9 @@ const { errorSchema } = require("./schemas/error.js");
 const { reputationSchema } = require("./schemas/reputation.js");
 
 module.exports = async function routes(fastify) {
-  fastify.register(storeSchema);
-  fastify.register(errorSchema);
-  fastify.register(reputationSchema);
+  storeSchema(fastify);
+  errorSchema(fastify);
+  reputationSchema(fastify);
 
   fastify.register(v2, { prefix: "v2" });
 };

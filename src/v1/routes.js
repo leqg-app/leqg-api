@@ -13,11 +13,11 @@ const { storeSchema } = require("./schemas/store.js");
 const { currencyRateSchema } = require("./schemas/currencyRate.js");
 
 module.exports = async function routes(fastify) {
-  fastify.register(userSchema);
-  fastify.register(errorSchema);
-  fastify.register(productSchema);
-  fastify.register(storeSchema);
-  fastify.register(currencyRateSchema);
+  userSchema(fastify);
+  errorSchema(fastify);
+  productSchema(fastify);
+  storeSchema(fastify);
+  currencyRateSchema(fastify);
 
   fastify.register(v1, { prefix: "v1" });
   fastify.register(authRoutes);

@@ -30,7 +30,6 @@ function getOneStore(req, id) {
   return req.server.db.manager.findOne(Store, {
     where: { id },
     relations: ["revisions.user"],
-    loadRelationIds: { relations: ["features"] },
   });
 }
 
@@ -100,7 +99,7 @@ const getStore = {
     const store = await getOneStore(req, id);
 
     if (!store) {
-      return reply.status(404).send({ message: "store.notfound" });
+      return reply.status(404).send({ error: "store.notfound" });
     }
 
     return store;
@@ -121,8 +120,6 @@ const createStore = {
   },
   onRequest: [isRole(ROLES.USER)],
   handler: async (req) => {
-    req.body.features = req.body.features.map((id) => ({ id }));
-
     const repoStore = req.server.db.getRepository(Store);
     const store = await repoStore.save(req.body);
 
@@ -185,12 +182,10 @@ const updateStore = {
     const store = await getOneStore(req, id);
 
     if (!store) {
-      return reply.status(404).send({ message: "store.notfound" });
+      return reply.status(404).send({ error: "store.notfound" });
     }
 
     req.body.id = id;
-    req.body.features = req.body.features.map((id) => ({ id }));
-
     await repoStore.save(req.body);
 
     const repoVersion = req.server.db.getRepository(Version);
