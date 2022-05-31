@@ -101,10 +101,6 @@ tap.test("Update store", async () => {
     t.equal(response.statusCode, 200);
     t.equal(response.json().store.name, "Store updated");
     t.equal(response.json().contributed, true);
-    t.same(response.json().reputation, {
-      total: 2,
-      fields: [{ reputation: 2, field: "name" }],
-    });
   });
 
   tap.test("Check upgraded version", async (t) => {
