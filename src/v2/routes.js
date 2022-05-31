@@ -1,13 +1,17 @@
 const stores = require("./handlers/stores.js");
+const user = require("./handlers/user.js");
+const auth = require("./handlers/auth.js");
 
 const { storeSchema } = require("./schemas/store.js");
 const { errorSchema } = require("./schemas/error.js");
 const { reputationSchema } = require("./schemas/reputation.js");
+const { userSchema } = require("./schemas/user.js");
 
 module.exports = async function routes(fastify) {
   storeSchema(fastify);
   errorSchema(fastify);
   reputationSchema(fastify);
+  userSchema(fastify);
 
   fastify.register(v2, { prefix: "v2" });
 };
@@ -19,4 +23,12 @@ async function v2(fastify) {
   fastify.put("/stores/:id", stores.updateStore);
   fastify.post("/stores/:id/validate", stores.validateStore);
   fastify.post("/stores/:id/rate", stores.rateStore);
+
+  fastify.post("/auth/local", auth.login);
+  fastify.post("/auth/local/register", auth.register);
+  fastify.post("/auth/forgot-password", auth.forgotPassword);
+  fastify.post("/auth/reset-password", auth.resetPassword);
+
+  fastify.get("/users/me", user.getProfile);
+  fastify.put("/users/me", user.updateProfile);
 }
