@@ -31,22 +31,25 @@ function formatStores(store) {
     currency: products[0] && products[0].currencyCode,
     ...(specialPrice && { specialPrice }),
     ...(productsIds.length && { products: productsIds }),
-    s: schedules.reduce((schedules, schedule) => {
-      schedules[schedule.dayOfWeek - 1] = {
-        cd: schedule.closed,
-        ...(schedule.opening &&
-          schedule.closing && {
-            o: schedule.opening,
-            c: schedule.closing,
-          }),
-        ...(schedule.openingSpecial &&
-          schedule.closingSpecial && {
-            os: schedule.openingSpecial,
-            cs: schedule.closingSpecial,
-          }),
-      };
-      return schedules;
-    }, new Array(7).fill({ cd: false })),
+    s: schedules.reduce(
+      (schedules, schedule) => {
+        schedules[schedule.dayOfWeek - 1] = {
+          cd: schedule.closed,
+          ...(schedule.opening &&
+            schedule.closing && {
+              o: schedule.opening,
+              c: schedule.closing,
+            }),
+          ...(schedule.openingSpecial &&
+            schedule.closingSpecial && {
+              os: schedule.openingSpecial,
+              cs: schedule.closingSpecial,
+            }),
+        };
+        return schedules;
+      },
+      new Array(7).fill().map(() => ({ cd: false }))
+    ),
     f: features.map(({ id }) => id),
   };
 }
