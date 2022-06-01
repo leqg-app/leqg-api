@@ -10,17 +10,16 @@ const context = {};
 tap.test("Login 1", async (t) => {
   const login = await fastify.inject({
     method: "POST",
-    url: "/auth/local",
+    url: "/v2/auth/local",
     payload: { identifier: "auth", password: "azerty" },
   });
   t.equal(login.statusCode, 200);
 
-  const { jwt, user } = login.json();
+  const { jwt, contributions } = login.json();
   t.type(jwt, "string");
 
   context.jwt = jwt;
-  context.reputation = user.reputation;
-  context.contributions = user.contributions;
+  context.contributions = contributions.length;
 });
 
 tap.test("Unavailable store", async (t) => {
@@ -99,15 +98,14 @@ tap.test("User reputation was granted", async (t) => {
   const { jwt } = context;
 
   const profile = await fastify.inject({
-    url: "/users/me",
+    url: "/v2/users/me",
     headers: {
       authorization: `Bearer ${jwt}`,
     },
   });
 
   t.equal(profile.statusCode, 200);
-  t.equal(profile.json().contributions, ++context.contributions);
-  t.equal(profile.json().reputation, (context.reputation += 10));
+  t.equal(profile.json().contributions.length, ++context.contributions);
 });
 
 tap.test("Can't rate store twice", async (t) => {
@@ -142,31 +140,29 @@ tap.test("User reputation is same", async (t) => {
   const { jwt } = context;
 
   const profile = await fastify.inject({
-    url: "/users/me",
+    url: "/v2/users/me",
     headers: {
       authorization: `Bearer ${jwt}`,
     },
   });
 
   t.equal(profile.statusCode, 200);
-  t.equal(profile.json().contributions, context.contributions);
-  t.equal(profile.json().reputation, context.reputation);
+  t.equal(profile.json().contributions.length, context.contributions);
 });
 
 tap.test("Login 2", async (t) => {
   const login = await fastify.inject({
     method: "POST",
-    url: "/auth/local",
+    url: "/v2/auth/local",
     payload: { identifier: "admin", password: "azerty" },
   });
   t.equal(login.statusCode, 200);
 
-  const { jwt, user } = login.json();
+  const { jwt, contributions } = login.json();
   t.type(jwt, "string");
 
   context.jwt2 = jwt;
-  context.reputation2 = user.reputation;
-  context.contributions2 = user.contributions;
+  context.contributions2 = contributions.length;
 });
 
 tap.test("User 2 rate store", async (t) => {

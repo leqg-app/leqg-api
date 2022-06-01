@@ -29,13 +29,47 @@ module.exports.Store = {
           type: "draft",
         },
       ],
-      schedules: Array(7)
-        .fill(0)
-        .map((_, i) => ({
-          dayOfWeek: i + 1,
+      schedules: [
+        {
+          dayOfWeek: 1,
+          closed: true,
+        },
+        {
+          dayOfWeek: 2,
+          closed: true,
+        },
+        {
+          dayOfWeek: 3,
           closed: false,
-        })),
-      features: [1],
+          opening: 200,
+          closing: 400,
+          openingSpecial: 200,
+          closingSpecial: 400,
+        },
+        {
+          dayOfWeek: 4,
+          closed: false,
+          openingSpecial: 200,
+          closingSpecial: 400,
+        },
+        {
+          dayOfWeek: 5,
+          closed: false,
+        },
+        {
+          dayOfWeek: 6,
+          closed: false,
+        },
+        {
+          dayOfWeek: 7,
+          closed: false,
+        },
+      ],
+      features: [
+        {
+          id: 1,
+        },
+      ],
     },
     {
       name: "Store 2",

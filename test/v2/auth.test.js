@@ -88,8 +88,6 @@ tap.test("Register", async (t) => {
       },
     });
 
-    console.log(response.json());
-
     t.equal(response.statusCode, 400);
   });
 
