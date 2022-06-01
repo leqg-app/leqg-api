@@ -23,14 +23,8 @@ function isRole(role) {
       const { id } = await request.jwtVerify();
       const repo = request.server.db.getRepository(User);
       const user = await repo.findOneBy({ id });
-      if (!user) {
+      if (!user || user.blocked || user.role < role) {
         return reply.status(403).send({ error: "user.invalid" });
-      }
-      if (user.blocked) {
-        return reply.status(403).send({ error: "user.blocked" });
-      }
-      if (user.role < role) {
-        return reply.status(403).send({ error: "user.forbidden" });
       }
       request.user = user;
     } catch (err) {
