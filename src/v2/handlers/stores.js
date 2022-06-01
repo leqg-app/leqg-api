@@ -52,17 +52,17 @@ const getStoresVersion = {
     summary: "Get all stores between two versions",
     tags: ["store"],
     params: S.object()
-      .prop("previous", S.integer().required())
+      .prop("current", S.integer().required())
       .prop("next", S.integer().required()),
     response: {
       200: S.object().prop("updated", S.array().items(S.ref("storeMinified"))),
     },
   },
   handler: async (req) => {
-    const { previous, next } = req.params;
+    const { current, next } = req.params;
     const revisions = await req.server.db.manager.find(StoreRevision, {
       where: {
-        version: Between(previous, next),
+        version: Between(current + 1, next), // don't include curent version
       },
       relations: {
         store: true,
@@ -191,17 +191,6 @@ const updateStore = {
     const repoVersion = req.server.db.getRepository(Version);
     let { version } = await repoVersion.findOneBy({ name: "stores" });
 
-    if (req.query.contribution === "false") {
-      return {
-        store,
-        reputation: {
-          total: 0,
-          fields: [],
-        },
-        version,
-      };
-    }
-
     const updated = await getOneStore(req, id);
     const changes = diffMapper(store, updated, STORE_REVISION_FIELDS);
 
@@ -218,6 +207,17 @@ const updateStore = {
 
     // Upgrade version
     await repoVersion.update({ name: "stores" }, { version: ++version });
+
+    if (req.query.contribution === "false") {
+      return {
+        store,
+        reputation: {
+          total: 0,
+          fields: [],
+        },
+        version,
+      };
+    }
 
     // Calculate new reputation
     const reputation = calculateReputation(

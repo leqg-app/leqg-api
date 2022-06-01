@@ -18,6 +18,7 @@ module.exports = async function routes(fastify) {
 
 async function v2(fastify) {
   fastify.get("/stores", stores.getAllStores);
+  fastify.get("/stores/versions/:current..:next", stores.getStoresVersion);
   fastify.get("/stores/:id", stores.getStore);
   fastify.post("/stores", stores.createStore);
   fastify.put("/stores/:id", stores.updateStore);

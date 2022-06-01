@@ -18,8 +18,6 @@ const getProfile = {
       id: req.user.id,
     });
 
-    console.log(req.user);
-
     return {
       jwt,
       ...req.user,
