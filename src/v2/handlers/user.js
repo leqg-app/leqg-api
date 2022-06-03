@@ -1,6 +1,7 @@
 const S = require("fluent-json-schema");
 
 const { User } = require("../../entity/User.js");
+const { Contribution } = require("../../entity/Contribution.js");
 const { isRole, ROLES } = require("../../plugins/authentication.js");
 
 const getProfile = {
@@ -22,6 +23,27 @@ const getProfile = {
       jwt,
       ...req.user,
     };
+  },
+};
+
+const getContributions = {
+  schema: {
+    summary: "Get user contributions list",
+    tags: ["user"],
+    response: {
+      200: S.array().items(S.ref("contributionSchema")),
+    },
+  },
+  onRequest: [isRole(ROLES.USER)],
+  handler: async (req) => {
+    return req.server.db.manager.find(Contribution, {
+      where: {
+        user: {
+          id: req.user.id,
+        },
+      },
+      relations: ["user", "revision.store", "validation.store"],
+    });
   },
 };
 
@@ -48,4 +70,4 @@ const updateProfile = {
   },
 };
 
-module.exports = { getProfile, updateProfile };
+module.exports = { getProfile, getContributions, updateProfile };

@@ -50,9 +50,7 @@ function formatStores(store) {
     }
 
     if (openingSpecial !== null && closingSpecial !== null) {
-      console.log(schedules[dayOfWeek - 1]);
       if (!schedules[dayOfWeek - 1][0]) {
-        console.log("never");
         schedules[dayOfWeek - 1][0] = [];
       }
       schedules[dayOfWeek - 1][1] = [openingSpecial, closingSpecial];

@@ -31,5 +31,6 @@ async function v2(fastify) {
   fastify.post("/auth/reset-password", auth.resetPassword);
 
   fastify.get("/users/me", user.getProfile);
+  fastify.get("/users/me/contributions", user.getContributions);
   fastify.put("/users/me", user.updateProfile);
 }

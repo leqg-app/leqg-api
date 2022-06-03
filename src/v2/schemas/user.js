@@ -6,7 +6,28 @@ const userSchema = function (fastify) {
     .id("contributionSchema")
     .prop("id", S.integer())
     .prop("reputation", S.integer())
-    .prop("reason", S.string());
+    .prop("reason", S.string())
+    .prop("createdAt", S.number())
+    .prop(
+      "revision",
+      S.anyOf([
+        S.null(),
+        S.object().prop(
+          "store",
+          S.object().prop("id", S.integer()).prop("name", S.string())
+        ),
+      ])
+    )
+    .prop(
+      "validation",
+      S.anyOf([
+        S.null(),
+        S.object().prop(
+          "store",
+          S.object().prop("id", S.integer()).prop("name", S.string())
+        ),
+      ])
+    );
 
   const userSchema = S.object()
     .additionalProperties(false)
@@ -23,7 +44,15 @@ const userSchema = function (fastify) {
           .prop("address", S.string())
       )
     )
-    .prop("contributions", S.array().items(S.ref("contributionSchema")));
+    .prop(
+      "contributions",
+      S.array().items(
+        S.object()
+          .prop("id", S.integer())
+          .prop("reputation", S.integer())
+          .prop("reason", S.string())
+      )
+    );
 
   fastify.addSchema(contributionSchema);
   fastify.addSchema(userSchema);
