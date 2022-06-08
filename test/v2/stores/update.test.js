@@ -104,6 +104,7 @@ tap.test("Update store name", async (t) => {
   t.equal(response.json().reputation.fields.length, 1);
   t.same(response.json().reputation, {
     total: 2,
+    reason: "store.edition",
     fields: [{ reputation: 2, fieldName: "name" }],
   });
 });

@@ -182,7 +182,7 @@ tap.test("User 2 rate store", async (t) => {
     },
   });
   t.equal(rate.statusCode, 200);
-  t.equal(rate.json().reputation, 25);
+  t.equal(rate.json().reputation.total, 25);
 });
 
 tap.test("Get store", async (t) => {

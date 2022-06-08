@@ -36,6 +36,7 @@ const storeSchema = function (fastify) {
 
   const productStoreSchema = S.object()
     .id("productStoreSchema")
+    .additionalProperties(false)
     .prop("id", S.integer())
     .prop("productName", S.anyOf([S.null(), S.string()]))
     .prop("price", S.anyOf([S.null(), S.number()]))
@@ -46,8 +47,8 @@ const storeSchema = function (fastify) {
     .prop("productId", S.anyOf([S.null(), S.integer()]));
 
   const storeBaseSchema = S.object()
-    .additionalProperties(false)
     .id("storeBaseSchema")
+    .additionalProperties(false)
     .prop("name", S.string().required())
     .prop("latitude", S.number().required())
     .prop("longitude", S.number().required())
@@ -74,8 +75,8 @@ const storeSchema = function (fastify) {
     );
 
   const storeSchema = S.object()
-    .additionalProperties(false)
     .id("storeSchema")
+    .additionalProperties(false)
     .prop("id", S.integer())
     .prop("countryCode", S.string())
     .prop("rate", S.anyOf([S.null(), S.number()]))
@@ -101,7 +102,15 @@ const storeSchema = function (fastify) {
           )
       )
     )
-    .required()
+    .prop(
+      "validations",
+      S.array().items(
+        S.object()
+          .prop("id", S.integer())
+          .prop("createdAt", S.number())
+          .prop("user", S.object().prop("username", S.string()))
+      )
+    )
     .extend(storeBaseSchema);
 
   fastify.addSchema(storeMinified);

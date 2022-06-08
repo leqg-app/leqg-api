@@ -5,6 +5,7 @@ const reputationSchema = function (fastify) {
     S.object()
       .id("reputationSchema")
       .prop("total", S.integer())
+      .prop("reason", S.string())
       .prop(
         "fields",
         S.array().items(

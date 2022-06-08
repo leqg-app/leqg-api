@@ -128,6 +128,7 @@ const createStore = {
 
     const changes = diffMapper({}, store, STORE_REVISION_FIELDS);
     const reputation = calculateReputation([], changes, req.user.id);
+    reputation.reason = "store.creation";
 
     // Create revision
     const revision = await req.server.db.manager.save(StoreRevision, {
@@ -225,6 +226,7 @@ const updateStore = {
       changes,
       req.user.id
     );
+    reputation.reason = "store.edition";
 
     // No new reputation, we don't store revision
     if (!reputation.total) {
@@ -274,7 +276,7 @@ const validateStore = {
       .prop("longitude", S.number().required())
       .prop("latitude", S.number().required()),
     response: {
-      200: S.object().prop("reputation", S.integer()),
+      200: S.object().prop("reputation", S.ref("reputationSchema")),
       404: S.object().prop("error", S.string()),
       422: S.object().prop("error", S.string()),
       429: S.object().prop("error", S.string()),
@@ -359,7 +361,12 @@ const validateStore = {
       store: store.id,
     });
 
-    return { reputation: REPUTATIONS.STORE.VALIDATION };
+    return {
+      reputation: {
+        total: REPUTATIONS.STORE.VALIDATION,
+        reason: "store.validation.creation",
+      },
+    };
   },
 };
 
@@ -375,7 +382,7 @@ const rateStore = {
       .prop("comment", S.string())
       .prop("recommendedProducts", S.array().items(S.integer())),
     response: {
-      200: S.object().prop("reputation", S.integer()),
+      200: S.object().prop("reputation", S.ref("reputationSchema")),
       400: S.object().prop("error", S.string()),
       404: S.object().prop("error", S.string()),
     },
@@ -430,7 +437,12 @@ const rateStore = {
       store: store.id,
     });
 
-    return { reputation };
+    return {
+      reputation: {
+        total: reputation,
+        reason: "store.rate.creation",
+      },
+    };
   },
 };
 
