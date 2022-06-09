@@ -1,6 +1,7 @@
 const S = require("fluent-json-schema");
 
 const { Version } = require("../../entity/Version.js");
+const { Store } = require("../../entity/Store.js");
 
 const getAllVersions = {
   schema: {
@@ -11,16 +12,19 @@ const getAllVersions = {
         .prop("stores", S.integer())
         .prop("products", S.integer())
         .prop("rates", S.integer())
-        .prop("features", S.integer()),
+        .prop("features", S.integer())
+        .prop("storeCount", S.integer()),
     },
   },
-  handler: async (req, rep) => {
-    const repo = rep.server.db.getRepository(Version);
-    const versions = await repo.find();
-    return versions.reduce((versions, { name, version }) => {
+  handler: async (req) => {
+    const versions = await req.server.db.manager.find(Version);
+    const storeCount = await req.server.db.manager.count(Store);
+    const version = versions.reduce((versions, { name, version }) => {
       versions[name] = version;
       return versions;
     }, {});
+    version.storeCount = storeCount;
+    return version;
   },
 };
 

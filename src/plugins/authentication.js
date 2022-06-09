@@ -17,12 +17,13 @@ async function authentication(fastify) {
   });
 }
 
-function isRole(role) {
+function isRole(role, options = {}) {
+  const { relations = [] } = options;
   return async function (request, reply) {
     try {
       const { id } = await request.jwtVerify();
       const repo = request.server.db.getRepository(User);
-      const user = await repo.findOneBy({ id });
+      const user = await repo.findOne({ where: { id }, relations });
       if (!user || user.blocked || user.role < role) {
         return reply.status(403).send({ error: "user.invalid" });
       }

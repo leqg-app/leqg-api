@@ -32,6 +32,7 @@ const userSchema = function (fastify) {
   const userSchema = S.object()
     .additionalProperties(false)
     .id("userSchema")
+    .prop("id", S.integer())
     .prop("jwt", S.string())
     .prop("username", S.string())
     .prop("email", S.string())

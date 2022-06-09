@@ -29,7 +29,7 @@ const STORE_REVISION_FIELDS = [
 function getOneStore(req, id) {
   return req.server.db.manager.findOne(Store, {
     where: { id },
-    relations: ["revisions.user"],
+    relations: ["revisions.user", "validations.user"],
   });
 }
 
@@ -282,7 +282,7 @@ const validateStore = {
       429: S.object().prop("error", S.string()),
     },
   },
-  onRequest: [isRole(ROLES.USER)],
+  onRequest: [isRole(ROLES.USER, { relations: ["contributions"] })],
   handler: async (req, reply) => {
     const { id } = req.params;
     const { longitude, latitude } = req.body;

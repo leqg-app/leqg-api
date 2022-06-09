@@ -108,7 +108,10 @@ const storeSchema = function (fastify) {
         S.object()
           .prop("id", S.integer())
           .prop("createdAt", S.number())
-          .prop("user", S.object().prop("username", S.string()))
+          .prop(
+            "user",
+            S.object().prop("id", S.integer()).prop("username", S.string())
+          )
       )
     )
     .extend(storeBaseSchema);

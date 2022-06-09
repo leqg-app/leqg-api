@@ -50,7 +50,6 @@ const User = new EntitySchema({
       type: "many-to-many",
       target: "Store",
       joinTable: true,
-      eager: true,
     },
     revisions: {
       type: "one-to-many",
@@ -61,7 +60,6 @@ const User = new EntitySchema({
       type: "one-to-many",
       target: "Contribution",
       inverseSide: "user",
-      eager: true,
     },
   },
 });

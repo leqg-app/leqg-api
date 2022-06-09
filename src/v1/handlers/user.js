@@ -8,7 +8,9 @@ const getProfile = {
     summary: "Get user profile",
     tags: ["user"],
   },
-  onRequest: [isRole(ROLES.USER)],
+  onRequest: [
+    isRole(ROLES.USER, { relations: ["favorites", "contributions"] }),
+  ],
   handler: async (req, reply) => {
     // Sign new jwt to expand expiration
     const jwt = await reply.jwtSign({
@@ -37,7 +39,9 @@ const updateProfile = {
       200: S.object().prop("statusCode", S.integer()),
     },
   },
-  onRequest: [isRole(ROLES.USER)],
+  onRequest: [
+    isRole(ROLES.USER, { relations: ["favorites", "contributions"] }),
+  ],
   handler: async (req, reply) => {
     const { favorites } = req.body;
 

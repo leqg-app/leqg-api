@@ -35,7 +35,6 @@ const Contribution = new EntitySchema({
       type: "one-to-one",
       target: "StoreRevision",
       inverseSide: "contribution",
-      eager: true,
     },
     validation: {
       type: "one-to-one",

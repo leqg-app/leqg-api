@@ -19,7 +19,10 @@ const login = {
   handler: async (req, reply) => {
     const { identifier, password } = req.body;
     const repo = req.server.db.getRepository(User);
-    const user = await repo.findOneBy({ username: identifier });
+    const user = await repo.findOne({
+      where: { username: identifier },
+      relations: ["favorites", "contributions"],
+    });
 
     if (!user) {
       return reply.status(400).send({ error: "user.credentials" });
@@ -87,7 +90,10 @@ const register = {
     });
 
     // Refetch user to get relations, maybe better way
-    const user = await repo.findOneBy({ id });
+    const user = await repo.findOne({
+      where: { id },
+      relations: ["favorites", "contributions"],
+    });
 
     // User is already signed in
     const jwt = await reply.jwtSign({
