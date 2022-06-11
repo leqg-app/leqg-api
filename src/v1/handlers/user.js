@@ -7,6 +7,9 @@ const getProfile = {
   schema: {
     summary: "Get user profile",
     tags: ["user"],
+    response: {
+      200: S.ref("userSchemaBase"),
+    },
   },
   onRequest: [
     isRole(ROLES.USER, { relations: ["favorites", "contributions"] }),
