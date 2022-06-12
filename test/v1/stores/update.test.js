@@ -1,6 +1,11 @@
 const tap = require("tap");
 
 const build = require("../../mocks/build.js");
+const loadTestResponses = require("../../loadTestResponses.js");
+
+const isEqualResponse = loadTestResponses(
+  `${__dirname}/../responses/stores-update.json`
+);
 
 const fastify = build();
 tap.teardown(() => fastify.close());
@@ -35,8 +40,7 @@ tap.test("Update store", async () => {
     t.equal(response.statusCode, 200);
 
     const store = response.json();
-    t.equal(store.name, "Store 1");
-    t.equal(store.address, "Address 1");
+    isEqualResponse(response.json(), t.name);
 
     context.store = store;
   });
@@ -51,10 +55,10 @@ tap.test("Update store", async () => {
       },
     });
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), t.name);
   });
 
   tap.test("Can't update unavailable store", async (t) => {
-    t.plan(1);
     const { jwt, store } = context;
     const response = await fastify.inject({
       method: "PUT",
@@ -65,6 +69,7 @@ tap.test("Update store", async () => {
       payload: store,
     });
     t.equal(response.statusCode, 404);
+    isEqualResponse(response.json(), t.name);
   });
 
   tap.test("Update store without contribution", async (t) => {
@@ -78,7 +83,7 @@ tap.test("Update store", async () => {
       payload: store,
     });
     t.equal(response.statusCode, 200);
-    t.equal(response.json().contributed, false);
+    isEqualResponse(response.json(), t.name);
   });
 
   tap.test("Check not-upgraded version", async (t) => {
@@ -99,8 +104,7 @@ tap.test("Update store", async () => {
       payload: store,
     });
     t.equal(response.statusCode, 200);
-    t.equal(response.json().store.name, "Store updated");
-    t.equal(response.json().contributed, true);
+    isEqualResponse(response.json(), t.name);
   });
 
   tap.test("Check upgraded version", async (t) => {
@@ -112,15 +116,15 @@ tap.test("Update store", async () => {
   tap.test("Check incremented user contribution", async (t) => {
     const { jwt } = context;
 
-    const profile = await fastify.inject({
+    const response = await fastify.inject({
       url: "/users/me",
       headers: {
         authorization: `Bearer ${jwt}`,
       },
     });
 
-    t.equal(profile.statusCode, 200);
-    t.equal(profile.json().contributions, 2);
+    t.equal(response.statusCode, 200);
+    isEqualResponse(response.json(), t.name);
   });
 
   tap.test("Update store to add product", async (t) => {
@@ -141,9 +145,7 @@ tap.test("Update store", async () => {
     });
     context.store = response.json().store;
     t.equal(response.statusCode, 200);
-    t.equal(response.json().store.products.length, store.products.length);
-    t.equal(response.json().contributed, true);
-    t.equal(response.json().reputation.total, 5);
+    isEqualResponse(response.json(), t.name);
   });
 
   tap.test("Update user product should not add reputation", async (t) => {
@@ -158,8 +160,6 @@ tap.test("Update store", async () => {
       payload: store,
     });
     t.equal(response.statusCode, 200);
-    t.equal(response.json().store.products.length, store.products.length);
-    t.equal(response.json().contributed, false);
-    t.equal(response.json().reputation.total, 0);
+    isEqualResponse(response.json(), t.name);
   });
 });

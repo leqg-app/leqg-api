@@ -1,6 +1,11 @@
 const tap = require("tap");
 
 const build = require("../../mocks/build.js");
+const loadTestResponses = require("../../loadTestResponses.js");
+
+const isEqualResponse = loadTestResponses(
+  `${__dirname}/../responses/stores-validate.json`
+);
 
 const fastify = build();
 tap.teardown(() => fastify.close());
@@ -17,12 +22,10 @@ tap.test("Login 1", async (t) => {
   });
   t.equal(login.statusCode, 200);
 
-  const { jwt, user } = login.json();
+  const { jwt } = login.json();
   t.type(jwt, "string");
 
   context.jwt = jwt;
-  context.reputation = user.reputation;
-  context.contributions = user.contributions;
 });
 
 tap.test("Check versions", async (t) => {
@@ -34,16 +37,10 @@ tap.test("Check versions", async (t) => {
 tap.test("Get store", async (t) => {
   const response = await fastify.inject("/v2/stores/1");
   t.equal(response.statusCode, 200);
-
-  const store = response.json();
-  t.equal(store.name, "Store 1");
-  t.equal(store.address, "Address 1");
-
-  context.store = store;
+  context.store = response.json();
 });
 
 tap.test("Miss fields to validate", async (t) => {
-  t.plan(1);
   const { jwt } = context;
   const response = await fastify.inject({
     method: "POST",
@@ -53,10 +50,10 @@ tap.test("Miss fields to validate", async (t) => {
     },
   });
   t.equal(response.statusCode, 400);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Don't validate unavailable store", async (t) => {
-  t.plan(2);
   const { jwt, store } = context;
   const response = await fastify.inject({
     method: "POST",
@@ -70,11 +67,10 @@ tap.test("Don't validate unavailable store", async (t) => {
     },
   });
   t.equal(response.statusCode, 404);
-  t.equal(response.json().error, "store.notfound");
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Position too far from store", async (t) => {
-  t.plan(2);
   const { jwt, store } = context;
   const response = await fastify.inject({
     method: "POST",
@@ -88,7 +84,7 @@ tap.test("Position too far from store", async (t) => {
     },
   });
   t.equal(response.statusCode, 422);
-  t.equal(response.json().error, "store.validation.position");
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Validate store", async (t) => {
@@ -105,21 +101,21 @@ tap.test("Validate store", async (t) => {
     },
   });
   t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("User 1 reputation should be granted", async (t) => {
   const { jwt } = context;
 
-  const profile = await fastify.inject({
+  const response = await fastify.inject({
     url: "/users/me",
     headers: {
       authorization: `Bearer ${jwt}`,
     },
   });
 
-  t.equal(profile.statusCode, 200);
-  t.equal(profile.json().contributions, ++context.contributions);
-  t.equal(profile.json().reputation, (context.reputation += 2));
+  t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Can't validate store twice", async (t) => {
@@ -136,6 +132,7 @@ tap.test("Can't validate store twice", async (t) => {
     },
   });
   t.equal(response.statusCode, 422);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Can't validate another store before some time", async (t) => {
@@ -152,6 +149,7 @@ tap.test("Can't validate another store before some time", async (t) => {
     },
   });
   t.equal(response.statusCode, 429);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Login 2", async (t) => {
@@ -182,19 +180,19 @@ tap.test("Validate store with another user", async (t) => {
     },
   });
   t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Creator reputation should be granted", async (t) => {
   const { jwt } = context;
 
-  const profile = await fastify.inject({
+  const response = await fastify.inject({
     url: "/users/me",
     headers: {
       authorization: `Bearer ${jwt}`,
     },
   });
 
-  t.equal(profile.statusCode, 200);
-  t.equal(profile.json().contributions, ++context.contributions);
-  t.equal(profile.json().reputation, (context.reputation += 6));
+  t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });

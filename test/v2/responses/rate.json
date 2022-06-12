@@ -1,0 +1,448 @@
+{
+  "Unavailable store": {
+    "error": "store.notfound"
+  },
+  "Missing required fields": {
+    "error": "Bad Request"
+  },
+  "Rate store": {
+    "reputation": {
+      "total": 10,
+      "reason": "store.rate.creation"
+    }
+  },
+  "Store rate has been updated": {
+    "name": "Store 1",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 1",
+    "phone": null,
+    "website": null,
+    "schedules": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 2,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 3,
+        "opening": 3600,
+        "closing": 7200,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 4,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 5,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 6,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 7,
+        "dayOfWeek": 7,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      }
+    ],
+    "products": [
+      {
+        "id": 2,
+        "productName": null,
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 2
+      },
+      {
+        "id": 1,
+        "productName": null,
+        "price": 5,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 1
+      },
+      {
+        "id": 3,
+        "productName": "Bière",
+        "price": 3.9,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": null
+      }
+    ],
+    "features": [
+      {
+        "id": 1
+      }
+    ],
+    "id": 1,
+    "countryCode": "FR",
+    "rate": 4.333333333333333,
+    "rateCount": 1,
+    "revisions": [
+      {
+        "id": 1,
+        "createdAt": null,
+        "user": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ],
+    "validations": []
+  },
+  "Can't rate store twice": {
+    "error": "store.rate.duplicate"
+  },
+  "Store rate didn't change": {
+    "name": "Store 1",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 1",
+    "phone": null,
+    "website": null,
+    "schedules": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 2,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 3,
+        "opening": 3600,
+        "closing": 7200,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 4,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 5,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 6,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 7,
+        "dayOfWeek": 7,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      }
+    ],
+    "products": [
+      {
+        "id": 2,
+        "productName": null,
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 2
+      },
+      {
+        "id": 1,
+        "productName": null,
+        "price": 5,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 1
+      },
+      {
+        "id": 3,
+        "productName": "Bière",
+        "price": 3.9,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": null
+      }
+    ],
+    "features": [
+      {
+        "id": 1
+      }
+    ],
+    "id": 1,
+    "countryCode": "FR",
+    "rate": 4.333333333333333,
+    "rateCount": 1,
+    "revisions": [
+      {
+        "id": 1,
+        "createdAt": null,
+        "user": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ],
+    "validations": []
+  },
+  "User reputation is same": {
+    "id": 2,
+    "jwt": null,
+    "username": "auth",
+    "email": "auth@leqg.app",
+    "favorites": [],
+    "contributions": [
+      {
+        "id": 2,
+        "reputation": 15,
+        "reason": "store.creation"
+      },
+      {
+        "id": 3,
+        "reputation": 10,
+        "reason": "store.rate.creation"
+      }
+    ]
+  },
+  "User 2 rate store": {
+    "reputation": {
+      "total": 25,
+      "reason": "store.rate.creation"
+    }
+  },
+  "Get store": {
+    "name": "Store 1",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 1",
+    "phone": null,
+    "website": null,
+    "schedules": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 2,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 3,
+        "opening": 3600,
+        "closing": 7200,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 4,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 5,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 6,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 7,
+        "dayOfWeek": 7,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      }
+    ],
+    "products": [
+      {
+        "id": 2,
+        "productName": null,
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 2
+      },
+      {
+        "id": 1,
+        "productName": null,
+        "price": 5,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 1
+      },
+      {
+        "id": 3,
+        "productName": "Bière",
+        "price": 3.9,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": null
+      }
+    ],
+    "features": [
+      {
+        "id": 1
+      }
+    ],
+    "id": 1,
+    "countryCode": "FR",
+    "rate": 4.166666666666666,
+    "rateCount": 2,
+    "revisions": [
+      {
+        "id": 1,
+        "createdAt": null,
+        "user": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ],
+    "validations": []
+  },
+  "User reputation was granted": {
+    "id": 2,
+    "jwt": null,
+    "username": "auth",
+    "email": "auth@leqg.app",
+    "favorites": [],
+    "contributions": [
+      {
+        "id": 2,
+        "reputation": 15,
+        "reason": "store.creation"
+      },
+      {
+        "id": 3,
+        "reputation": 10,
+        "reason": "store.rate.creation"
+      }
+    ]
+  }
+}

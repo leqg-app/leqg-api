@@ -1,6 +1,9 @@
 const tap = require("tap");
 
 const build = require("../mocks/build.js");
+const loadTestResponses = require("../loadTestResponses.js");
+
+const isEqualResponse = loadTestResponses(`${__dirname}/responses/auth.json`);
 
 const fastify = build();
 tap.teardown(() => fastify.close());
@@ -14,11 +17,7 @@ tap.test("Login", async (t) => {
     });
 
     t.equal(response.statusCode, 200);
-    t.type(response.json().jwt, "string");
-    t.type(response.json().username, "string");
-    t.type(response.json().email, "string");
-    t.type(response.json().favorites, "object");
-    t.type(response.json().contributions, "object");
+    isEqualResponse(response.json(), `Login.${t.name}`);
   });
 
   t.test("Miss field", async (t) => {
@@ -28,6 +27,7 @@ tap.test("Login", async (t) => {
       payload: { identifier: "user" },
     });
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Login.${t.name}`);
   });
 
   t.test("Wrong username", async (t) => {
@@ -37,6 +37,7 @@ tap.test("Login", async (t) => {
       payload: { identifier: "wronguser", password: "azerty" },
     });
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Login.${t.name}`);
   });
 
   t.test("Wrong password", async (t) => {
@@ -46,6 +47,7 @@ tap.test("Login", async (t) => {
       payload: { identifier: "admin", password: "wrongpassword" },
     });
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Login.${t.name}`);
   });
 
   t.test("Blocked user", async (t) => {
@@ -55,15 +57,17 @@ tap.test("Login", async (t) => {
       payload: { identifier: "blocked", password: "azerty" },
     });
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Login.${t.name}`);
   });
 
-  t.test("Wrong provder", async (t) => {
+  t.test("Wrong provider", async (t) => {
     const response = await fastify.inject({
       method: "POST",
       url: "/v2/auth/local",
       payload: { identifier: "google", password: "azerty" },
     });
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Login.${t.name}`);
   });
 });
 
@@ -76,6 +80,7 @@ tap.test("Register", async (t) => {
     });
 
     t.equal(response.statusCode, 200);
+    isEqualResponse(response.json(), `Register.${t.name}`);
   });
 
   t.test("Miss field", async (t) => {
@@ -89,6 +94,7 @@ tap.test("Register", async (t) => {
     });
 
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Register.${t.name}`);
   });
 
   t.test("Already exist username", async (t) => {
@@ -103,6 +109,7 @@ tap.test("Register", async (t) => {
     });
 
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Register.${t.name}`);
   });
 
   t.test("Already exist email", async (t) => {
@@ -117,6 +124,7 @@ tap.test("Register", async (t) => {
     });
 
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Register.${t.name}`);
   });
 });
 
@@ -129,6 +137,7 @@ tap.test("Forgot password", async (t) => {
     });
 
     t.equal(response.statusCode, 200);
+    isEqualResponse(response.json(), `Forgot password.${t.name}`);
   });
 
   t.test("Miss field", async (t) => {
@@ -139,6 +148,7 @@ tap.test("Forgot password", async (t) => {
     });
 
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Forgot password.${t.name}`);
   });
 
   t.test("User doesn't exist", async (t) => {
@@ -149,6 +159,7 @@ tap.test("Forgot password", async (t) => {
     });
 
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Forgot password.${t.name}`);
   });
 
   t.test("Blocked user", async (t) => {
@@ -158,6 +169,7 @@ tap.test("Forgot password", async (t) => {
       payload: { email: "blocked@leqg.app" },
     });
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Forgot password.${t.name}`);
   });
 
   t.test("Wrong provder", async (t) => {
@@ -167,6 +179,7 @@ tap.test("Forgot password", async (t) => {
       payload: { email: "google@leqg.app" },
     });
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Forgot password.${t.name}`);
   });
 });
 
@@ -178,6 +191,7 @@ tap.test("Reset password", async (t) => {
     });
 
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Reset password.${t.name}`);
   });
 
   t.test("Password mismatch", async (t) => {
@@ -192,6 +206,7 @@ tap.test("Reset password", async (t) => {
     });
 
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Reset password.${t.name}`);
   });
 
   t.test("Expired reset code", async (t) => {
@@ -206,6 +221,7 @@ tap.test("Reset password", async (t) => {
     });
 
     t.equal(response.statusCode, 400);
+    isEqualResponse(response.json(), `Reset password.${t.name}`);
   });
 
   t.test("Success", async (t) => {
@@ -220,6 +236,7 @@ tap.test("Reset password", async (t) => {
     });
 
     t.equal(response.statusCode, 200);
+    isEqualResponse(response.json(), `Reset password.${t.name}`);
   });
 
   t.test("Could login with new password", async (t) => {
@@ -230,5 +247,6 @@ tap.test("Reset password", async (t) => {
     });
 
     t.equal(response.statusCode, 200);
+    isEqualResponse(response.json(), `Reset password.${t.name}`);
   });
 });

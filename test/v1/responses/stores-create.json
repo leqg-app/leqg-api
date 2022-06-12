@@ -1,0 +1,149 @@
+{
+  "Create store": {
+    "name": "Store 3",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 3",
+    "phone": null,
+    "website": null,
+    "schedules": [
+      {
+        "dayOfWeek": 1,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 2,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 3,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 4,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 5,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 6,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 7,
+        "closed": false
+      }
+    ],
+    "products": [
+      {
+        "id": 5,
+        "productName": "the beer",
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "product": null
+      }
+    ],
+    "features": [],
+    "id": 3,
+    "countryCode": "FR",
+    "revisions": [
+      {
+        "created_at": null,
+        "author": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ]
+  },
+  "Get created store": {
+    "name": "Store 3",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 3",
+    "phone": null,
+    "website": null,
+    "schedules": [
+      {
+        "dayOfWeek": 1,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 2,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 3,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 4,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 5,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 6,
+        "closed": false
+      },
+      {
+        "dayOfWeek": 7,
+        "closed": false
+      }
+    ],
+    "products": [
+      {
+        "id": 5,
+        "productName": "the beer",
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "product": null
+      }
+    ],
+    "features": [],
+    "id": 3,
+    "countryCode": "FR",
+    "revisions": [
+      {
+        "created_at": null,
+        "author": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ]
+  },
+  "Check versions": {
+    "stores": 2,
+    "products": 1,
+    "rates": 1,
+    "features": 1,
+    "storeCount": 3
+  },
+  "Check incremented user contribution": {
+    "jwt": null,
+    "username": "admin",
+    "email": "admin@leqg.app",
+    "contributions": 2,
+    "reputation": 40,
+    "favorites": []
+  }
+}

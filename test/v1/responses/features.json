@@ -1,0 +1,30 @@
+{
+  "Get all features": [
+    {
+      "name": "Ambiances",
+      "features": [
+        {
+          "id": 1,
+          "name": "Etudiant"
+        },
+        {
+          "id": 2,
+          "name": "Evenements sportifs"
+        }
+      ]
+    },
+    {
+      "name": "Lieux",
+      "features": [
+        {
+          "id": 3,
+          "name": "Rooftop"
+        },
+        {
+          "id": 4,
+          "name": "Terrasse"
+        }
+      ]
+    }
+  ]
+}

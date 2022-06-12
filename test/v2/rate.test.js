@@ -1,6 +1,9 @@
 const tap = require("tap");
 
 const build = require("../mocks/build.js");
+const loadTestResponses = require("../loadTestResponses.js");
+
+const isEqualResponse = loadTestResponses(`${__dirname}/responses/rate.json`);
 
 const fastify = build();
 tap.teardown(() => fastify.close());
@@ -24,7 +27,7 @@ tap.test("Login 1", async (t) => {
 
 tap.test("Unavailable store", async (t) => {
   const { jwt } = context;
-  const rate = await fastify.inject({
+  const response = await fastify.inject({
     method: "POST",
     url: "/v2/stores/999/rate",
     headers: {
@@ -38,12 +41,13 @@ tap.test("Unavailable store", async (t) => {
       recommendedProducts: [],
     },
   });
-  t.equal(rate.statusCode, 404);
+  t.equal(response.statusCode, 404);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Missing required fields", async (t) => {
   const { jwt } = context;
-  const rate = await fastify.inject({
+  const response = await fastify.inject({
     method: "POST",
     url: "/v2/stores/999/rate",
     headers: {
@@ -56,20 +60,13 @@ tap.test("Missing required fields", async (t) => {
       recommendedProducts: [],
     },
   });
-  t.equal(rate.statusCode, 400);
-});
-
-tap.test("Get store", async (t) => {
-  const response = await fastify.inject("/v2/stores/1");
-  t.equal(response.statusCode, 200);
-  const { rate, rateCount } = response.json();
-  t.equal(rate, null);
-  t.equal(rateCount, 0);
+  t.equal(response.statusCode, 400);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Rate store", async (t) => {
   const { jwt } = context;
-  const rate = await fastify.inject({
+  const response = await fastify.inject({
     method: "POST",
     url: "/v2/stores/1/rate",
     headers: {
@@ -83,34 +80,33 @@ tap.test("Rate store", async (t) => {
       recommendedProducts: [],
     },
   });
-  t.equal(rate.statusCode, 200);
+  t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Store rate has been updated", async (t) => {
   const response = await fastify.inject("/v2/stores/1");
   t.equal(response.statusCode, 200);
-  const { rate, rateCount } = response.json();
-  t.equal(rate.toFixed(1), "4.3");
-  t.equal(rateCount, 1);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("User reputation was granted", async (t) => {
   const { jwt } = context;
 
-  const profile = await fastify.inject({
+  const response = await fastify.inject({
     url: "/v2/users/me",
     headers: {
       authorization: `Bearer ${jwt}`,
     },
   });
 
-  t.equal(profile.statusCode, 200);
-  t.equal(profile.json().contributions.length, ++context.contributions);
+  t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Can't rate store twice", async (t) => {
   const { jwt } = context;
-  const rate = await fastify.inject({
+  const response = await fastify.inject({
     method: "POST",
     url: "/v2/stores/1/rate",
     headers: {
@@ -124,30 +120,28 @@ tap.test("Can't rate store twice", async (t) => {
       recommendedProducts: [],
     },
   });
-  t.equal(rate.statusCode, 400);
-  t.equal(rate.json().error, "store.rate.duplicate");
+  t.equal(response.statusCode, 400);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Store rate didn't change", async (t) => {
   const response = await fastify.inject("/v2/stores/1");
   t.equal(response.statusCode, 200);
-  const { rate, rateCount } = response.json();
-  t.equal(rate.toFixed(1), "4.3");
-  t.equal(rateCount, 1);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("User reputation is same", async (t) => {
   const { jwt } = context;
 
-  const profile = await fastify.inject({
+  const response = await fastify.inject({
     url: "/v2/users/me",
     headers: {
       authorization: `Bearer ${jwt}`,
     },
   });
 
-  t.equal(profile.statusCode, 200);
-  t.equal(profile.json().contributions.length, context.contributions);
+  t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Login 2", async (t) => {
@@ -167,7 +161,7 @@ tap.test("Login 2", async (t) => {
 
 tap.test("User 2 rate store", async (t) => {
   const { jwt2 } = context;
-  const rate = await fastify.inject({
+  const response = await fastify.inject({
     method: "POST",
     url: "/v2/stores/1/rate",
     headers: {
@@ -181,14 +175,12 @@ tap.test("User 2 rate store", async (t) => {
       recommendedProducts: [1],
     },
   });
-  t.equal(rate.statusCode, 200);
-  t.equal(rate.json().reputation.total, 25);
+  t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Get store", async (t) => {
   const response = await fastify.inject("/v2/stores/1");
   t.equal(response.statusCode, 200);
-  const { rate, rateCount } = response.json();
-  t.equal(rate.toFixed(1), "4.2");
-  t.equal(rateCount, 2);
+  isEqualResponse(response.json(), t.name);
 });

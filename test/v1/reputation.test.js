@@ -1,6 +1,11 @@
 const tap = require("tap");
 
 const build = require("../mocks/build.js");
+const loadTestResponses = require("../loadTestResponses.js");
+
+const isEqualResponse = loadTestResponses(
+  `${__dirname}/responses/reputation.json`
+);
 
 const fastify = build();
 tap.teardown(() => fastify.close());
@@ -29,7 +34,7 @@ tap.test("Login user 2", async (t) => {
   });
   t.equal(login.statusCode, 200);
 
-  const { jwt, user } = login.json();
+  const { jwt } = login.json();
   t.type(jwt, "string");
 
   tap.context.jwt2 = jwt;
@@ -58,22 +63,22 @@ tap.test("Create store with user 1", async (t) => {
     },
   });
   t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
   tap.context.store = response.json();
 });
 
 tap.test("User 1 reputation was granted", async (t) => {
   const { jwt1 } = tap.context;
 
-  const profile = await fastify.inject({
+  const response = await fastify.inject({
     url: "/users/me",
     headers: {
       authorization: `Bearer ${jwt1}`,
     },
   });
 
-  t.equal(profile.statusCode, 200);
-  t.equal(profile.json().contributions, ++tap.context.contributions1);
-  t.equal(profile.json().reputation, (tap.context.reputation1 += 20));
+  t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Update store with user 1 shouldn't contribute", async (t) => {
@@ -89,23 +94,21 @@ tap.test("Update store with user 1 shouldn't contribute", async (t) => {
   });
   tap.context.store = response.json().store;
   t.equal(response.statusCode, 200);
-  t.equal(response.json().store.name, "Store updated"); // updated
-  t.equal(response.json().contributed, false); // already contributed with creation
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("User 1 reputation should be the same", async (t) => {
   const { jwt1 } = tap.context;
 
-  const profile = await fastify.inject({
+  const response = await fastify.inject({
     url: "/users/me",
     headers: {
       authorization: `Bearer ${jwt1}`,
     },
   });
 
-  t.equal(profile.statusCode, 200);
-  t.equal(profile.json().contributions, tap.context.contributions1);
-  t.equal(profile.json().reputation, tap.context.reputation1); // same as before
+  t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Update product 1 with user 2 should contribute", async (t) => {
@@ -121,9 +124,7 @@ tap.test("Update product 1 with user 2 should contribute", async (t) => {
   });
   tap.context.store = response.json().store;
   t.equal(response.statusCode, 200);
-  t.equal(response.json().store.products[0].productName, "beer user 2");
-  t.equal(response.json().contributed, true);
-  t.equal(response.json().reputation.total, 5);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Update product 1 with user 1 should contribute again", async (t) => {
@@ -140,8 +141,5 @@ tap.test("Update product 1 with user 1 should contribute again", async (t) => {
   });
   tap.context.store = response.json().store;
   t.equal(response.statusCode, 200);
-  t.equal(response.json().store.name, "Best Store!");
-  t.equal(response.json().store.products[0].productName, "beer user 1");
-  t.equal(response.json().contributed, true);
-  t.equal(response.json().reputation.total, 5);
+  isEqualResponse(response.json(), t.name);
 });

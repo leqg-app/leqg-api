@@ -3,6 +3,9 @@ const { createSigner } = require("fast-jwt");
 const signSync = createSigner({ key: process.env.JWT_SECRET });
 
 const build = require("../mocks/build.js");
+const loadTestResponses = require("../loadTestResponses.js");
+
+const isEqualResponse = loadTestResponses(`${__dirname}/responses/user.json`);
 
 const fastify = build();
 tap.teardown(() => fastify.close());
@@ -24,30 +27,31 @@ tap.test("Profile", async ({ context }) => {
   tap.test("Get user profile", async (t) => {
     const { jwt } = context;
 
-    const profile = await fastify.inject({
+    const response = await fastify.inject({
       url: "/v2/users/me",
       headers: {
         authorization: `Bearer ${jwt}`,
       },
     });
 
-    t.equal(profile.statusCode, 200);
-    t.equal(profile.json().username, "admin");
+    t.equal(response.statusCode, 200);
+    isEqualResponse(response.json(), t.name);
   });
 
   tap.test("Invalid jwt", async (t) => {
-    const profile = await fastify.inject({
+    const response = await fastify.inject({
       url: "/v2/users/me",
       headers: {
         authorization: `Bearer invalidJwt`,
       },
     });
 
-    t.equal(profile.statusCode, 401);
+    t.equal(response.statusCode, 401);
+    isEqualResponse(response.json(), t.name);
   });
 
   tap.test("Blocked jwt", async (t) => {
-    const profile = await fastify.inject({
+    const response = await fastify.inject({
       url: "/v2/users/me",
       headers: {
         // valid jwt with blocked user
@@ -55,7 +59,8 @@ tap.test("Profile", async ({ context }) => {
       },
     });
 
-    t.equal(profile.statusCode, 403);
+    t.equal(response.statusCode, 403);
+    isEqualResponse(response.json(), t.name);
   });
 
   tap.test("Add favorite store to user", async (t) => {
@@ -70,15 +75,16 @@ tap.test("Profile", async ({ context }) => {
       payload: { favorites: [{ id: 1 }] },
     });
     t.equal(update.statusCode, 200);
+    isEqualResponse(update.json(), t.name);
 
-    const profile = await fastify.inject({
+    const response = await fastify.inject({
       url: "/v2/users/me",
       headers: {
         authorization: `Bearer ${jwt}`,
       },
     });
 
-    t.equal(profile.statusCode, 200);
-    t.equal(profile.json().favorites.length, 1);
+    t.equal(response.statusCode, 200);
+    isEqualResponse(response.json(), `${t.name}-2`);
   });
 });

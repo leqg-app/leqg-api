@@ -1,0 +1,209 @@
+{
+  "Get all": [
+    {
+      "id": 1,
+      "name": "Store 1",
+      "lng": 1,
+      "lat": 1,
+      "price": 2,
+      "currency": "EUR",
+      "products": [
+        2,
+        1
+      ],
+      "s": [
+        {
+          "cd": true
+        },
+        {
+          "cd": true
+        },
+        {
+          "cd": false,
+          "o": 3600,
+          "c": 7200,
+          "os": 4800,
+          "cs": 6000
+        },
+        {
+          "cd": false,
+          "os": 4800,
+          "cs": 6000
+        },
+        {
+          "cd": false
+        },
+        {
+          "cd": false
+        },
+        {
+          "cd": false
+        }
+      ],
+      "f": [
+        1
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Store 2",
+      "lng": 1,
+      "lat": 1,
+      "price": 1,
+      "currency": "EUR",
+      "products": [
+        1
+      ],
+      "s": [
+        {
+          "cd": false
+        },
+        {
+          "cd": false
+        },
+        {
+          "cd": false
+        },
+        {
+          "cd": false
+        },
+        {
+          "cd": false
+        },
+        {
+          "cd": false
+        },
+        {
+          "cd": false
+        }
+      ],
+      "f": []
+    }
+  ],
+  "Unavailable store": {
+    "error": "store.notfound"
+  },
+  "Get one": {
+    "name": "Store 1",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 1",
+    "phone": null,
+    "website": null,
+    "schedules": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 2,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 3,
+        "opening": 3600,
+        "closing": 7200,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 4,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 5,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 6,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 7,
+        "dayOfWeek": 7,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      }
+    ],
+    "products": [
+      {
+        "id": 2,
+        "productName": null,
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "product": 2
+      },
+      {
+        "id": 1,
+        "productName": null,
+        "price": 5,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "product": 1
+      },
+      {
+        "id": 3,
+        "productName": "Bière",
+        "price": 3.9,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "product": null
+      }
+    ],
+    "features": [
+      1
+    ],
+    "id": 1,
+    "countryCode": "FR",
+    "revisions": [
+      {
+        "created_at": null,
+        "author": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ]
+  }
+}

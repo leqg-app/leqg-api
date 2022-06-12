@@ -1,6 +1,11 @@
 const tap = require("tap");
 
 const build = require("../../mocks/build.js");
+const loadTestResponses = require("../../loadTestResponses.js");
+
+const isEqualResponse = loadTestResponses(
+  `${__dirname}/../responses/stores-update.json`
+);
 
 const fastify = build();
 tap.teardown(() => fastify.close());
@@ -32,12 +37,9 @@ tap.test("Check versions", async (t) => {
 tap.test("Get store", async (t) => {
   const response = await fastify.inject("/v2/stores/1");
   t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 
-  const store = response.json();
-  t.equal(store.name, "Store 1");
-  t.equal(store.address, "Address 1");
-
-  context.store = store;
+  context.store = response.json();
 });
 
 tap.test("Miss fields", async (t) => {
@@ -50,10 +52,10 @@ tap.test("Miss fields", async (t) => {
     },
   });
   t.equal(response.statusCode, 400);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Can't update unavailable store", async (t) => {
-  t.plan(1);
   const { jwt, store } = context;
   const response = await fastify.inject({
     method: "PUT",
@@ -64,6 +66,7 @@ tap.test("Can't update unavailable store", async (t) => {
     payload: store,
   });
   t.equal(response.statusCode, 404);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Update store without contribution", async (t) => {
@@ -77,8 +80,7 @@ tap.test("Update store without contribution", async (t) => {
     payload: store,
   });
   t.equal(response.statusCode, 200);
-  t.equal(response.json().reputation.total, 0);
-  t.equal(response.json().reputation.fields.length, 0);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Check not-upgraded version", async (t) => {
@@ -99,14 +101,7 @@ tap.test("Update store name", async (t) => {
     payload: store,
   });
   t.equal(response.statusCode, 200);
-  t.equal(response.json().store.name, "Store updated");
-  t.equal(response.json().reputation.total, 2);
-  t.equal(response.json().reputation.fields.length, 1);
-  t.same(response.json().reputation, {
-    total: 2,
-    reason: "store.edition",
-    fields: [{ reputation: 2, fieldName: "name" }],
-  });
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Check upgraded version", async (t) => {
@@ -118,15 +113,15 @@ tap.test("Check upgraded version", async (t) => {
 tap.test("Check incremented user contribution", async (t) => {
   const { jwt } = context;
 
-  const profile = await fastify.inject({
+  const response = await fastify.inject({
     url: "/v2/users/me",
     headers: {
       authorization: `Bearer ${jwt}`,
     },
   });
 
-  t.equal(profile.statusCode, 200);
-  t.equal(profile.json().contributions.length, 2);
+  t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Update store to add product", async (t) => {
@@ -147,9 +142,7 @@ tap.test("Update store to add product", async (t) => {
   });
   context.store = response.json().store;
   t.equal(response.statusCode, 200);
-  t.equal(response.json().store.products.length, store.products.length);
-  t.equal(response.json().reputation.total, 5);
-  t.equal(response.json().reputation.fields.length, 1);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Check upgraded version", async (t) => {
@@ -170,9 +163,7 @@ tap.test("Update added product should not add reputation", async (t) => {
     payload: store,
   });
   t.equal(response.statusCode, 200);
-  t.equal(response.json().store.products.length, store.products.length);
-  t.equal(response.json().reputation.total, 0);
-  t.equal(response.json().reputation.fields.length, 0);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Check upgraded version", async (t) => {
@@ -193,8 +184,7 @@ tap.test("Update store with no contribution param", async (t) => {
     payload: store,
   });
   t.equal(response.statusCode, 200);
-  t.equal(response.json().reputation.total, 0);
-  t.equal(response.json().reputation.fields.length, 0);
+  isEqualResponse(response.json(), t.name);
 });
 
 tap.test("Check upgraded version", async (t) => {

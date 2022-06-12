@@ -1,0 +1,156 @@
+{
+  "Create store": {
+    "store": {
+      "name": "Store 3",
+      "latitude": 1,
+      "longitude": 1,
+      "address": "Address 3",
+      "phone": null,
+      "website": null,
+      "schedules": [],
+      "products": [
+        {
+          "id": 5,
+          "productName": "the beer",
+          "price": 2,
+          "specialPrice": null,
+          "volume": 50,
+          "type": "draft",
+          "currencyCode": "EUR",
+          "productId": null
+        }
+      ],
+      "features": [],
+      "id": 3,
+      "countryCode": "FR",
+      "rate": null,
+      "rateCount": 0,
+      "revisions": [
+        {
+          "id": 3,
+          "createdAt": null,
+          "user": {
+            "username": "admin"
+          },
+          "changes": [
+            {
+              "type": "initial"
+            }
+          ]
+        }
+      ],
+      "validations": []
+    },
+    "reputation": {
+      "total": 15,
+      "reason": "store.creation",
+      "fields": [
+        {
+          "fieldName": "name",
+          "reputation": 5
+        },
+        {
+          "fieldName": "address",
+          "reputation": 5
+        },
+        {
+          "fieldName": "products",
+          "reputation": 5
+        }
+      ]
+    },
+    "version": 2
+  },
+  "Get created store": {
+    "name": "Store 3",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 3",
+    "phone": null,
+    "website": null,
+    "schedules": [],
+    "products": [
+      {
+        "id": 5,
+        "productName": "the beer",
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": null
+      }
+    ],
+    "features": [],
+    "id": 3,
+    "countryCode": "FR",
+    "rate": null,
+    "rateCount": 0,
+    "revisions": [
+      {
+        "id": 3,
+        "createdAt": null,
+        "user": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ],
+    "validations": []
+  },
+  "Get compared versions": {
+    "updated": [
+      [
+        3,
+        "Store 3",
+        "Address 3",
+        1,
+        1,
+        2,
+        0,
+        "EUR",
+        [
+          [
+            0,
+            2,
+            0,
+            50
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        []
+      ]
+    ]
+  },
+  "Check incremented user contribution": {
+    "id": 1,
+    "jwt": null,
+    "username": "admin",
+    "email": "admin@leqg.app",
+    "favorites": [],
+    "contributions": [
+      {
+        "id": 1,
+        "reputation": 25,
+        "reason": "store.creation"
+      },
+      {
+        "id": 3,
+        "reputation": 15,
+        "reason": "store.creation"
+      }
+    ]
+  }
+}

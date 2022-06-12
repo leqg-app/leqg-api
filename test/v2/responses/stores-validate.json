@@ -1,0 +1,176 @@
+{
+  "Get store": {
+    "name": "Store 1",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 1",
+    "phone": null,
+    "website": null,
+    "schedules": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 2,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 3,
+        "opening": 3600,
+        "closing": 7200,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 4,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": 4800,
+        "closingSpecial": 6000,
+        "closed": false
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 5,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 6,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 7,
+        "dayOfWeek": 7,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      }
+    ],
+    "products": [
+      {
+        "id": 2,
+        "productName": null,
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 2
+      },
+      {
+        "id": 1,
+        "productName": null,
+        "price": 5,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 1
+      },
+      {
+        "id": 3,
+        "productName": "Bière",
+        "price": 3.9,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": null
+      }
+    ],
+    "features": [
+      {
+        "id": 1
+      }
+    ],
+    "id": 1,
+    "countryCode": "FR",
+    "rate": null,
+    "rateCount": 0,
+    "revisions": [
+      {
+        "id": 1,
+        "createdAt": null,
+        "user": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ],
+    "validations": []
+  },
+  "Miss fields to validate": {
+    "statusCode": 400,
+    "error": "Bad Request",
+    "message": "body should be object"
+  },
+  "Don't validate unavailable store": {
+    "error": "store.notfound"
+  },
+  "Position too far from store": {
+    "error": "store.validation.position"
+  },
+  "Validate store": {
+    "reputation": {
+      "total": 2,
+      "reason": "store.validation.creation"
+    }
+  },
+  "User 1 reputation should be granted": {
+    "jwt": null,
+    "username": "admin",
+    "email": "admin@leqg.app",
+    "contributions": 2,
+    "reputation": 27,
+    "favorites": []
+  },
+  "Can't validate store twice": {
+    "error": "store.validation.already"
+  },
+  "Can't validate another store before some time": {
+    "error": "store.validation.ratelimit"
+  },
+  "Validate store with another user": {
+    "reputation": {
+      "total": 2,
+      "reason": "store.validation.creation"
+    }
+  },
+  "Creator reputation should be granted": {
+    "jwt": null,
+    "username": "admin",
+    "email": "admin@leqg.app",
+    "contributions": 3,
+    "reputation": 33,
+    "favorites": []
+  }
+}

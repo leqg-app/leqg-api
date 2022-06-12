@@ -1,0 +1,22 @@
+{
+  "Get all products": [
+    {
+      "name": "Heineken",
+      "type": "beer",
+      "custom": {},
+      "id": 1
+    },
+    {
+      "name": "Leffe",
+      "type": "beer",
+      "custom": {},
+      "id": 2
+    },
+    {
+      "name": "La Chouffe",
+      "type": "beer",
+      "custom": {},
+      "id": 3
+    }
+  ]
+}

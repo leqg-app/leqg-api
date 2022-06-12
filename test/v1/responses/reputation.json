@@ -1,0 +1,595 @@
+{
+  "Create store with user 1": {
+    "name": "Store 3",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 3",
+    "phone": null,
+    "website": null,
+    "schedules": [
+      {
+        "id": 8,
+        "dayOfWeek": 1,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 9,
+        "dayOfWeek": 2,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 10,
+        "dayOfWeek": 3,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 11,
+        "dayOfWeek": 4,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 12,
+        "dayOfWeek": 5,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 13,
+        "dayOfWeek": 6,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 14,
+        "dayOfWeek": 7,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      }
+    ],
+    "products": [
+      {
+        "id": 6,
+        "productName": "beer 2",
+        "price": 3,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "product": null
+      },
+      {
+        "id": 5,
+        "productName": "the beer",
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "product": null
+      }
+    ],
+    "features": [],
+    "id": 3,
+    "countryCode": "FR",
+    "revisions": [
+      {
+        "created_at": null,
+        "author": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ]
+  },
+  "User 1 reputation was granted": {
+    "jwt": null,
+    "username": "admin",
+    "email": "admin@leqg.app",
+    "contributions": 2,
+    "reputation": 45,
+    "favorites": []
+  },
+  "Update store with user 1 shouldn't contribute": {
+    "store": {
+      "name": "Store updated",
+      "latitude": 1,
+      "longitude": 1,
+      "address": "Address 3",
+      "phone": null,
+      "website": null,
+      "schedules": [
+        {
+          "id": 8,
+          "dayOfWeek": 1,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 9,
+          "dayOfWeek": 2,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 10,
+          "dayOfWeek": 3,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 11,
+          "dayOfWeek": 4,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 12,
+          "dayOfWeek": 5,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 13,
+          "dayOfWeek": 6,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 14,
+          "dayOfWeek": 7,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        }
+      ],
+      "products": [
+        {
+          "id": 6,
+          "productName": "beer 2",
+          "price": 3,
+          "specialPrice": null,
+          "volume": 50,
+          "type": "draft",
+          "currencyCode": "EUR",
+          "product": null
+        },
+        {
+          "id": 5,
+          "productName": "the beer",
+          "price": 2,
+          "specialPrice": null,
+          "volume": 50,
+          "type": "draft",
+          "currencyCode": "EUR",
+          "product": null
+        }
+      ],
+      "features": [],
+      "id": 3,
+      "countryCode": "FR",
+      "revisions": [
+        {
+          "created_at": null,
+          "author": {
+            "username": "admin"
+          },
+          "changes": [
+            {
+              "type": "initial"
+            }
+          ]
+        }
+      ]
+    },
+    "contributed": false,
+    "reputation": {
+      "total": 0,
+      "fields": []
+    },
+    "version": 3
+  },
+  "User 1 reputation should be the same": {
+    "jwt": null,
+    "username": "admin",
+    "email": "admin@leqg.app",
+    "contributions": 2,
+    "reputation": 45,
+    "favorites": []
+  },
+  "Update product 1 with user 2 should contribute": {
+    "store": {
+      "name": "Store updated",
+      "latitude": 1,
+      "longitude": 1,
+      "address": "Address 3",
+      "phone": null,
+      "website": null,
+      "schedules": [
+        {
+          "id": 8,
+          "dayOfWeek": 1,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 9,
+          "dayOfWeek": 2,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 10,
+          "dayOfWeek": 3,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 11,
+          "dayOfWeek": 4,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 12,
+          "dayOfWeek": 5,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 13,
+          "dayOfWeek": 6,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 14,
+          "dayOfWeek": 7,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        }
+      ],
+      "products": [
+        {
+          "id": 6,
+          "productName": "beer user 2",
+          "price": 3,
+          "specialPrice": null,
+          "volume": 50,
+          "type": "draft",
+          "currencyCode": "EUR",
+          "product": null
+        },
+        {
+          "id": 5,
+          "productName": "the beer",
+          "price": 2,
+          "specialPrice": null,
+          "volume": 50,
+          "type": "draft",
+          "currencyCode": "EUR",
+          "product": null
+        }
+      ],
+      "features": [],
+      "id": 3,
+      "countryCode": "FR",
+      "revisions": [
+        {
+          "created_at": null,
+          "author": {
+            "username": "admin"
+          },
+          "changes": [
+            {
+              "type": "initial"
+            }
+          ]
+        },
+        {
+          "created_at": null,
+          "author": {
+            "username": "auth"
+          },
+          "changes": [
+            {
+              "type": "updated",
+              "field": "products",
+              "delta": {
+                "id": 6,
+                "productName": "beer 2",
+                "price": 3,
+                "specialPrice": null,
+                "volume": 50,
+                "type": "draft",
+                "currencyCode": "EUR"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "contributed": true,
+    "reputation": {
+      "total": 5,
+      "fields": [
+        {
+          "reputation": 5
+        }
+      ]
+    },
+    "version": 4
+  },
+  "Update product 1 with user 1 should contribute again": {
+    "store": {
+      "name": "Best Store!",
+      "latitude": 1,
+      "longitude": 1,
+      "address": "Address 3",
+      "phone": null,
+      "website": null,
+      "schedules": [
+        {
+          "id": 8,
+          "dayOfWeek": 1,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 9,
+          "dayOfWeek": 2,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 10,
+          "dayOfWeek": 3,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 11,
+          "dayOfWeek": 4,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 12,
+          "dayOfWeek": 5,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 13,
+          "dayOfWeek": 6,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        },
+        {
+          "id": 14,
+          "dayOfWeek": 7,
+          "opening": null,
+          "closing": null,
+          "openingSpecial": null,
+          "closingSpecial": null,
+          "closed": false
+        }
+      ],
+      "products": [
+        {
+          "id": 6,
+          "productName": "beer user 1",
+          "price": 3,
+          "specialPrice": null,
+          "volume": 50,
+          "type": "draft",
+          "currencyCode": "EUR",
+          "product": null
+        },
+        {
+          "id": 5,
+          "productName": "the beer",
+          "price": 2,
+          "specialPrice": null,
+          "volume": 50,
+          "type": "draft",
+          "currencyCode": "EUR",
+          "product": null
+        }
+      ],
+      "features": [],
+      "id": 3,
+      "countryCode": "FR",
+      "revisions": [
+        {
+          "created_at": null,
+          "author": {
+            "username": "admin"
+          },
+          "changes": [
+            {
+              "type": "initial"
+            }
+          ]
+        },
+        {
+          "created_at": null,
+          "author": {
+            "username": "auth"
+          },
+          "changes": [
+            {
+              "type": "updated",
+              "field": "products",
+              "delta": {
+                "id": 6,
+                "productName": "beer 2",
+                "price": 3,
+                "specialPrice": null,
+                "volume": 50,
+                "type": "draft",
+                "currencyCode": "EUR"
+              }
+            }
+          ]
+        },
+        {
+          "created_at": null,
+          "author": {
+            "username": "admin"
+          },
+          "changes": [
+            {
+              "type": "updated",
+              "field": "name",
+              "delta": "Store updated"
+            },
+            {
+              "type": "updated",
+              "field": "products",
+              "delta": {
+                "id": 6,
+                "productName": "beer user 2",
+                "price": 3,
+                "specialPrice": null,
+                "volume": 50,
+                "type": "draft",
+                "currencyCode": "EUR"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "contributed": true,
+    "reputation": {
+      "total": 5,
+      "fields": [
+        {
+          "reputation": 5
+        }
+      ]
+    },
+    "version": 5
+  },
+  "Get user profile": {
+    "jwt": null,
+    "username": "admin",
+    "email": "admin@leqg.app",
+    "contributions": 1,
+    "reputation": 25,
+    "favorites": []
+  },
+  "Invalid jwt": {
+    "error": "The token is malformed."
+  },
+  "Blocked jwt": {
+    "error": "user.invalid"
+  },
+  "Add favorite store to user": {
+    "statusCode": 200
+  },
+  "Add favorite store to user-2": {
+    "jwt": null,
+    "username": "admin",
+    "email": "admin@leqg.app",
+    "contributions": 1,
+    "reputation": 25,
+    "favorites": [
+      {
+        "id": 1,
+        "name": "Store 1",
+        "address": "Address 1",
+        "longitude": 1,
+        "latitude": 1
+      }
+    ]
+  }
+}
