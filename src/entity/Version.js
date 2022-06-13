@@ -11,6 +11,9 @@ const Version = new EntitySchema({
     version: {
       type: "int",
     },
+    count: {
+      type: "int",
+    },
     updatedAt: {
       updateDate: true,
     },
