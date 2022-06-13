@@ -37,13 +37,17 @@ function formatStores(store) {
           cd: schedule.closed,
           ...(schedule.opening &&
             schedule.closing && {
-              o: schedule.opening,
-              c: schedule.closing,
+              o: schedule.opening ? schedule.opening * 60 : schedule.opening,
+              c: schedule.closing ? schedule.closing * 60 : schedule.closing,
             }),
           ...(schedule.openingSpecial &&
             schedule.closingSpecial && {
-              os: schedule.openingSpecial,
-              cs: schedule.closingSpecial,
+              os: schedule.openingSpecial
+                ? schedule.openingSpecial * 60
+                : schedule.openingSpecial,
+              cs: schedule.closingSpecial
+                ? schedule.closingSpecial * 60
+                : schedule.closingSpecial,
             }),
         };
         return schedules;
@@ -54,11 +58,34 @@ function formatStores(store) {
   };
 }
 
+function formatSchedules(schedules) {
+  if (!schedules) {
+    return;
+  }
+  schedules.map((schedule) => {
+    ["opening", "closing", "openingSpecial", "closingSpecial"].map((field) => {
+      schedule[field] = schedule[field]
+        ? schedule[field] / 60
+        : schedule[field];
+    });
+  });
+}
+
 function formatStore(store) {
   if (store.schedules.length < 7) {
     store.schedules = new Array(7)
       .fill()
       .map((_, i) => ({ dayOfWeek: i + 1, closed: false }));
+  } else {
+    store.schedules.map((schedule) => {
+      ["opening", "closing", "openingSpecial", "closingSpecial"].map(
+        (field) => {
+          schedule[field] = schedule[field]
+            ? schedule[field] * 60
+            : schedule[field];
+        }
+      );
+    });
   }
   if (store.features) {
     store.features = store.features.map(({ id }) => id);
@@ -78,4 +105,4 @@ function formatStore(store) {
   return store;
 }
 
-module.exports = { formatStores, formatStore };
+module.exports = { formatStores, formatStore, formatSchedules };

@@ -41,16 +41,16 @@ module.exports.Store = {
         {
           dayOfWeek: 3,
           closed: false,
-          opening: 3600,
-          closing: 7200,
-          openingSpecial: 4800,
-          closingSpecial: 6000,
+          opening: 60,
+          closing: 120,
+          openingSpecial: 80,
+          closingSpecial: 100,
         },
         {
           dayOfWeek: 4,
           closed: false,
-          openingSpecial: 4800,
-          closingSpecial: 6000,
+          openingSpecial: 80,
+          closingSpecial: 100,
         },
         {
           dayOfWeek: 5,

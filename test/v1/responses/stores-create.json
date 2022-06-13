@@ -136,7 +136,12 @@
     "products": 1,
     "rates": 1,
     "features": 1,
-    "storeCount": 3
+    "count": {
+      "stores": 0,
+      "products": 0,
+      "rates": 0,
+      "features": 0
+    }
   },
   "Check incremented user contribution": {
     "jwt": null,

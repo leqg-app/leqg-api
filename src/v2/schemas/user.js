@@ -36,6 +36,7 @@ const userSchema = function (fastify) {
     .prop("jwt", S.string())
     .prop("username", S.string())
     .prop("email", S.string())
+    .prop("provider", S.string())
     .prop(
       "favorites",
       S.array().items(

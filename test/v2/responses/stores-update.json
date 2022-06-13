@@ -28,10 +28,10 @@
       {
         "id": 3,
         "dayOfWeek": 3,
-        "opening": 3600,
-        "closing": 7200,
-        "openingSpecial": 4800,
-        "closingSpecial": 6000,
+        "opening": 60,
+        "closing": 120,
+        "openingSpecial": 80,
+        "closingSpecial": 100,
         "closed": false
       },
       {
@@ -39,8 +39,8 @@
         "dayOfWeek": 4,
         "opening": null,
         "closing": null,
-        "openingSpecial": 4800,
-        "closingSpecial": 6000,
+        "openingSpecial": 80,
+        "closingSpecial": 100,
         "closed": false
       },
       {
@@ -166,10 +166,10 @@
         {
           "id": 3,
           "dayOfWeek": 3,
-          "opening": 3600,
-          "closing": 7200,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "opening": 60,
+          "closing": 120,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {
@@ -177,8 +177,8 @@
           "dayOfWeek": 4,
           "opening": null,
           "closing": null,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {
@@ -302,10 +302,10 @@
         {
           "id": 3,
           "dayOfWeek": 3,
-          "opening": 3600,
-          "closing": 7200,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "opening": 60,
+          "closing": 120,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {
@@ -313,8 +313,8 @@
           "dayOfWeek": 4,
           "opening": null,
           "closing": null,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {
@@ -433,6 +433,7 @@
     "jwt": null,
     "username": "auth",
     "email": "auth@leqg.app",
+    "provider": "local",
     "favorites": [],
     "contributions": [
       {
@@ -477,10 +478,10 @@
         {
           "id": 3,
           "dayOfWeek": 3,
-          "opening": 3600,
-          "closing": 7200,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "opening": 60,
+          "closing": 120,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {
@@ -488,8 +489,8 @@
           "dayOfWeek": 4,
           "opening": null,
           "closing": null,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {
@@ -666,10 +667,10 @@
         {
           "id": 3,
           "dayOfWeek": 3,
-          "opening": 3600,
-          "closing": 7200,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "opening": 60,
+          "closing": 120,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {
@@ -677,8 +678,8 @@
           "dayOfWeek": 4,
           "opening": null,
           "closing": null,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {
@@ -850,10 +851,10 @@
         {
           "id": 3,
           "dayOfWeek": 3,
-          "opening": 3600,
-          "closing": 7200,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "opening": 60,
+          "closing": 120,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {
@@ -861,8 +862,8 @@
           "dayOfWeek": 4,
           "opening": null,
           "closing": null,
-          "openingSpecial": 4800,
-          "closingSpecial": 6000,
+          "openingSpecial": 80,
+          "closingSpecial": 100,
           "closed": false
         },
         {

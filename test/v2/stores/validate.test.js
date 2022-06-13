@@ -37,6 +37,7 @@ tap.test("Check versions", async (t) => {
 tap.test("Get store", async (t) => {
   const response = await fastify.inject("/v2/stores/1");
   t.equal(response.statusCode, 200);
+  isEqualResponse(response.json(), t.name);
   context.store = response.json();
 });
 

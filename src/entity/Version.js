@@ -13,6 +13,7 @@ const Version = new EntitySchema({
     },
     count: {
       type: "int",
+      default: 0,
     },
     updatedAt: {
       updateDate: true,

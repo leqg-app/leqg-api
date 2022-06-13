@@ -4,6 +4,7 @@
     "jwt": null,
     "username": "admin",
     "email": "admin@leqg.app",
+    "provider": "local",
     "favorites": [],
     "contributions": [
       {
@@ -27,6 +28,7 @@
     "jwt": null,
     "username": "admin",
     "email": "admin@leqg.app",
+    "provider": "local",
     "favorites": [
       {
         "id": 1,

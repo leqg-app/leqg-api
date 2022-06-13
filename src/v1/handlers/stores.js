@@ -4,7 +4,11 @@ const { Store } = require("../../entity/Store.js");
 const { StoreRevision } = require("../../entity/StoreRevision.js");
 const { Version } = require("../../entity/Version.js");
 const { isRole, ROLES } = require("../../plugins/authentication.js");
-const { formatStore, formatStores } = require("../utils/format.js");
+const {
+  formatStore,
+  formatStores,
+  formatSchedules,
+} = require("../utils/format.js");
 const diffMapper = require("../utils/diffMapper.js");
 const { calculateReputation } = require("../utils/reputation.js");
 
@@ -78,6 +82,7 @@ const createStore = {
     });
 
     req.body.features = req.body.features.map((id) => ({ id }));
+    formatSchedules(req.body.schedules);
 
     const repoStore = req.server.db.getRepository(Store);
     const store = await repoStore.save(req.body);
@@ -166,6 +171,7 @@ const updateStore = {
 
     req.body.id = id;
     req.body.features = req.body.features.map((id) => ({ id }));
+    formatSchedules(req.body.schedules);
 
     await repoStore.save(req.body);
     const updated = await repoStore.findOne({
