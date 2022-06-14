@@ -61,10 +61,38 @@ const storeSchema = function (fastify) {
         S.object()
           .prop("id", S.integer())
           .prop("dayOfWeek", S.integer())
-          .prop("opening", S.anyOf([S.null(), S.integer()]))
-          .prop("closing", S.anyOf([S.null(), S.integer()]))
-          .prop("openingSpecial", S.anyOf([S.null(), S.integer()]))
-          .prop("closingSpecial", S.anyOf([S.null(), S.integer()]))
+          .prop(
+            "opening",
+            S.integer().raw({
+              nullable: true,
+              minimum: 0,
+              maximum: 1440,
+            })
+          )
+          .prop(
+            "closing",
+            S.integer().raw({
+              nullable: true,
+              minimum: 0,
+              maximum: 1440,
+            })
+          )
+          .prop(
+            "openingSpecial",
+            S.integer().raw({
+              nullable: true,
+              minimum: 0,
+              maximum: 1440,
+            })
+          )
+          .prop(
+            "closingSpecial",
+            S.integer().raw({
+              nullable: true,
+              minimum: 0,
+              maximum: 1440,
+            })
+          )
           .prop("closed", S.boolean())
       )
     )
