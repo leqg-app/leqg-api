@@ -142,6 +142,7 @@ const storeSchema = function (fastify) {
           )
       )
     )
+    .prop("updatedAt", S.number())
     .extend(storeBaseSchema);
 
   fastify.addSchema(storeMinified);

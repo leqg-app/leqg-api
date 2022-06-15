@@ -126,7 +126,8 @@
         ]
       }
     ],
-    "validations": []
+    "validations": [],
+    "updatedAt": null
   },
   "Miss fields": {
     "statusCode": 400,
@@ -264,7 +265,8 @@
           ]
         }
       ],
-      "validations": []
+      "validations": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 0,
@@ -414,7 +416,8 @@
           ]
         }
       ],
-      "validations": []
+      "validations": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 2,
@@ -623,7 +626,8 @@
           ]
         }
       ],
-      "validations": []
+      "validations": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 5,
@@ -812,7 +816,8 @@
           ]
         }
       ],
-      "validations": []
+      "validations": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 0,
@@ -996,7 +1001,8 @@
           ]
         }
       ],
-      "validations": []
+      "validations": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 0,

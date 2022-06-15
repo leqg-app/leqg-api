@@ -39,7 +39,8 @@
           ]
         }
       ],
-      "validations": []
+      "validations": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 15,
@@ -100,7 +101,8 @@
         ]
       }
     ],
-    "validations": []
+    "validations": [],
+    "updatedAt": null
   },
   "Get compared versions": {
     "updated": [

@@ -138,7 +138,8 @@
         ]
       }
     ],
-    "validations": []
+    "validations": [],
+    "updatedAt": null
   },
   "User reputation was granted": {
     "id": 2,
@@ -290,7 +291,8 @@
         ]
       }
     ],
-    "validations": []
+    "validations": [],
+    "updatedAt": null
   },
   "User reputation is same": {
     "id": 2,
@@ -445,6 +447,7 @@
         ]
       }
     ],
-    "validations": []
+    "validations": [],
+    "updatedAt": null
   }
 }
