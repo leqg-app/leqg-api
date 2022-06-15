@@ -150,7 +150,8 @@ const createStore = {
     store.revisions = [revision];
 
     // Upgrade version
-    await repoVersion.update({ name: "stores" }, { version });
+    const count = await repoStore.count();
+    await repoVersion.update({ name: "stores" }, { version, count });
 
     const created = await getOneStore(req, store.id);
     return {
