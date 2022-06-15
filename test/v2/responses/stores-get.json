@@ -207,6 +207,7 @@
         "id": 1,
         "createdAt": null,
         "user": {
+          "id": 1,
           "username": "admin"
         },
         "changes": [

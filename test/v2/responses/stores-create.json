@@ -30,6 +30,7 @@
           "id": 3,
           "createdAt": null,
           "user": {
+            "id": 1,
             "username": "admin"
           },
           "changes": [
@@ -92,6 +93,7 @@
         "id": 3,
         "createdAt": null,
         "user": {
+          "id": 1,
           "username": "admin"
         },
         "changes": [

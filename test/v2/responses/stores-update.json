@@ -117,6 +117,7 @@
         "id": 1,
         "createdAt": null,
         "user": {
+          "id": 1,
           "username": "admin"
         },
         "changes": [
@@ -256,6 +257,7 @@
           "id": 1,
           "createdAt": null,
           "user": {
+            "id": 1,
             "username": "admin"
           },
           "changes": [
@@ -393,6 +395,7 @@
           "id": 1,
           "createdAt": null,
           "user": {
+            "id": 1,
             "username": "admin"
           },
           "changes": [
@@ -580,6 +583,7 @@
           "id": 1,
           "createdAt": null,
           "user": {
+            "id": 1,
             "username": "admin"
           },
           "changes": [
@@ -592,6 +596,7 @@
           "id": 3,
           "createdAt": null,
           "user": {
+            "id": 2,
             "username": "auth"
           },
           "changes": [
@@ -770,6 +775,7 @@
           "id": 1,
           "createdAt": null,
           "user": {
+            "id": 1,
             "username": "admin"
           },
           "changes": [
@@ -782,6 +788,7 @@
           "id": 3,
           "createdAt": null,
           "user": {
+            "id": 2,
             "username": "auth"
           },
           "changes": [
@@ -796,6 +803,7 @@
           "id": 4,
           "createdAt": null,
           "user": {
+            "id": 2,
             "username": "auth"
           },
           "changes": [
@@ -955,6 +963,7 @@
           "id": 1,
           "createdAt": null,
           "user": {
+            "id": 1,
             "username": "admin"
           },
           "changes": [
@@ -967,6 +976,7 @@
           "id": 3,
           "createdAt": null,
           "user": {
+            "id": 2,
             "username": "auth"
           },
           "changes": [
@@ -981,6 +991,7 @@
           "id": 4,
           "createdAt": null,
           "user": {
+            "id": 2,
             "username": "auth"
           },
           "changes": [
