@@ -29,6 +29,8 @@ async function v2(fastify) {
   fastify.post("/auth/local/register", auth.register);
   fastify.post("/auth/forgot-password", auth.forgotPassword);
   fastify.post("/auth/reset-password", auth.resetPassword);
+  fastify.post("/auth/:provider/register", auth.providerRegister);
+  fastify.get("/auth/:provider/callback", auth.providerCallback);
 
   fastify.get("/users/me", user.getProfile);
   fastify.get("/users/me/contributions", user.getContributions);

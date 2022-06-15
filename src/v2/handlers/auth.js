@@ -1,8 +1,10 @@
 const S = require("fluent-json-schema");
 const crypto = require("crypto");
+const purest = require("purest");
 
 const { User } = require("../../entity/index.js");
 const { hashPassword, comparePassword } = require("../../v1/utils/password.js");
+const authProviders = require("./auth-providers.js");
 
 const login = {
   schema: {
@@ -41,14 +43,11 @@ const login = {
       return reply.status(400).send({ error: "user.credentials" });
     }
 
-    const jwt = await reply.jwtSign({
+    user.jwt = await reply.jwtSign({
       id: user.id,
     });
 
-    return {
-      jwt,
-      ...user,
-    };
+    return user;
   },
 };
 
@@ -96,14 +95,11 @@ const register = {
     });
 
     // User is already signed in
-    const jwt = await reply.jwtSign({
+    user.jwt = await reply.jwtSign({
       id: id,
     });
 
-    return {
-      jwt,
-      ...user,
-    };
+    return user;
   },
 };
 
@@ -212,4 +208,118 @@ const resetPassword = {
   },
 };
 
-module.exports = { login, register, forgotPassword, resetPassword };
+const providerRegister = {
+  schema: {
+    summary: "Register user with third party provider",
+    tags: ["user"],
+    params: S.object().prop("provider", S.string()),
+    body: S.object()
+      .prop("username", S.string())
+      .prop("auth_token", S.string()),
+    response: {
+      200: S.ref("userSchema"),
+      400: S.ref("errorSchema"),
+    },
+  },
+  handler: async (req, reply) => {
+    const { provider } = req.params;
+    const { username, auth_token } = req.body;
+    const repo = req.server.db.getRepository(User);
+
+    if (!authProviders[provider]) {
+      return reply.status(400).send({ error: "user.provider.invalidprovider" });
+    }
+
+    const userInfo = await authProviders[provider](auth_token);
+
+    if (!userInfo) {
+      return reply.status(400).send({ error: "user.provider.invalidtoken" });
+    }
+
+    const { email } = userInfo;
+
+    const userExist = await repo.findOne({ where: [{ username }, { email }] });
+    if (userExist) {
+      if (userExist.username === username) {
+        return reply.status(400).send({ error: "user.username.taken" });
+      }
+      return reply.status(400).send({ error: "user.email.taken" });
+    }
+
+    const user = await repo.save({
+      username,
+      email,
+      password: "",
+      provider,
+      role: 1,
+      confirmed: 1,
+    });
+
+    user.favorites = [];
+    user.contributions = [];
+
+    user.jwt = await reply.jwtSign({
+      id: user.id,
+    });
+
+    return user;
+  },
+};
+
+const providerCallback = {
+  schema: {
+    summary: "Connect user with third party provider",
+    tags: ["user"],
+    params: S.object().prop("provider", S.string()),
+    query: S.object().prop("auth_token", S.string()),
+    response: {
+      200: S.ref("userSchema"),
+      400: S.ref("errorSchema"),
+    },
+  },
+  handler: async (req, reply) => {
+    const { provider } = req.params;
+    const { auth_token } = req.query;
+
+    if (!authProviders[provider]) {
+      return reply.status(400).send({ error: "user.provider.invalidprovider" });
+    }
+
+    const userInfo = await authProviders[provider](auth_token);
+
+    if (!userInfo) {
+      return reply.status(400).send({ error: "user.provider.invalidtoken" });
+    }
+
+    const { email } = userInfo;
+
+    const repo = req.server.db.getRepository(User);
+    const user = await repo.findOne({
+      where: { email },
+      relations: ["favorites", "contributions"],
+    });
+    if (!user) {
+      return reply.status(400).send({ error: "user.notfound" });
+    }
+
+    if (user.blocked) {
+      return reply.status(400).send({ error: "user.blocked" });
+    }
+
+    user.provider = provider;
+    user.jwt = await reply.jwtSign({
+      id: user.id,
+    });
+
+    return user;
+  },
+};
+
+module.exports = {
+  login,
+  register,
+  forgotPassword,
+  resetPassword,
+  providerRegister,
+  providerCallback,
+};
