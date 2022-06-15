@@ -1,4 +1,12 @@
 const purest = require("purest");
+const appleSignin = require("apple-signin-auth");
+
+function apple(access_token) {
+  return appleSignin.verifyIdToken(access_token, {
+    audience: "com.leqg.app",
+    ignoreExpiration: true,
+  });
+}
 
 async function google(id_token) {
   const google = purest({ provider: "google" });
@@ -10,4 +18,4 @@ async function google(id_token) {
   return userInfo && userInfo.body;
 }
 
-module.exports = { google };
+module.exports = { apple, google };
