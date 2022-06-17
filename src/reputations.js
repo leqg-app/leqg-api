@@ -14,6 +14,8 @@ const STORE = {
   EDITION: {
     name: 2,
     address: 2,
+    website: 2,
+    phone: 2,
     products: 5,
     schedules: 2,
     features: 2,
