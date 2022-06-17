@@ -62,42 +62,90 @@ const Store = new EntitySchema({
       target: "Schedule",
       inverseSide: "store",
       cascade: ["insert", "remove", "update"],
-      eager: true,
     },
     products: {
       type: "one-to-many",
       target: "StoreProduct",
       inverseSide: "store",
       cascade: ["insert", "remove", "update"],
-      eager: true,
     },
     features: {
       type: "many-to-many",
       target: "Feature",
       joinTable: true,
-      eager: true,
     },
     rates: {
       type: "one-to-many",
       target: "Rate",
       inverseSide: "store",
-      eager: true,
     },
     revisions: {
       type: "one-to-many",
       target: "StoreRevision",
       inverseSide: "store",
-      eager: true,
     },
     validations: {
       type: "one-to-many",
       target: "StoreValidation",
       inverseSide: "store",
-      eager: true,
     },
   },
 });
 
+async function getStores(db) {
+  const stores = await db.manager.find(Store);
+  const schedules = await db.manager.query(`SELECT * FROM schedule`);
+  const storeProducts = await db.manager.query(`SELECT * FROM store_product`);
+  const features = await db.manager.query(
+    `SELECT * FROM store_features_feature`
+  );
+
+  const scheduleByStoreId = {};
+  for (const schedule of schedules) {
+    if (!scheduleByStoreId[schedule.storeId]) {
+      scheduleByStoreId[schedule.storeId] = [];
+    }
+    scheduleByStoreId[schedule.storeId].push(schedule);
+  }
+  const storeProductsByStoreId = {};
+  for (const storeProduct of storeProducts) {
+    if (!storeProductsByStoreId[storeProduct.storeId]) {
+      storeProductsByStoreId[storeProduct.storeId] = [];
+    }
+    storeProductsByStoreId[storeProduct.storeId].push(storeProduct);
+  }
+  const featuresByStoreId = {};
+  for (const feature of features) {
+    if (!featuresByStoreId[feature.storeId]) {
+      featuresByStoreId[feature.storeId] = [];
+    }
+    featuresByStoreId[feature.storeId].push({ id: feature.featureId });
+  }
+
+  for (const store of stores) {
+    store.schedules = scheduleByStoreId[store.id] || [];
+    store.products = storeProductsByStoreId[store.id] || [];
+    store.features = featuresByStoreId[store.id] || [];
+  }
+
+  return stores;
+}
+
+function getOneStore(req, id) {
+  return req.server.db.manager.findOne(Store, {
+    where: { id },
+    relations: {
+      schedules: true,
+      products: true,
+      features: true,
+      revisions: { user: true },
+      validations: { user: true },
+    },
+  });
+}
+
 module.exports = {
   Store,
+  getStores,
+  getOneStore,
 };

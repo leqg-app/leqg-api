@@ -1,12 +1,14 @@
 const S = require("fluent-json-schema");
-const { Between, Not } = require("typeorm");
+const { Between } = require("typeorm");
 
-const { Store } = require("../../entity/Store.js");
-const { StoreRevision } = require("../../entity/StoreRevision.js");
-const { Version } = require("../../entity/Version.js");
-const { Contribution } = require("../../entity/Contribution.js");
-const { StoreValidation } = require("../../entity/StoreValidation.js");
-const { Rate } = require("../../entity/Rate.js");
+const {
+  StoreRevision,
+  Version,
+  Contribution,
+  StoreValidation,
+  Rate,
+} = require("../../entity/index.js");
+const { Store, getStores, getOneStore } = require("../../entity/Store.js");
 const { isRole, ROLES } = require("../../plugins/authentication.js");
 const { formatStores } = require("../utils/format.js");
 const diffMapper = require("../../v1/utils/diffMapper.js");
@@ -26,13 +28,6 @@ const STORE_REVISION_FIELDS = [
   "features",
 ];
 
-function getOneStore(req, id) {
-  return req.server.db.manager.findOne(Store, {
-    where: { id },
-    relations: ["revisions.user", "validations.user"],
-  });
-}
-
 const getAllStores = {
   schema: {
     summary: "Get all stores",
@@ -42,7 +37,7 @@ const getAllStores = {
     },
   },
   handler: async (req) => {
-    const stores = await req.server.db.getRepository(Store).find();
+    const stores = await getStores(req.server.db);
     return stores.map(formatStores);
   },
 };
@@ -65,7 +60,11 @@ const getStoresVersion = {
         version: Between(current + 1, next), // don't include curent version
       },
       relations: {
-        store: true,
+        store: {
+          schedules: true,
+          products: true,
+          features: true,
+        },
       },
     });
 

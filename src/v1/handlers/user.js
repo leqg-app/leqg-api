@@ -45,7 +45,7 @@ const updateProfile = {
   onRequest: [
     isRole(ROLES.USER, { relations: ["favorites", "contributions"] }),
   ],
-  handler: async (req, reply) => {
+  handler: async (req) => {
     const { favorites } = req.body;
 
     const repoUser = req.server.db.getRepository(User);

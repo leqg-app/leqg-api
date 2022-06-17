@@ -11,8 +11,18 @@ function getLowest(numbers) {
 }
 
 function formatStores(store) {
-  const { id, name, address, longitude, latitude, features } = store;
-  const products = store.products.reduce(
+  const {
+    id,
+    name,
+    address,
+    longitude,
+    latitude,
+    schedules = [],
+    products = [],
+    features = [],
+  } = store;
+
+  const productsMinified = store.products.reduce(
     (products, product) =>
       products.concat([
         [
@@ -25,8 +35,8 @@ function formatStores(store) {
     []
   );
 
-  const schedules = new Array(7).fill().map(() => []);
-  for (const schedule of store.schedules) {
+  const schedulesMinified = new Array(7).fill().map(() => []);
+  for (const schedule of schedules) {
     const {
       dayOfWeek,
       closed,
@@ -37,7 +47,7 @@ function formatStores(store) {
     } = schedule;
 
     if (closed) {
-      schedules[dayOfWeek - 1] = 0;
+      schedulesMinified[dayOfWeek - 1] = 0;
       continue;
     }
 
@@ -46,14 +56,14 @@ function formatStores(store) {
     }
 
     if (opening !== null && closing !== null) {
-      schedules[dayOfWeek - 1][0] = [opening, closing];
+      schedulesMinified[dayOfWeek - 1][0] = [opening, closing];
     }
 
     if (openingSpecial !== null && closingSpecial !== null) {
-      if (!schedules[dayOfWeek - 1][0]) {
-        schedules[dayOfWeek - 1][0] = [];
+      if (!schedulesMinified[dayOfWeek - 1][0]) {
+        schedulesMinified[dayOfWeek - 1][0] = [];
       }
-      schedules[dayOfWeek - 1][1] = [openingSpecial, closingSpecial];
+      schedulesMinified[dayOfWeek - 1][1] = [openingSpecial, closingSpecial];
     }
   }
 
@@ -63,11 +73,11 @@ function formatStores(store) {
     address,
     +longitude.toFixed(5),
     +latitude.toFixed(5),
-    getLowest(store.products.map((p) => p.price).filter(Boolean)),
-    getLowest(store.products.map((p) => p.specialPrice).filter(Boolean)),
-    store.products?.[0]?.currencyCode || "EUR",
-    products,
-    schedules,
+    getLowest(products.map((p) => p.price).filter(Boolean)),
+    getLowest(products.map((p) => p.specialPrice).filter(Boolean)),
+    products?.[0]?.currencyCode || "EUR",
+    productsMinified,
+    schedulesMinified,
     features.map(({ id }) => id),
   ];
 }

@@ -1,6 +1,6 @@
 const S = require("fluent-json-schema");
 
-const { Store } = require("../../entity/Store.js");
+const { Store, getStores, getOneStore } = require("../../entity/Store.js");
 const { StoreRevision } = require("../../entity/StoreRevision.js");
 const { Version } = require("../../entity/Version.js");
 const { isRole, ROLES } = require("../../plugins/authentication.js");
@@ -33,8 +33,7 @@ const getAllStores = {
     },
   },
   handler: async (req) => {
-    const storeRepo = req.server.db.getRepository(Store);
-    const stores = await storeRepo.find();
+    const stores = await getStores(req.server.db);
     return stores.map(formatStores);
   },
 };
@@ -50,11 +49,7 @@ const getStore = {
   },
   handler: async (req, reply) => {
     const { id } = req.params;
-    const storeRepo = req.server.db.getRepository(Store);
-    const store = await storeRepo.findOne({
-      where: { id },
-      relations: ["revisions.user"],
-    });
+    const store = await getOneStore(req, id);
 
     if (!store) {
       return reply.status(404).send({ error: "store.notfound" });
@@ -74,7 +69,7 @@ const createStore = {
     },
   },
   onRequest: [isRole(ROLES.USER)],
-  handler: async (req, rep) => {
+  handler: async (req) => {
     // TOFIX: v2
     req.body.products.map((p) => {
       p.productId = p.product;
@@ -116,12 +111,7 @@ const createStore = {
     const count = await repoStore.count();
     await repoVersion.update({ name: "stores" }, { version, count });
 
-    return repoStore
-      .findOne({
-        where: { id: store.id },
-        relations: ["revisions.user"],
-      })
-      .then(formatStore);
+    return getOneStore(req, store.id).then(formatStore);
   },
 };
 
@@ -155,10 +145,7 @@ const updateStore = {
   handler: async (req, reply) => {
     const { id } = req.params;
     const repoStore = req.server.db.getRepository(Store);
-    const store = await repoStore.findOne({
-      where: { id },
-      relations: ["revisions.user"],
-    });
+    const store = await getOneStore(req, id);
 
     if (!store) {
       return reply.status(404).send({ error: "store.notfound" });
@@ -175,10 +162,7 @@ const updateStore = {
     formatSchedules(req.body.schedules);
 
     await repoStore.save(req.body);
-    const updated = await repoStore.findOne({
-      where: { id },
-      relations: ["revisions.user"],
-    });
+    const updated = await getOneStore(req, id);
 
     const changes = diffMapper(store, updated, STORE_REVISION_FIELDS);
 

@@ -25,11 +25,11 @@ const createProduct = {
       200: S.ref("productSchema"),
     },
   },
-  preHandler: async (req, reply) => {
+  preHandler: async () => {
     // TODO
     // Only admin at the moment
   },
-  handler: async (req, rep) => {
+  handler: async () => {
     // TODO
   },
 };

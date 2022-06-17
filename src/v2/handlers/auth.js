@@ -1,6 +1,5 @@
 const S = require("fluent-json-schema");
 const crypto = require("crypto");
-const purest = require("purest");
 
 const { User } = require("../../entity/index.js");
 const { hashPassword, comparePassword } = require("../../v1/utils/password.js");
