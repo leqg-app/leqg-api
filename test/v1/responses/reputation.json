@@ -558,38 +558,5 @@
       ]
     },
     "version": 5
-  },
-  "Get user profile": {
-    "jwt": null,
-    "username": "admin",
-    "email": "admin@leqg.app",
-    "contributions": 1,
-    "reputation": 25,
-    "favorites": []
-  },
-  "Invalid jwt": {
-    "error": "The token is malformed."
-  },
-  "Blocked jwt": {
-    "error": "user.invalid"
-  },
-  "Add favorite store to user": {
-    "statusCode": 200
-  },
-  "Add favorite store to user-2": {
-    "jwt": null,
-    "username": "admin",
-    "email": "admin@leqg.app",
-    "contributions": 1,
-    "reputation": 25,
-    "favorites": [
-      {
-        "id": 1,
-        "name": "Store 1",
-        "address": "Address 1",
-        "longitude": 1,
-        "latitude": 1
-      }
-    ]
   }
 }

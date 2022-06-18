@@ -5,9 +5,7 @@ const signSync = createSigner({ key: process.env.JWT_SECRET });
 const build = require("../mocks/build.js");
 const loadTestResponses = require("../loadTestResponses.js");
 
-const isEqualResponse = loadTestResponses(
-  `${__dirname}/responses/reputation.json`
-);
+const isEqualResponse = loadTestResponses(`${__dirname}/responses/user.json`);
 
 const fastify = build();
 tap.teardown(() => fastify.close());
@@ -61,7 +59,7 @@ tap.test("Profile", async ({ context }) => {
       },
     });
 
-    t.equal(response.statusCode, 403);
+    t.equal(response.statusCode, 401);
     isEqualResponse(response.json(), t.name);
   });
 
