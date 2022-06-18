@@ -59,7 +59,7 @@ tap.test("Profile", async ({ context }) => {
       },
     });
 
-    t.equal(response.statusCode, 403);
+    t.equal(response.statusCode, 401);
     isEqualResponse(response.json(), t.name);
   });
 
