@@ -22,6 +22,7 @@ async function v2(fastify) {
   fastify.get("/stores/:id", stores.getStore);
   fastify.post("/stores", stores.createStore);
   fastify.put("/stores/:id", stores.updateStore);
+  fastify.delete("/stores/:id", stores.deleteStore);
   fastify.post("/stores/:id/validate", stores.validateStore);
   fastify.post("/stores/:id/rate", stores.rateStore);
 

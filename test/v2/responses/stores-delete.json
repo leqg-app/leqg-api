@@ -1,0 +1,151 @@
+{
+  "Get store": {
+    "name": "Store 1",
+    "latitude": 1,
+    "longitude": 1,
+    "address": "Address 1",
+    "phone": null,
+    "website": null,
+    "schedules": [
+      {
+        "id": 1,
+        "dayOfWeek": 1,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 2,
+        "dayOfWeek": 2,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": true
+      },
+      {
+        "id": 3,
+        "dayOfWeek": 3,
+        "opening": 60,
+        "closing": 120,
+        "openingSpecial": 80,
+        "closingSpecial": 100,
+        "closed": false
+      },
+      {
+        "id": 4,
+        "dayOfWeek": 4,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": 80,
+        "closingSpecial": 100,
+        "closed": false
+      },
+      {
+        "id": 5,
+        "dayOfWeek": 5,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 6,
+        "dayOfWeek": 6,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      },
+      {
+        "id": 7,
+        "dayOfWeek": 7,
+        "opening": null,
+        "closing": null,
+        "openingSpecial": null,
+        "closingSpecial": null,
+        "closed": false
+      }
+    ],
+    "products": [
+      {
+        "id": 2,
+        "productName": null,
+        "price": 2,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 2
+      },
+      {
+        "id": 1,
+        "productName": null,
+        "price": 5,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": 1
+      },
+      {
+        "id": 3,
+        "productName": "Bière",
+        "price": 3.9,
+        "specialPrice": null,
+        "volume": 50,
+        "type": "draft",
+        "currencyCode": "EUR",
+        "productId": null
+      }
+    ],
+    "features": [
+      {
+        "id": 1
+      }
+    ],
+    "id": 1,
+    "countryCode": "FR",
+    "rate": null,
+    "rateCount": 0,
+    "revisions": [
+      {
+        "id": 1,
+        "createdAt": null,
+        "user": {
+          "id": 1,
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ],
+    "validations": [],
+    "updatedAt": null
+  },
+  "Unauthorized": {
+    "error": "user.invalid"
+  },
+  "Success": {
+    "version": 2
+  },
+  "Can't get store anymore": {
+    "error": "store.notfound"
+  },
+  "Check store versionned": {
+    "updated": [],
+    "deleted": [
+      1
+    ]
+  },
+  "Can't delete store anymore": {
+    "error": "store.notfound"
+  }
+}

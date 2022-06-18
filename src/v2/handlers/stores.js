@@ -50,7 +50,9 @@ const getStoresVersion = {
       .prop("current", S.integer().required())
       .prop("next", S.integer().required()),
     response: {
-      200: S.object().prop("updated", S.array().items(S.ref("storeMinified"))),
+      200: S.object()
+        .prop("updated", S.array().items(S.ref("storeMinified")))
+        .prop("deleted", S.array().items(S.integer())),
     },
   },
   handler: async (req) => {
@@ -70,7 +72,15 @@ const getStoresVersion = {
 
     // Display stores only once
     const updated = {};
+    const deleted = [];
     for (const revision of revisions) {
+      const deletion = revision.changes.find(
+        (change) => change.type === "deleted" && change.field === "id"
+      );
+      if (deletion) {
+        deleted.push(deletion.delta);
+        continue;
+      }
       if (!revision.store) {
         continue;
       }
@@ -79,6 +89,7 @@ const getStoresVersion = {
 
     return {
       updated: Object.values(updated).map(formatStores),
+      deleted,
     };
   },
 };
@@ -261,6 +272,53 @@ const updateStore = {
       version,
       reputation,
     };
+  },
+};
+
+const deleteStore = {
+  schema: {
+    summary: "Delete store",
+    tags: ["store"],
+    params: S.object().prop("id", S.integer().required()),
+    response: {
+      200: S.object().prop("version", S.integer()),
+      404: S.ref("errorSchema"),
+    },
+  },
+  onRequest: [isRole(ROLES.ADMIN)],
+  handler: async (req, reply) => {
+    const { id } = req.params;
+    const repoStore = req.server.db.getRepository(Store);
+    const store = await getOneStore(req, id);
+
+    if (!store) {
+      return reply.status(404).send({ error: "store.notfound" });
+    }
+
+    await repoStore.delete(id);
+
+    const repoVersion = req.server.db.getRepository(Version);
+    let { version } = await repoVersion.findOneBy({ name: "stores" });
+
+    const changes = diffMapper(store, {}, ["id", ...STORE_REVISION_FIELDS]);
+
+    // Upgrade version
+    const count = await repoStore.count();
+    await repoVersion.update({ name: "stores" }, { version: ++version, count });
+
+    // Create revision
+    await req.server.db.manager.save(StoreRevision, {
+      user: req.user.id,
+      version,
+      changes,
+      contribution: {
+        user: req.user.id,
+        reputation: 0,
+        reason: "store.deletion",
+      },
+    });
+
+    return { version };
   },
 };
 
@@ -452,6 +510,7 @@ module.exports = {
   getStoresVersion,
   createStore,
   updateStore,
+  deleteStore,
   validateStore,
   rateStore,
 };
