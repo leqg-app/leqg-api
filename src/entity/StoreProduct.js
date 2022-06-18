@@ -43,6 +43,7 @@ const StoreProduct = new EntitySchema({
       type: "many-to-one",
       target: "Store",
       inverseSide: "products",
+      onDelete: "CASCADE",
     },
     product: {
       type: "many-to-one",

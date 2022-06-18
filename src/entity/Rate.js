@@ -31,11 +31,13 @@ const Rate = new EntitySchema({
     user: {
       type: "many-to-one",
       target: "User",
+      onDelete: "SET NULL",
     },
     store: {
       type: "many-to-one",
       target: "Store",
       inverseSide: "rates",
+      onDelete: "CASCADE",
     },
     recommendedProducts: {
       type: "many-to-many",

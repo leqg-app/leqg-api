@@ -36,6 +36,7 @@ const Schedule = new EntitySchema({
       type: "many-to-one",
       target: "Store",
       inverseSide: "schedules",
+      onDelete: "CASCADE",
     },
   },
 });

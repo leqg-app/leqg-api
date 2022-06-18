@@ -32,6 +32,7 @@ const StoreRevision = new EntitySchema({
       type: "many-to-one",
       target: "Store",
       inverseSide: "revisions",
+      onDelete: "SET NULL",
     },
     contribution: {
       type: "one-to-one",

@@ -61,18 +61,19 @@ const Store = new EntitySchema({
       type: "one-to-many",
       target: "Schedule",
       inverseSide: "store",
-      cascade: ["insert", "remove", "update"],
+      cascade: ["insert", "update"],
     },
     products: {
       type: "one-to-many",
       target: "StoreProduct",
       inverseSide: "store",
-      cascade: ["insert", "remove", "update"],
+      cascade: ["insert", "update"],
     },
     features: {
       type: "many-to-many",
       target: "Feature",
       joinTable: true,
+      cascade: ["remove"],
     },
     rates: {
       type: "one-to-many",
