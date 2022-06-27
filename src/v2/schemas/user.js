@@ -44,6 +44,8 @@ const userSchema = function (fastify) {
           .prop("id", S.integer())
           .prop("name", S.string())
           .prop("address", S.string())
+          .prop("longitude", S.number())
+          .prop("latitude", S.number())
       )
     )
     .prop(

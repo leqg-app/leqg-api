@@ -33,7 +33,9 @@
       {
         "id": 1,
         "name": "Store 1",
-        "address": "Address 1"
+        "address": "Address 1",
+        "longitude": 1,
+        "latitude": 1
       }
     ],
     "contributions": [
