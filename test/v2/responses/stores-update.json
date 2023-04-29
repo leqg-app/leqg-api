@@ -128,7 +128,8 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+    "rates": []
   },
   "Miss fields": {
     "statusCode": 400,
@@ -268,7 +269,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null
+      "updatedAt": null,
+      "rates": []
     },
     "reputation": {
       "total": 0,
@@ -420,7 +422,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null
+      "updatedAt": null,
+      "rates": []
     },
     "reputation": {
       "total": 2,
@@ -632,7 +635,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null
+      "updatedAt": null,
+      "rates": []
     },
     "reputation": {
       "total": 5,
@@ -822,10 +826,34 @@
               }
             }
           ]
+        },
+        {
+          "id": 5,
+          "createdAt": null,
+          "user": {
+            "username": "auth"
+          },
+          "changes": [
+            {
+              "type": "updated",
+              "field": "products",
+              "delta": {
+                "id": 5,
+                "productName": "my favorite beer",
+                "price": 1,
+                "specialPrice": null,
+                "volume": 50,
+                "type": "draft",
+                "currencyCode": "EUR",
+                "productId": null
+              }
+            }
+          ]
         }
       ],
       "validations": [],
-      "updatedAt": null
+      "updatedAt": null,
+      "rates": []
     },
     "reputation": {
       "total": 0,
@@ -1010,10 +1038,35 @@
               }
             }
           ]
+        },
+        {
+          "id": 5,
+          "createdAt": null,
+          "user": {
+            "id": 2,
+            "username": "auth"
+          },
+          "changes": [
+            {
+              "type": "updated",
+              "field": "products",
+              "delta": {
+                "id": 5,
+                "productName": "my favorite beer",
+                "price": 1,
+                "specialPrice": null,
+                "volume": 50,
+                "type": "draft",
+                "currencyCode": "EUR",
+                "productId": null
+              }
+            }
+          ]
         }
       ],
       "validations": [],
-      "updatedAt": null
+      "updatedAt": null,
+      "rates": []
     },
     "reputation": {
       "total": 0,

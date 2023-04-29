@@ -239,15 +239,6 @@ const updateStore = {
     );
     reputation.reason = "store.edition";
 
-    // No new reputation, we don't store revision
-    if (!reputation.total) {
-      return {
-        store: updated,
-        reputation,
-        version,
-      };
-    }
-
     // Create revision
     const revision = await req.server.db.manager.save(StoreRevision, {
       store: store.id,
@@ -269,8 +260,8 @@ const updateStore = {
 
     return {
       store: updated,
-      version,
       reputation,
+      version,
     };
   },
 };
@@ -440,7 +431,12 @@ const rateStore = {
       .prop("comment", S.string())
       .prop("recommendedProducts", S.array().items(S.integer())),
     response: {
-      200: S.object().prop("reputation", S.ref("reputationSchema")),
+      200: S.object()
+        .prop(
+          "store",
+          S.object().prop("rate", S.number()).prop("rateCount", S.number())
+        )
+        .prop("reputation", S.ref("reputationSchema")),
       400: S.object().prop("error", S.string()),
       404: S.object().prop("error", S.string()),
     },
@@ -466,22 +462,40 @@ const rateStore = {
       return reply.status(400).send({ error: "store.rate.duplicate" });
     }
 
-    let reputation = REPUTATIONS.STORE.RATE;
+    const fields = [
+      {
+        fieldName: "rate",
+        reputation: REPUTATIONS.STORE.RATE,
+      },
+    ];
     if (comment) {
-      reputation += REPUTATIONS.STORE.COMMENT;
+      fields.push({
+        fieldName: "comment",
+        reputation: REPUTATIONS.STORE.COMMENT,
+      });
       if (comment.length > 20) {
-        reputation += REPUTATIONS.STORE.LONG_COMMENT;
+        fields.push({
+          fieldName: "longComment",
+          reputation: REPUTATIONS.STORE.LONG_COMMENT,
+        });
       }
     }
 
     if (recommendedProducts.length) {
-      reputation += REPUTATIONS.STORE.RECOMMENDED_PRODUCT;
+      fields.push(
+        ...recommendedProducts.map(() => ({
+          fieldName: "recommendedProduct",
+          reputation: REPUTATIONS.STORE.RECOMMENDED_PRODUCT,
+        }))
+      );
     }
 
     const rate = (rate1 + rate2 + rate3) / 3;
     store.rate = (store.rate * store.rateCount + rate) / ++store.rateCount;
 
     await repoStore.save(store);
+
+    const reputation = fields.reduce((rep, field) => rep + field.reputation, 0);
 
     // Save validation and reward user
     await req.server.db.manager.save(Rate, {
@@ -496,9 +510,14 @@ const rateStore = {
     });
 
     return {
+      store: {
+        rate: store.rate,
+        rateCount: store.rateCount,
+      },
       reputation: {
         total: reputation,
         reason: "store.rate.creation",
+        fields,
       },
     };
   },

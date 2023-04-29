@@ -41,7 +41,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null
+      "updatedAt": null,
+      "rates": []
     },
     "reputation": {
       "total": 15,
@@ -104,7 +105,8 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+    "rates": []
   },
   "Get compared versions": {
     "updated": [
@@ -117,24 +119,10 @@
         2,
         0,
         "EUR",
-        [
-          [
-            0,
-            2,
-            0,
-            50
-          ]
-        ],
-        [
-          [],
-          [],
-          [],
-          [],
-          [],
-          [],
-          []
-        ],
-        []
+        [[0, 2, 0, 50]],
+        [[], [], [], [], [], [], []],
+        [],
+        0
       ]
     ],
     "deleted": []

@@ -32,6 +32,7 @@ const storeSchema = function (fastify) {
         // 10 features
         S.integer() // id
       ),
+      S.number(), // 11 rate
     ]);
 
   const productStoreSchema = S.object()
@@ -108,7 +109,26 @@ const storeSchema = function (fastify) {
     .prop("id", S.integer())
     .prop("countryCode", S.string())
     .prop("rate", S.anyOf([S.null(), S.number()]))
-    .prop("rateCount", S.number())
+    .prop("rateCount", S.integer())
+    .prop(
+      "rates",
+      S.array().items(
+        S.object()
+          .prop("rate1", S.integer())
+          .prop("rate2", S.integer())
+          .prop("rate3", S.integer())
+          .prop("createdAt", S.number())
+          .prop("updatedAt", S.number())
+          .prop(
+            "user",
+            S.object().prop("id", S.integer()).prop("username", S.string())
+          )
+          .prop(
+            "recommendedProducts",
+            S.array().items(S.object().prop("id", S.integer()))
+          )
+      )
+    )
     .prop(
       "revisions",
       S.array().items(

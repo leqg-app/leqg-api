@@ -128,7 +128,8 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+    "rates": []
   },
   "Miss fields to validate": {
     "statusCode": 400,

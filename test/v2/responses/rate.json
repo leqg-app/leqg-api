@@ -8,7 +8,12 @@
   "Rate store": {
     "reputation": {
       "total": 10,
-      "reason": "store.rate.creation"
+      "reason": "store.rate.creation",
+      "fields": [{ "fieldName": "rate", "reputation": 10 }]
+    },
+    "store": {
+      "rate": 4.333333333333333,
+      "rateCount": 1
     }
   },
   "Store rate has been updated": {
@@ -140,7 +145,18 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+    "rates": [
+      {
+        "rate1": 5,
+        "rate2": 4,
+        "rate3": 4,
+        "createdAt": null,
+        "updatedAt": null,
+        "user": { "id": 2, "username": "auth" },
+        "recommendedProducts": []
+      }
+    ]
   },
   "User reputation was granted": {
     "id": 2,
@@ -294,7 +310,18 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+    "rates": [
+      {
+        "rate1": 5,
+        "rate2": 4,
+        "rate3": 4,
+        "createdAt": null,
+        "updatedAt": null,
+        "user": { "id": 2, "username": "auth" },
+        "recommendedProducts": []
+      }
+    ]
   },
   "User reputation is same": {
     "id": 2,
@@ -319,7 +346,16 @@
   "User 2 rate store": {
     "reputation": {
       "total": 25,
-      "reason": "store.rate.creation"
+      "reason": "store.rate.creation",
+      "fields": [
+        { "fieldName": "rate", "reputation": 10 },
+        { "fieldName": "comment", "reputation": 10 },
+        { "fieldName": "recommendedProduct", "reputation": 5 }
+      ]
+    },
+    "store": {
+      "rate": 4.166666666666666,
+      "rateCount": 2
     }
   },
   "Get store": {
@@ -451,6 +487,26 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+    "rates": [
+      {
+        "rate1": 4,
+        "rate2": 4,
+        "rate3": 4,
+        "createdAt": null,
+        "updatedAt": null,
+        "user": { "id": 1, "username": "admin" },
+        "recommendedProducts": []
+      },
+      {
+        "rate1": 5,
+        "rate2": 4,
+        "rate3": 4,
+        "createdAt": null,
+        "updatedAt": null,
+        "user": { "id": 2, "username": "auth" },
+        "recommendedProducts": []
+      }
+    ]
   }
 }

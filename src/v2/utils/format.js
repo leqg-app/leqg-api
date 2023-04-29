@@ -20,6 +20,7 @@ function formatStores(store) {
     schedules = [],
     products = [],
     features = [],
+    rate,
   } = store;
 
   const productsMinified = store.products.reduce(
@@ -71,14 +72,15 @@ function formatStores(store) {
     id,
     name,
     address,
-    +longitude.toFixed(5),
-    +latitude.toFixed(5),
+    +parseFloat(longitude).toFixed(5),
+    +parseFloat(latitude).toFixed(5),
     getLowest(products.map((p) => p.price).filter(Boolean)),
     getLowest(products.map((p) => p.specialPrice).filter(Boolean)),
     products?.[0]?.currencyCode || "EUR",
     productsMinified,
     schedulesMinified,
     features.map(({ id }) => id),
+    parseFloat(rate) || 0,
   ];
 }
 

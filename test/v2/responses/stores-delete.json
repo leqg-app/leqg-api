@@ -128,7 +128,8 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+    "rates": []
   },
   "Unauthorized": {
     "error": "user.invalid"
@@ -141,9 +142,7 @@
   },
   "Check store versionned": {
     "updated": [],
-    "deleted": [
-      1
-    ]
+    "deleted": [1]
   },
   "Can't delete store anymore": {
     "error": "store.notfound"
