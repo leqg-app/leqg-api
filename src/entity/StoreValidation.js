@@ -9,10 +9,14 @@ const StoreValidation = new EntitySchema({
       generated: true,
     },
     latitude: {
-      type: "double",
+      type: "decimal",
+      precision: 8,
+      scale: 5,
     },
     longitude: {
-      type: "double",
+      type: "decimal",
+      precision: 8,
+      scale: 5,
     },
     createdAt: {
       createDate: true,

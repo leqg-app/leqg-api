@@ -12,10 +12,14 @@ const Store = new EntitySchema({
       type: "varchar",
     },
     latitude: {
-      type: "double",
+      type: "decimal",
+      precision: 8,
+      scale: 5,
     },
     longitude: {
-      type: "double",
+      type: "decimal",
+      precision: 8,
+      scale: 5,
     },
     address: {
       type: "varchar",
@@ -42,7 +46,9 @@ const Store = new EntitySchema({
       default: "FR",
     },
     rate: {
-      type: "double",
+      type: "decimal",
+      precision: 3,
+      scale: 2,
       default: null,
     },
     rateCount: {
@@ -61,19 +67,18 @@ const Store = new EntitySchema({
       type: "one-to-many",
       target: "Schedule",
       inverseSide: "store",
-      cascade: ["insert", "update"],
+      cascade: ["insert", "update", "remove"],
     },
     products: {
       type: "one-to-many",
       target: "StoreProduct",
       inverseSide: "store",
-      cascade: ["insert", "update"],
+      cascade: ["insert", "update", "remove"],
     },
     features: {
       type: "many-to-many",
       target: "Feature",
       joinTable: true,
-      cascade: ["remove"],
     },
     rates: {
       type: "one-to-many",
@@ -139,6 +144,7 @@ function getOneStore(req, id) {
       schedules: true,
       products: true,
       features: true,
+      rates: { user: true, recommendedProducts: true },
       revisions: { user: true },
       validations: { user: true },
     },

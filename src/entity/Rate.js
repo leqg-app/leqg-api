@@ -9,13 +9,19 @@ const Rate = new EntitySchema({
       generated: true,
     },
     rate1: {
-      type: "double",
+      type: "decimal",
+      precision: 3,
+      scale: 2,
     },
     rate2: {
-      type: "double",
+      type: "decimal",
+      precision: 3,
+      scale: 2,
     },
     rate3: {
-      type: "double",
+      type: "decimal",
+      precision: 3,
+      scale: 2,
     },
     comment: {
       type: "text",
@@ -42,6 +48,7 @@ const Rate = new EntitySchema({
     recommendedProducts: {
       type: "many-to-many",
       target: "StoreProduct",
+      joinTable: true,
     },
     contribution: {
       type: "one-to-one",
