@@ -19,6 +19,7 @@ function app(opts = {}) {
       .prop("DB_USER", S.string())
       .prop("DB_PASSWORD", S.string())
       .prop("DB_NAME", S.string())
+      .prop("DB_PORT", S.number())
       .prop("SIB_API_KEY", S.string()),
     dotenv: true,
   };
