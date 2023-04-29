@@ -74,4 +74,30 @@ const updateProfile = {
   },
 };
 
-module.exports = { getProfile, getContributions, updateProfile };
+const deleteProfile = {
+  schema: {
+    summary: "Delete own user profile",
+    tags: ["user"],
+    response: {
+      200: S.object().prop("statusCode", S.integer()),
+    },
+  },
+  onRequest: [isRole(ROLES.USER)],
+  handler: async (req) => {
+    const { id } = req.user;
+    await req.server.db.manager.update(
+      User,
+      {
+        id,
+      },
+      {
+        email: `deleted.${id}@leqg.app`,
+        password: "",
+      }
+    );
+
+    return { statusCode: 200 };
+  },
+};
+
+module.exports = { getProfile, getContributions, updateProfile, deleteProfile };

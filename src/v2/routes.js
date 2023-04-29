@@ -36,4 +36,5 @@ async function v2(fastify) {
   fastify.get("/users/me", user.getProfile);
   fastify.get("/users/me/contributions", user.getContributions);
   fastify.put("/users/me", user.updateProfile);
+  fastify.delete("/users/me", user.deleteProfile);
 }
