@@ -80,7 +80,7 @@ function formatStores(store) {
     productsMinified,
     schedulesMinified,
     features.map(({ id }) => id),
-    parseFloat(rate) || 0,
+    rate ? parseFloat(rate) : 0,
   ];
 }
 
