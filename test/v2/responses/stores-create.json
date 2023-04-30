@@ -23,7 +23,7 @@
       "features": [],
       "id": 3,
       "countryCode": "FR",
-      "rate": null,
+      "rate": 0,
       "rateCount": 0,
       "revisions": [
         {
@@ -87,7 +87,7 @@
     "features": [],
     "id": 3,
     "countryCode": "FR",
-    "rate": null,
+    "rate": 0,
     "rateCount": 0,
     "revisions": [
       {

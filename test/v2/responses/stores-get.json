@@ -158,7 +158,7 @@
     ],
     "id": 1,
     "countryCode": "FR",
-    "rate": null,
+    "rate": 0,
     "rateCount": 0,
     "revisions": [
       {

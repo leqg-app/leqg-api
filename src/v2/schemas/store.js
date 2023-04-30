@@ -108,7 +108,7 @@ const storeSchema = function (fastify) {
     .additionalProperties(false)
     .prop("id", S.integer())
     .prop("countryCode", S.string())
-    .prop("rate", S.anyOf([S.null(), S.number()]))
+    .prop("rate", S.number())
     .prop("rateCount", S.integer())
     .prop(
       "rates",

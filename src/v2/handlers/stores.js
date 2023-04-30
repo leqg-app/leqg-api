@@ -432,11 +432,9 @@ const rateStore = {
       .prop("recommendedProducts", S.array().items(S.integer())),
     response: {
       200: S.object()
-        .prop(
-          "store",
-          S.object().prop("rate", S.number()).prop("rateCount", S.number())
-        )
-        .prop("reputation", S.ref("reputationSchema")),
+        .prop("store", S.ref("storeSchema"))
+        .prop("reputation", S.ref("reputationSchema"))
+        .prop("version", S.integer()),
       400: S.object().prop("error", S.string()),
       404: S.object().prop("error", S.string()),
     },
@@ -509,6 +507,10 @@ const rateStore = {
       store: store.id,
     });
 
+    const repoVersion = req.server.db.getRepository(Version);
+    let { version } = await repoVersion.findOneBy({ name: "stores" });
+    await repoVersion.update({ name: "stores" }, { version: ++version });
+
     return {
       store: await getOneStore(req, store.id),
       reputation: {
@@ -516,6 +518,7 @@ const rateStore = {
         reason: "store.rate.creation",
         fields,
       },
+      version,
     };
   },
 };
