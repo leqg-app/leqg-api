@@ -510,10 +510,7 @@ const rateStore = {
     });
 
     return {
-      store: {
-        rate: store.rate,
-        rateCount: store.rateCount,
-      },
+      store: await getOneStore(req, store.id),
       reputation: {
         total: reputation,
         reason: "store.rate.creation",
