@@ -92,7 +92,8 @@ const deleteProfile = {
       },
       {
         email: `deleted.${id}@leqg.app`,
-        password: "",
+        password: "deleted",
+        provider: "deleted",
       }
     );
 
