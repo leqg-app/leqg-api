@@ -134,7 +134,8 @@
   "Miss fields to validate": {
     "statusCode": 400,
     "error": "Bad Request",
-    "message": "body should be object"
+    "message": "body must be object",
+    "code": "FST_ERR_VALIDATION"
   },
   "Don't validate unavailable store": {
     "error": "store.notfound"

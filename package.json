@@ -15,29 +15,29 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@fastify/cors": "^7.0.0",
-    "@fastify/env": "^3.0.0",
-    "@fastify/jwt": "^5.0.1",
-    "@fastify/swagger": "^6.0.1",
-    "apple-signin-auth": "^1.5.1",
+    "@fastify/cors": "^8.2.1",
+    "@fastify/env": "^4.2.0",
+    "@fastify/jwt": "^6.7.1",
+    "@fastify/swagger": "^8.3.1",
+    "apple-signin-auth": "^1.7.5",
     "bcryptjs": "^2.4.3",
-    "fastify": "^3.29.0",
-    "fastify-plugin": "^3.0.1",
-    "fluent-json-schema": "^3.1.0",
+    "fastify": "^4.17.0",
+    "fastify-plugin": "^4.5.0",
+    "fluent-json-schema": "^4.1.0",
     "mysql": "^2.18.1",
-    "pino-pretty": "^7.6.1",
+    "pino-pretty": "^10.0.0",
     "pm2": "^5.2.0",
-    "purest": "^4.0.2",
-    "sib-api-v3-sdk": "^8.3.0",
-    "sqlite3": "^5.0.6",
-    "typeorm": "^0.3.6"
+    "purest": "^4.0.3",
+    "sib-api-v3-sdk": "^8.5.0",
+    "sqlite3": "^5.1.6",
+    "typeorm": "^0.3.15"
   },
   "devDependencies": {
-    "eslint": "^8.17.0",
-    "fast-jwt": "^1.5.4",
+    "eslint": "^8.39.0",
+    "fast-jwt": "^2.2.2",
     "ndb": "^1.1.5",
-    "nodemon": "^2.0.16",
-    "tap": "^16.2.0"
+    "nodemon": "^2.0.22",
+    "tap": "^16.3.4"
   },
   "tap": {
     "files": "test/**/*.test.js",

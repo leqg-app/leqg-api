@@ -8,7 +8,7 @@
     "favorites": []
   },
   "Invalid jwt": {
-    "error": "The token is malformed."
+    "error": "Authorization token is invalid: The token is malformed."
   },
   "Blocked jwt": {
     "error": "user.invalid"

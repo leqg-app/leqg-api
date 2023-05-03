@@ -103,9 +103,7 @@
         "product": null
       }
     ],
-    "features": [
-      1
-    ],
+    "features": [1],
     "id": 1,
     "countryCode": "FR",
     "revisions": [
@@ -125,7 +123,8 @@
   "Miss fields": {
     "statusCode": 400,
     "error": "Bad Request",
-    "message": "body should be object"
+    "message": "body must be object",
+    "code": "FST_ERR_VALIDATION"
   },
   "Can't update unavailable store": {
     "error": "store.notfound"
@@ -235,9 +234,7 @@
           "product": null
         }
       ],
-      "features": [
-        1
-      ],
+      "features": [1],
       "id": 1,
       "countryCode": "FR",
       "revisions": [
@@ -361,9 +358,7 @@
           "product": null
         }
       ],
-      "features": [
-        1
-      ],
+      "features": [1],
       "id": 1,
       "countryCode": "FR",
       "revisions": [
@@ -527,9 +522,7 @@
           "product": null
         }
       ],
-      "features": [
-        1
-      ],
+      "features": [1],
       "id": 1,
       "countryCode": "FR",
       "revisions": [
@@ -707,9 +700,7 @@
           "product": null
         }
       ],
-      "features": [
-        1
-      ],
+      "features": [1],
       "id": 1,
       "countryCode": "FR",
       "revisions": [

@@ -15,6 +15,8 @@ module.exports = () =>
   build({
     logger: {
       level: "warn",
-      prettyPrint: true,
+      transport: {
+        target: "pino-pretty",
+      },
     },
   });

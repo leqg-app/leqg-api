@@ -13,18 +13,23 @@ const storeSchema = function (fastify) {
       S.number(), // 6 cheapest specialPrice
       S.string(), // 7 currencyCode
       S.array().items(
-        S.array().items([
-          // 8 products
-          S.integer(), // productId
-          S.number(), // price
-          S.number(), // specialPrice
-          S.integer(), // volume
-        ])
+        S.array()
+          .items([
+            // 8 products
+            S.integer(), // productId
+            S.number(), // price
+            S.number(), // specialPrice
+            S.integer(), // volume
+          ])
+          .minItems(4)
+          .maxItems(4)
       ),
       S.array().items(
         // 9 schedules
         S.anyOf([
-          S.array().items(S.array().items([S.integer(), S.integer()])),
+          S.array().items(
+            S.array().items([S.integer(), S.integer()]).minItems(0).maxItems(2)
+          ),
           S.integer(),
         ])
       ),
@@ -33,7 +38,9 @@ const storeSchema = function (fastify) {
         S.integer() // id
       ),
       S.number(), // 11 rate
-    ]);
+    ])
+    .minItems(12)
+    .maxItems(12);
 
   const productStoreSchema = S.object()
     .id("productStoreSchema")
