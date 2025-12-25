@@ -153,12 +153,7 @@ const storeSchema = function (fastify) {
                 .prop("field", S.string())
                 .prop(
                   "delta",
-                  S.anyOf([
-                    S.string(),
-                    S.number(),
-                    S.ref("schedulesSchema"),
-                    S.ref("productStoreSchema"),
-                  ])
+                  S.raw({}) // Allow any type
                 )
             )
           )
