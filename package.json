@@ -24,7 +24,7 @@
     "fastify": "^4.17.0",
     "fastify-plugin": "^4.5.0",
     "fluent-json-schema": "^4.1.0",
-    "mysql": "^2.18.1",
+    "mysql2": "^3.16.0",
     "pino-pretty": "^10.0.0",
     "pm2": "^5.2.0",
     "purest": "^4.0.3",
@@ -42,5 +42,6 @@
   "tap": {
     "files": "test/**/*.test.js",
     "check-coverage": false
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
