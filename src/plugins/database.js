@@ -6,6 +6,7 @@ const entities = require("../entity/index.js");
 async function db(fastify) {
   try {
     const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = fastify.config;
+    console.log(DB_HOST);
     const AppDataSource = new DataSource({
       type: "mysql",
       host: DB_HOST,
