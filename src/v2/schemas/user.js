@@ -12,20 +12,30 @@ const userSchema = function (fastify) {
       "revision",
       S.anyOf([
         S.null(),
-        S.object().prop(
-          "store",
-          S.object().prop("id", S.integer()).prop("name", S.string())
-        ),
+        S.object()
+          .additionalProperties(false)
+          .prop(
+            "store",
+            S.object()
+              .additionalProperties(false)
+              .prop("id", S.integer())
+              .prop("name", S.string())
+          ),
       ])
     )
     .prop(
       "validation",
       S.anyOf([
         S.null(),
-        S.object().prop(
-          "store",
-          S.object().prop("id", S.integer()).prop("name", S.string())
-        ),
+        S.object()
+          .additionalProperties(false)
+          .prop(
+            "store",
+            S.object()
+              .additionalProperties(false)
+              .prop("id", S.integer())
+              .prop("name", S.string())
+          ),
       ])
     );
 
