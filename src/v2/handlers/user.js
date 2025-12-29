@@ -44,6 +44,10 @@ const getContributions = {
           id: req.user.id,
         },
       },
+      take: 20,
+      order: {
+        createdAt: "DESC",
+      },
       relations: ["user", "revision.store", "validation.store"],
     });
   },
