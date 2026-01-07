@@ -20,6 +20,9 @@ function loadTestResponses(responsePath) {
   if (!responsePath) {
     throw `loadTestResponses need responses path in arg`;
   }
+  if (!fs.existsSync(responsePath)) {
+    fs.writeFileSync(responsePath, "{}");
+  }
   const responses = require(responsePath);
   return function (response, testName) {
     if (!testName) {

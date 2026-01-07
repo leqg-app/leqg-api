@@ -88,6 +88,19 @@
     "latitude": 1,
     "longitude": 1,
     "address": "Address 1",
+    "revisions": [
+      {
+        "created_at": null,
+        "author": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ],
     "phone": null,
     "website": null,
     "schedules": [
@@ -191,19 +204,6 @@
       1
     ],
     "id": 1,
-    "countryCode": "FR",
-    "revisions": [
-      {
-        "created_at": null,
-        "author": {
-          "username": "admin"
-        },
-        "changes": [
-          {
-            "type": "initial"
-          }
-        ]
-      }
-    ]
+    "countryCode": "FR"
   }
 }

@@ -4,6 +4,19 @@
     "latitude": 1,
     "longitude": 1,
     "address": "Address 3",
+    "revisions": [
+      {
+        "created_at": null,
+        "author": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ],
     "phone": null,
     "website": null,
     "schedules": [
@@ -50,26 +63,26 @@
     ],
     "features": [],
     "id": 3,
-    "countryCode": "FR",
-    "revisions": [
-      {
-        "created_at": null,
-        "author": {
-          "username": "admin"
-        },
-        "changes": [
-          {
-            "type": "initial"
-          }
-        ]
-      }
-    ]
+    "countryCode": "FR"
   },
   "Get created store": {
     "name": "Store 3",
     "latitude": 1,
     "longitude": 1,
     "address": "Address 3",
+    "revisions": [
+      {
+        "created_at": null,
+        "author": {
+          "username": "admin"
+        },
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ]
+      }
+    ],
     "phone": null,
     "website": null,
     "schedules": [
@@ -116,20 +129,7 @@
     ],
     "features": [],
     "id": 3,
-    "countryCode": "FR",
-    "revisions": [
-      {
-        "created_at": null,
-        "author": {
-          "username": "admin"
-        },
-        "changes": [
-          {
-            "type": "initial"
-          }
-        ]
-      }
-    ]
+    "countryCode": "FR"
   },
   "Check versions": {
     "stores": 2,

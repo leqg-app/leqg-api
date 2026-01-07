@@ -2,24 +2,24 @@ const S = require("fluent-json-schema");
 
 const userSchema = function (fastify) {
   const contributionSchema = S.object()
-    .additionalProperties(false)
     .id("contributionSchema")
     .prop("id", S.integer())
     .prop("reputation", S.integer())
     .prop("reason", S.string())
-    .prop("createdAt", S.number())
+    .prop("createdAt", S.string())
     .prop(
       "revision",
       S.anyOf([
         S.null(),
         S.object()
-          .additionalProperties(false)
+          .prop("changes", S.array().items(S.object().prop("type", S.string())))
+          .prop("createdAt", S.string())
           .prop(
             "store",
-            S.object()
-              .additionalProperties(false)
-              .prop("id", S.integer())
-              .prop("name", S.string())
+            S.anyOf([
+              S.null(),
+              S.object().prop("id", S.integer()).prop("name", S.string()),
+            ])
           ),
       ])
     )
@@ -27,20 +27,17 @@ const userSchema = function (fastify) {
       "validation",
       S.anyOf([
         S.null(),
-        S.object()
-          .additionalProperties(false)
-          .prop(
-            "store",
-            S.object()
-              .additionalProperties(false)
-              .prop("id", S.integer())
-              .prop("name", S.string())
-          ),
+        S.object().prop(
+          "store",
+          S.anyOf([
+            S.null(),
+            S.object().prop("id", S.integer()).prop("name", S.string()),
+          ])
+        ),
       ])
     );
 
   const userSchema = S.object()
-    .additionalProperties(false)
     .id("userSchema")
     .prop("id", S.integer())
     .prop("jwt", S.string())

@@ -112,6 +112,7 @@
     "countryCode": "FR",
     "rate": 0,
     "rateCount": 0,
+    "rates": [],
     "revisions": [
       {
         "id": 1,
@@ -128,15 +129,14 @@
       }
     ],
     "validations": [],
-    "updatedAt": null,
-    "rates": [],
-    "photos": []
+    "photos": [],
+    "updatedAt": null
   },
   "Miss fields to validate": {
     "statusCode": 400,
+    "code": "FST_ERR_VALIDATION",
     "error": "Bad Request",
-    "message": "body must be object",
-    "code": "FST_ERR_VALIDATION"
+    "message": "body must be object"
   },
   "Don't validate unavailable store": {
     "error": "store.notfound"

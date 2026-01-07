@@ -112,6 +112,7 @@
     "countryCode": "FR",
     "rate": 0,
     "rateCount": 0,
+    "rates": [],
     "revisions": [
       {
         "id": 1,
@@ -128,9 +129,8 @@
       }
     ],
     "validations": [],
-    "updatedAt": null,
-    "rates": [],
-    "photos": []
+    "photos": [],
+    "updatedAt": null
   },
   "Unauthorized": {
     "error": "user.invalid"
@@ -138,14 +138,16 @@
   "Success": {
     "version": 2
   },
+  "Can't delete store anymore": {
+    "error": "store.notfound"
+  },
   "Can't get store anymore": {
     "error": "store.notfound"
   },
   "Check store versionned": {
     "updated": [],
-    "deleted": [1]
-  },
-  "Can't delete store anymore": {
-    "error": "store.notfound"
+    "deleted": [
+      1
+    ]
   }
 }

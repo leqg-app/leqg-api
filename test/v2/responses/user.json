@@ -1,15 +1,15 @@
 {
   "Get user profile": {
-    "id": 1,
+    "id": 2,
     "jwt": null,
-    "username": "admin",
-    "email": "admin@leqg.app",
+    "username": "auth",
+    "email": "auth@leqg.app",
     "provider": "local",
     "favorites": [],
     "contributions": [
       {
-        "id": 1,
-        "reputation": 25,
+        "id": 2,
+        "reputation": 15,
         "reason": "store.creation"
       }
     ]
@@ -24,10 +24,10 @@
     "statusCode": 200
   },
   "Add favorite store to user-2": {
-    "id": 1,
+    "id": 2,
     "jwt": null,
-    "username": "admin",
-    "email": "admin@leqg.app",
+    "username": "auth",
+    "email": "auth@leqg.app",
     "provider": "local",
     "favorites": [
       {
@@ -40,10 +40,59 @@
     ],
     "contributions": [
       {
-        "id": 1,
-        "reputation": 25,
+        "id": 2,
+        "reputation": 15,
         "reason": "store.creation"
       }
     ]
-  }
+  },
+  "Get user contributions": [
+    {
+      "id": 4,
+      "reputation": 5,
+      "reason": "store.validation.creation",
+      "createdAt": null,
+      "revision": null,
+      "validation": {
+        "store": {
+          "id": 1,
+          "name": "Store 1"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "reputation": 15,
+      "reason": "store.creation",
+      "createdAt": null,
+      "revision": {
+        "changes": [
+          {
+            "type": "initial"
+          }
+        ],
+        "createdAt": null,
+        "store": {
+          "id": 2,
+          "name": "Store 2"
+        }
+      },
+      "validation": null
+    }
+  ],
+  "Get user contributions with pagination": [
+    {
+      "id": 4,
+      "reputation": 5,
+      "reason": "store.validation.creation",
+      "createdAt": null,
+      "revision": null,
+      "validation": {
+        "store": {
+          "id": 1,
+          "name": "Store 1"
+        }
+      }
+    }
+  ]
 }

@@ -15,7 +15,7 @@ tap.test("Profile", async ({ context }) => {
     const login = await fastify.inject({
       method: "POST",
       url: "/v2/auth/local",
-      payload: { identifier: "admin", password: "azerty" },
+      payload: { identifier: "auth", password: "azerty" },
     });
     t.equal(login.statusCode, 200);
 
@@ -86,5 +86,51 @@ tap.test("Profile", async ({ context }) => {
 
     t.equal(response.statusCode, 200);
     isEqualResponse(response.json(), `${t.name}-2`);
+  });
+
+  tap.test("Validate store", async (t) => {
+    const storeResponse = await fastify.inject("/v2/stores/1");
+    t.equal(storeResponse.statusCode, 200);
+    const store = storeResponse.json();
+
+    const { jwt } = context;
+    const response = await fastify.inject({
+      method: "POST",
+      url: "/v2/stores/1/validate",
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+      payload: {
+        latitude: store.latitude,
+        longitude: store.longitude + 0.0001, // + ~10m
+      },
+    });
+    t.equal(response.statusCode, 200);
+  });
+
+  tap.test("Get user contributions", async (t) => {
+    const { jwt } = context;
+
+    const response = await fastify.inject({
+      url: "/v2/users/me/contributions",
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    });
+    t.equal(response.statusCode, 200);
+    t.equal(response.json().length, 2);
+  });
+
+  tap.test("Get user contributions with pagination", async (t) => {
+    const { jwt } = context;
+
+    const response = await fastify.inject({
+      url: "/v2/users/me/contributions?page=1&limit=1",
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    });
+    t.equal(response.statusCode, 200);
+    t.equal(response.json().length, 1);
   });
 });

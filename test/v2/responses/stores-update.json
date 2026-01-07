@@ -112,6 +112,7 @@
     "countryCode": "FR",
     "rate": 0,
     "rateCount": 0,
+    "rates": [],
     "revisions": [
       {
         "id": 1,
@@ -128,15 +129,14 @@
       }
     ],
     "validations": [],
-    "updatedAt": null,
-    "rates": [],
-    "photos": []
+    "photos": [],
+    "updatedAt": null
   },
   "Miss fields": {
     "statusCode": 400,
+    "code": "FST_ERR_VALIDATION",
     "error": "Bad Request",
-    "message": "body must be object",
-    "code": "FST_ERR_VALIDATION"
+    "message": "body must be object"
   },
   "Can't update unavailable store": {
     "error": "store.notfound"
@@ -255,6 +255,7 @@
       "countryCode": "FR",
       "rate": 0,
       "rateCount": 0,
+      "rates": [],
       "revisions": [
         {
           "id": 1,
@@ -271,9 +272,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null,
-      "rates": [],
-      "photos": []
+      "photos": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 0,
@@ -395,6 +395,7 @@
       "countryCode": "FR",
       "rate": 0,
       "rateCount": 0,
+      "rates": [],
       "revisions": [
         {
           "id": 1,
@@ -425,9 +426,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null,
-      "rates": [],
-      "photos": []
+      "photos": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 2,
@@ -585,6 +585,7 @@
       "countryCode": "FR",
       "rate": 0,
       "rateCount": 0,
+      "rates": [],
       "revisions": [
         {
           "id": 1,
@@ -639,9 +640,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null,
-      "rates": [],
-      "photos": []
+      "photos": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 5,
@@ -779,6 +779,7 @@
       "countryCode": "FR",
       "rate": 0,
       "rateCount": 0,
+      "rates": [],
       "revisions": [
         {
           "id": 1,
@@ -857,9 +858,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null,
-      "rates": [],
-      "photos": []
+      "photos": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 0,
@@ -992,6 +992,7 @@
       "countryCode": "FR",
       "rate": 0,
       "rateCount": 0,
+      "rates": [],
       "revisions": [
         {
           "id": 1,
@@ -1071,9 +1072,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null,
-      "rates": [],
-      "photos": []
+      "photos": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 0,

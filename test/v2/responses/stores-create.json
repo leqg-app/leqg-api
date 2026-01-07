@@ -25,6 +25,7 @@
       "countryCode": "FR",
       "rate": 0,
       "rateCount": 0,
+      "rates": [],
       "revisions": [
         {
           "id": 3,
@@ -41,9 +42,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null,
-      "rates": [],
-      "photos": []
+      "photos": [],
+      "updatedAt": null
     },
     "reputation": {
       "total": 15,
@@ -90,6 +90,7 @@
     "countryCode": "FR",
     "rate": 0,
     "rateCount": 0,
+    "rates": [],
     "revisions": [
       {
         "id": 3,
@@ -106,9 +107,8 @@
       }
     ],
     "validations": [],
-    "updatedAt": null,
-    "rates": [],
-      "photos": []
+    "photos": [],
+    "updatedAt": null
   },
   "Get compared versions": {
     "updated": [
@@ -121,8 +121,23 @@
         2,
         0,
         "EUR",
-        [[0, 2, 0, 50]],
-        [[], [], [], [], [], [], []],
+        [
+          [
+            0,
+            2,
+            0,
+            50
+          ]
+        ],
+        [
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
         [],
         0
       ]

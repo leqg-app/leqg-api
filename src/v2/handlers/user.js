@@ -32,23 +32,31 @@ const getContributions = {
   schema: {
     summary: "Get user contributions list",
     tags: ["user"],
+    querystring: S.object()
+      .prop("page", S.integer().default(1).minimum(1))
+      .prop("limit", S.integer().default(20).minimum(1).maximum(50)),
     response: {
       200: S.array().items(S.ref("contributionSchema")),
     },
   },
   onRequest: [isRole(ROLES.USER)],
   handler: async (req) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = Math.min(parseInt(req.query.limit) || 20, 50);
+    const skip = (page - 1) * limit;
+
     return req.server.db.manager.find(Contribution, {
       where: {
         user: {
           id: req.user.id,
         },
       },
-      take: 20,
       order: {
         createdAt: "DESC",
       },
       relations: ["user", "revision.store", "validation.store"],
+      skip,
+      take: limit,
     });
   },
 };
