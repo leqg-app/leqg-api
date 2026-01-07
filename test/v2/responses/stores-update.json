@@ -129,7 +129,8 @@
     ],
     "validations": [],
     "updatedAt": null,
-    "rates": []
+    "rates": [],
+    "photos": []
   },
   "Miss fields": {
     "statusCode": 400,
@@ -271,7 +272,8 @@
       ],
       "validations": [],
       "updatedAt": null,
-      "rates": []
+      "rates": [],
+      "photos": []
     },
     "reputation": {
       "total": 0,
@@ -424,7 +426,8 @@
       ],
       "validations": [],
       "updatedAt": null,
-      "rates": []
+      "rates": [],
+      "photos": []
     },
     "reputation": {
       "total": 2,
@@ -637,7 +640,8 @@
       ],
       "validations": [],
       "updatedAt": null,
-      "rates": []
+      "rates": [],
+      "photos": []
     },
     "reputation": {
       "total": 5,
@@ -854,7 +858,8 @@
       ],
       "validations": [],
       "updatedAt": null,
-      "rates": []
+      "rates": [],
+      "photos": []
     },
     "reputation": {
       "total": 0,
@@ -1067,7 +1072,8 @@
       ],
       "validations": [],
       "updatedAt": null,
-      "rates": []
+      "rates": [],
+      "photos": []
     },
     "reputation": {
       "total": 0,

@@ -297,7 +297,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null
+      "updatedAt": null,
+      "photos": []
     },
     "reputation": {
       "total": 10,
@@ -454,7 +455,8 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+      "photos": []
   },
   "User reputation was granted": {
     "id": 2,
@@ -622,7 +624,8 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+      "photos": []
   },
   "User reputation is same": {
     "id": 2,
@@ -800,7 +803,8 @@
         }
       ],
       "validations": [],
-      "updatedAt": null
+      "updatedAt": null,
+      "photos": []
     },
     "reputation": {
       "total": 25,
@@ -977,6 +981,7 @@
       }
     ],
     "validations": [],
-    "updatedAt": null
+    "updatedAt": null,
+      "photos": []
   }
 }

@@ -171,6 +171,7 @@ const storeSchema = function (fastify) {
           )
       )
     )
+    .prop("photos", S.array().items(S.ref("photoSchema")))
     .prop("updatedAt", S.number())
     .extend(storeBaseSchema);
 

@@ -11,6 +11,7 @@ const { Feature } = require("./Feature.js");
 const { Rate } = require("./Rate.js");
 const { StoreValidation } = require("./StoreValidation.js");
 const { Version } = require("./Version.js");
+const { Photo } = require("./Photo.js");
 
 module.exports = {
   Store,
@@ -26,4 +27,5 @@ module.exports = {
   Rate,
   StoreValidation,
   Version,
+  Photo,
 };

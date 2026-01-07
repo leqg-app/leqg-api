@@ -25,6 +25,7 @@ const STORE = {
   COMMENT: 10,
   LONG_COMMENT: 10,
   RECOMMENDED_PRODUCT: 5,
+  PHOTO: 20,
 };
 
 module.exports = {

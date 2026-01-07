@@ -95,6 +95,11 @@ const Store = new EntitySchema({
       target: "StoreValidation",
       inverseSide: "store",
     },
+    photos: {
+      type: "one-to-many",
+      target: "Photo",
+      inverseSide: "store",
+    },
   },
 });
 
@@ -147,6 +152,7 @@ function getOneStore(req, id) {
       rates: { user: true, recommendedProducts: true },
       revisions: { user: true },
       validations: { user: true },
+      photos: { user: true },
     },
   });
 }

@@ -11,3 +11,5 @@ coverage
 !.elasticbeanstalk/*.global.yml
 
 Makefile
+uploads/*
+!uploads/.gitkeep

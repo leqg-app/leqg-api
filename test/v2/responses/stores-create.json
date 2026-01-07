@@ -42,7 +42,8 @@
       ],
       "validations": [],
       "updatedAt": null,
-      "rates": []
+      "rates": [],
+      "photos": []
     },
     "reputation": {
       "total": 15,
@@ -106,7 +107,8 @@
     ],
     "validations": [],
     "updatedAt": null,
-    "rates": []
+    "rates": [],
+      "photos": []
   },
   "Get compared versions": {
     "updated": [
