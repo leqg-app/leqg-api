@@ -1,6 +1,7 @@
 node_modules
 tmp
 .env
+.tap
 
 .nyc_output
 coverage
