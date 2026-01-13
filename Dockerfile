@@ -1,4 +1,4 @@
-FROM debian:bullseye as builder
+FROM debian:trixie as builder
 
 ENV PATH=/usr/local/node/bin:$PATH
 ARG NODE_VERSION=20.19.4
@@ -15,8 +15,7 @@ COPY . .
 
 RUN npm install
 
-
-FROM debian:bullseye-slim
+FROM debian:trixie-slim
 
 LABEL fly_launch_runtime="nodejs"
 

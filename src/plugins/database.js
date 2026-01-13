@@ -13,8 +13,10 @@ async function db(fastify) {
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
-      synchronize: true,
+      synchronize: false,
       entities,
+      migrations: ["src/migrations/*.js"],
+      migrationsRun: process.env.NODE_ENV === "production",
     });
 
     await AppDataSource.initialize();
