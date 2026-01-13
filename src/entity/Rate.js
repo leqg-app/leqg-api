@@ -57,6 +57,11 @@ const Rate = new EntitySchema({
       joinColumn: true,
       cascade: ["insert"],
     },
+    photos: {
+      type: "one-to-many",
+      target: "Photo",
+      inverseSide: "rate",
+    },
   },
 });
 

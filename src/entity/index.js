@@ -1,5 +1,6 @@
 const { Store } = require("./Store.js");
 const { Product } = require("./Product.js");
+const { ProductCategory } = require("./ProductCategory.js");
 const { StoreProduct } = require("./StoreProduct.js");
 const { Schedule } = require("./Schedule.js");
 const { StoreRevision } = require("./StoreRevision.js");
@@ -16,6 +17,7 @@ const { Photo } = require("./Photo.js");
 module.exports = {
   Store,
   Product,
+  ProductCategory,
   StoreProduct,
   Schedule,
   StoreRevision,

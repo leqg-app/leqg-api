@@ -39,6 +39,13 @@ const Photo = new EntitySchema({
       target: "Product",
       nullable: true,
     },
+    rate: {
+      type: "many-to-one",
+      target: "Rate",
+      inverseSide: "photos",
+      nullable: true,
+      onDelete: "CASCADE",
+    },
   },
 });
 
